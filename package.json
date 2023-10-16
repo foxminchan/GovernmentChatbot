@@ -2,14 +2,32 @@
   "name": "@goverment/source",
   "version": "0.0.0",
   "license": "MIT",
+  "description": "Smart chatbot for streamlined administrative procedures, powered by advanced language models.",
+  "keywords": [
+    "nx",
+    "nest",
+    "react",
+    "vite",
+    "workspace"
+  ],
   "scripts": {},
   "private": true,
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
+    "@docusaurus/core": "^2.4.3",
+    "@docusaurus/preset-classic": "^2.4.3",
+    "@mdx-js/react": "^1.6.22",
     "@nestjs/common": "^10.0.2",
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
     "@swc/helpers": "~0.5.2",
     "axios": "^1.0.0",
+    "clsx": "^1.2.1",
+    "prism-react-renderer": "^1.3.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "reflect-metadata": "^0.1.13",
@@ -19,8 +37,10 @@
   "devDependencies": {
     "@commitlint/cli": "^17.8.0",
     "@commitlint/config-conventional": "^17.8.0",
+    "@docusaurus/module-type-aliases": "2.1.0",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
+    "@nx-plus/docusaurus": "^15.0.0-rc.0",
     "@nx/eslint-plugin": "16.10.0",
     "@nx/jest": "16.10.0",
     "@nx/js": "16.10.0",
