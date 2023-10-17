@@ -4,19 +4,19 @@ import * as process from 'process';
 const prisma = new PrismaClient();
 
 async function main() {
-  const lookup = await prisma.lookup.create({
+  const lookup = await prisma.topic.create({
     data: {
       name: 'Tra cứu thông tin',
     },
   });
 
-  const qa = await prisma.qa.create({
+  const qa = await prisma.topic.create({
     data: {
       name: 'Hỏi đáp',
     },
   });
 
-  const helper = await prisma.helper.create({
+  const helper = await prisma.topic.create({
     data: {
       name: 'Hỗ trợ',
     },
