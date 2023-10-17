@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  email       String        @unique
+  phone       String        @unique
+  address     String
+  id_card     String        @unique
+  chatHistory ChatHistory[]
+}
+
+model ChatHistory {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  message  String
+  date     DateTime @default(now())
+  user_id  String   @db.ObjectId
+  user     User     @relation(fields: [user_id], references: [id])
+  topic_id String[] @db.ObjectId
+  topics   Topic[]  @relation(fields: [topic_id], references: [id])
+}
+
+model Topic {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  chat_id     String[]      @db.ObjectId
+  chatHistory ChatHistory[] @relation(fields: [chat_id], references: [id])
+}
