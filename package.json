@@ -30,6 +30,7 @@
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/platform-fastify": "^10.2.7",
     "@nestjs/swagger": "^7.1.13",
+    "@nestjs/throttler": "^5.0.0",
     "@swc/helpers": "~0.5.2",
     "@xenova/transformers": "^2.6.2",
     "axios": "^1.0.0",

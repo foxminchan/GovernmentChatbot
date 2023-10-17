@@ -2,10 +2,27 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './controllers/app.controller';
 import { AppService } from './controllers/app.service';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { DataModule } from './frameworks/data';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
-  imports: [],
+  imports: [
+    ThrottlerModule.forRoot([
+      {
+        ttl: 10000,
+        limit: 20,
+      },
+    ]),
+    DataModule,
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}
