@@ -5,6 +5,8 @@ dist
 tmp
 /out-tsc
 
+apps/api/.env
+
 # dependencies
 node_modules
 
