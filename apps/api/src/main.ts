@@ -9,11 +9,17 @@ import {
 } from '@nestjs/platform-fastify';
 import {
   BadRequestException,
+  Logger,
   ValidationError,
   ValidationPipe,
 } from '@nestjs/common';
 
-declare const module: any;
+declare const module: NodeModule & {
+  hot?: {
+    accept: () => void;
+    dispose: (callback: () => void) => void;
+  };
+};
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -62,9 +68,15 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT || 3000);
 
+  Logger.log(
+    `🚀 Application is running on: http://localhost:${process.env.PORT || 3000}`
+  );
+
   if (module.hot) {
     module.hot.accept();
-    module.hot.dispose(() => app.close());
+    module.hot.dispose(() => {
+      app.close();
+    });
   }
 }
 
