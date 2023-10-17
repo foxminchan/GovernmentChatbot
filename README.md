@@ -13,7 +13,7 @@
 
 <hr>
 
-<h1 align="justify"> Goverment Chatbot - A large language model application 🤖</h1>
+<h1 align="justify"> Goverment Chatbot - A LLM Application 🤖</h1>
 
 <p align="center">
 	Goverment Chatbot is a monorepo project built with <a href="https://nx.dev/">Nx</a> technology. It is a set of extensible dev tools for monorepos, which helps you develop like Google, Facebook, and Microsoft.
