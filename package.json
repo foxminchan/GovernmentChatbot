@@ -20,6 +20,7 @@
   "dependencies": {
     "@docusaurus/core": "^2.4.3",
     "@docusaurus/preset-classic": "^2.4.3",
+    "@fastify/helmet": "^11.1.1",
     "@fastify/static": "^6.11.2",
     "@huggingface/agents": "^0.0.5",
     "@huggingface/hub": "^0.10.0",
