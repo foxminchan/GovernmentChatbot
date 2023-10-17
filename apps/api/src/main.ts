@@ -13,7 +13,6 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const module: any;
 
 async function bootstrap() {
