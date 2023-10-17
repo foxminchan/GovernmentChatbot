@@ -30,7 +30,7 @@ async function bootstrap() {
   );
 
   app.enableCors();
-  app.setGlobalPrefix('api/v1');
+  app.setGlobalPrefix('api/v1/');
   app.useGlobalFilters(new NotFoundExceptionFilter());
   app.useGlobalPipes(
     new ValidationPipe({

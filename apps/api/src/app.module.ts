@@ -1,25 +1,24 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-
-import { AppController } from './controllers/app.controller';
-import { AppService } from './controllers/app.service';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { DataModule } from './frameworks/data';
 import { APP_GUARD } from '@nestjs/core';
-import { LoggerMiddleware } from './middlewares/logger.middleware';
+import { TopicModule } from './usecase';
+import { TopicController } from './controllers';
+import { DataModule } from './frameworks';
+import { LoggerMiddleware } from './middlewares';
 
 @Module({
   imports: [
     ThrottlerModule.forRoot([
       {
-        ttl: 10000,
-        limit: 20,
+        ttl: 60,
+        limit: 30,
       },
     ]),
     DataModule,
+    TopicModule,
   ],
-  controllers: [AppController],
+  controllers: [TopicController],
   providers: [
-    AppService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
