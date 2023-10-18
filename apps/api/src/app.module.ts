@@ -7,7 +7,7 @@ import {
   TopicController,
   UserController,
 } from './controllers';
-import { DataModule } from './frameworks';
+import { DataModule, OpenaiModule } from './frameworks';
 import { LoggerMiddleware } from './middlewares';
 
 @Module({
@@ -19,6 +19,7 @@ import { LoggerMiddleware } from './middlewares';
       },
     ]),
     DataModule,
+    OpenaiModule,
     TopicModule,
     UserModule,
     ChatHistoryModule,
