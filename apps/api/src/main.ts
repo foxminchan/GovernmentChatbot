@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from '@fastify/helmet';
+import compression from '@fastify/compress';
+import fastifyCsrf from '@fastify/csrf-protection';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -26,10 +28,14 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter({
       logger: true,
-    })
+    }),
+    {
+      rawBody: true,
+      cors: true,
+      forceCloseConnections: true,
+    }
   );
 
-  app.enableCors();
   app.setGlobalPrefix('api/v1/');
   app.useGlobalFilters(new NotFoundExceptionFilter());
   app.useGlobalPipes(
@@ -45,6 +51,8 @@ async function bootstrap() {
     })
   );
 
+  app.register(fastifyCsrf);
+
   app.register(helmet, {
     contentSecurityPolicy: {
       directives: {
@@ -55,6 +63,8 @@ async function bootstrap() {
       },
     },
   });
+
+  app.register(compression, { encodings: ['gzip', 'deflate'] });
 
   const config = new DocumentBuilder()
     .setTitle('Goverment Chatbot')
