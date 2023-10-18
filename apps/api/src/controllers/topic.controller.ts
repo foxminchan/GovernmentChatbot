@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { TopicService } from '../usecase';
-import { CreateTopicDto } from '../core';
+import { CreateTopicDto, UpdateTopicDto } from '../core';
 
 @ApiTags('Topic')
 @Controller('topic')
@@ -32,7 +32,7 @@ export class TopicController {
   }
 
   @Put(':id')
-  updateTopic(@Param('id') id: string, @Body() topic: CreateTopicDto) {
+  updateTopic(@Param('id') id: string, @Body() topic: UpdateTopicDto) {
     return this.topicService.updateTopic(id, topic);
   }
 

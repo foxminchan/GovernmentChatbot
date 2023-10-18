@@ -1,8 +1,8 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
-import { TopicModule } from './usecase';
-import { TopicController } from './controllers';
+import { TopicModule, UserModule } from './usecase';
+import { TopicController, UserController } from './controllers';
 import { DataModule } from './frameworks';
 import { LoggerMiddleware } from './middlewares';
 
@@ -16,8 +16,9 @@ import { LoggerMiddleware } from './middlewares';
     ]),
     DataModule,
     TopicModule,
+    UserModule,
   ],
-  controllers: [TopicController],
+  controllers: [TopicController, UserController],
   providers: [
     {
       provide: APP_GUARD,
