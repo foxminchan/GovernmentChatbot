@@ -21,6 +21,14 @@ export class UserController {
     return this.userService.getUsers();
   }
 
+  @Get(':page/:limit')
+  getPaginatedUsers(
+    @Param('page') page: number,
+    @Param('limit') limit: number
+  ) {
+    return this.userService.getPaginatedUsers(page, limit);
+  }
+
   @Get(':id')
   getUser(@Param('id') id: string) {
     return this.userService.getUser(id);

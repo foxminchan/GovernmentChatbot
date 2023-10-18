@@ -10,6 +10,13 @@ export class UserService {
     return this.dataService.user.findMany();
   }
 
+  getPaginatedUsers(page: number, limit: number) {
+    return this.dataService.user.findMany({
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+  }
+
   getUser(id: string) {
     return this.dataService.user.findUnique({
       where: { id: id },

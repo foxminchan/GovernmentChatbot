@@ -21,6 +21,14 @@ export class ChatHistoryController {
     return this.chatHistoryService.getChatHistories();
   }
 
+  @Get(':page/:limit')
+  getPaginatedChatHistories(
+    @Param('page') page: number,
+    @Param('limit') limit: number
+  ) {
+    return this.chatHistoryService.getPaginatedChatHistories(page, limit);
+  }
+
   @Get(':id')
   getChatHistory(@Param('id') id: string) {
     return this.chatHistoryService.getChatHistory(id);

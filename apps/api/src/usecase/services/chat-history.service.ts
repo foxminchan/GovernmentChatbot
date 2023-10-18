@@ -10,6 +10,13 @@ export class ChatHistoryService {
     return this.dataService.chatHistory.findMany();
   }
 
+  getPaginatedChatHistories(page: number, limit: number) {
+    return this.dataService.chatHistory.findMany({
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+  }
+
   getChatHistory(id: string) {
     return this.dataService.chatHistory.findUnique({
       where: { id: id },
