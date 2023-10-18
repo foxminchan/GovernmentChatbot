@@ -1,10 +1,11 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
-import { TopicModule, UserModule } from './usecase';
+import { ChatHistoryModule, TopicModule, UserModule } from './usecase';
 import { TopicController, UserController } from './controllers';
 import { DataModule } from './frameworks';
 import { LoggerMiddleware } from './middlewares';
+import { ChatHistoryController } from './controllers/chat-history.controller';
 
 @Module({
   imports: [
@@ -17,8 +18,9 @@ import { LoggerMiddleware } from './middlewares';
     DataModule,
     TopicModule,
     UserModule,
+    ChatHistoryModule,
   ],
-  controllers: [TopicController, UserController],
+  controllers: [TopicController, UserController, ChatHistoryController],
   providers: [
     {
       provide: APP_GUARD,
