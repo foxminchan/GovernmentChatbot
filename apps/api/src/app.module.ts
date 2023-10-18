@@ -1,6 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
 import { ChatHistoryModule, TopicModule, UserModule } from './usecase';
 import {
   ChatHistoryController,
@@ -23,12 +24,21 @@ import { LoggerMiddleware } from './middlewares';
     TopicModule,
     UserModule,
     ChatHistoryModule,
+    CacheModule.register({
+      ttl: 60,
+      max: 100,
+      isGlobal: true,
+    }),
   ],
   controllers: [TopicController, UserController, ChatHistoryController],
   providers: [
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
     },
   ],
 })
