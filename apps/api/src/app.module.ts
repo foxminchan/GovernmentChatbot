@@ -2,10 +2,13 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { ChatHistoryModule, TopicModule, UserModule } from './usecase';
-import { TopicController, UserController } from './controllers';
+import {
+  ChatHistoryController,
+  TopicController,
+  UserController,
+} from './controllers';
 import { DataModule } from './frameworks';
 import { LoggerMiddleware } from './middlewares';
-import { ChatHistoryController } from './controllers/chat-history.controller';
 
 @Module({
   imports: [

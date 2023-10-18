@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { NotFoundExceptionFilter } from './exceptions/not-found-exception.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from '@fastify/helmet';
 import {
@@ -13,6 +12,7 @@ import {
   ValidationError,
   ValidationPipe,
 } from '@nestjs/common';
+import { NotFoundExceptionFilter } from './exceptions';
 
 declare const module: NodeModule & {
   hot?: {

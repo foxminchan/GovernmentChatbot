@@ -6,8 +6,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { PartialType } from '@nestjs/mapped-types';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 
 export class CreateUserDto {
   @ApiProperty()
@@ -23,8 +22,7 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsNotEmpty({ message: 'Số điện thoại không được để trống' })
-  @MaxLength(10, { message: 'Số điện thoại không được quá 10 ký tự' })
-  @Matches(/^\d*$/, { message: 'Số điện thoại không hợp lệ' })
+  @Matches(/^\d{10}$/, { message: 'Số điện thoại không hợp lệ' })
   phone: string;
 
   @ApiProperty()
