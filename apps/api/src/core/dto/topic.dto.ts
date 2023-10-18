@@ -7,7 +7,7 @@ export class CreateTopicDto {
   @IsString({ message: 'Tên chủ đề phải là chuỗi' })
   name: string;
 
-  chatHistory: string[];
+  chat_id: string[];
 }
 
 export class UpdateTopicDto extends PartialType(CreateTopicDto) {}
