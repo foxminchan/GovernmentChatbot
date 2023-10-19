@@ -15,6 +15,7 @@ model User {
   address     String
   id_card     String        @unique
   chatHistory ChatHistory[]
+  account     Account[]
 }
 
 model ChatHistory {
@@ -32,4 +33,12 @@ model Topic {
   name        String
   chat_id     String[]      @db.ObjectId
   chatHistory ChatHistory[] @relation(fields: [chat_id], references: [id])
+}
+
+model Account {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
+  password String
+  user_id  String @db.ObjectId
+  user     User   @relation(fields: [user_id], references: [id])
 }

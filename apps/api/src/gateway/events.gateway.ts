@@ -21,6 +21,8 @@ export class EventsGateway {
   @SubscribeMessage('events')
   async handleEvent(@MessageBody() data: string) {
     const response = await this.openaiService.createChatCompletion(data);
-    this.server.emit('events', response);
+    setTimeout(() => {
+      this.server.emit('events', response);
+    }, 1000);
   }
 }

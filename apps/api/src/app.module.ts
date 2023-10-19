@@ -2,13 +2,19 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
-import { ChatHistoryModule, TopicModule, UserModule } from './usecase';
 import {
+  AccountModule,
+  ChatHistoryModule,
+  TopicModule,
+  UserModule,
+} from './usecase';
+import {
+  AuthController,
   ChatHistoryController,
   TopicController,
   UserController,
 } from './controllers';
-import { DataModule, OpenaiModule } from './frameworks';
+import { AuthModule, DataModule, OpenaiModule } from './frameworks';
 import { LoggerMiddleware } from './middlewares';
 import { EventsModule } from './gateway';
 
@@ -22,6 +28,8 @@ import { EventsModule } from './gateway';
     ]),
     DataModule,
     OpenaiModule,
+    AccountModule,
+    AuthModule,
     EventsModule,
     TopicModule,
     UserModule,
@@ -32,7 +40,12 @@ import { EventsModule } from './gateway';
       isGlobal: true,
     }),
   ],
-  controllers: [TopicController, UserController, ChatHistoryController],
+  controllers: [
+    TopicController,
+    UserController,
+    ChatHistoryController,
+    AuthController,
+  ],
   providers: [
     {
       provide: APP_GUARD,
