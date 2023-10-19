@@ -24,19 +24,6 @@ async function main() {
   });
 
   console.log({ lookup, qa, helper });
-
-  // user seed data
-  const example = await prisma.user.create({
-    data: {
-      name: 'Example',
-      email: 'example@gmail.com',
-      phone: '0123456789',
-      address: 'Quan 1, TP.HCM',
-      id_card: '123456789',
-    },
-  });
-
-  console.log({ example });
 }
 
 main()
