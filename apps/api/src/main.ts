@@ -78,9 +78,7 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT || 3000);
 
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${process.env.PORT || 3000}`
-  );
+  Logger.log(`🚀 Application is running on: ${await app.getUrl()}`);
 
   if (module.hot) {
     module.hot.accept();

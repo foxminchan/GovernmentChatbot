@@ -10,6 +10,7 @@ import {
 } from './controllers';
 import { DataModule, OpenaiModule } from './frameworks';
 import { LoggerMiddleware } from './middlewares';
+import { EventsModule } from './gateway';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { LoggerMiddleware } from './middlewares';
     ]),
     DataModule,
     OpenaiModule,
+    EventsModule,
     TopicModule,
     UserModule,
     ChatHistoryModule,
