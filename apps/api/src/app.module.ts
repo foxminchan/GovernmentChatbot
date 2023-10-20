@@ -8,7 +8,7 @@ import {
   TopicController,
   UserController,
 } from './controllers';
-import { DataModule, OpenaiModule } from './frameworks';
+import { DataModule, HuggingFaceModule, OpenaiModule } from './frameworks';
 import { LoggerMiddleware } from './middlewares';
 import { EventsModule } from './gateway';
 
@@ -22,6 +22,7 @@ import { EventsModule } from './gateway';
     ]),
     DataModule,
     OpenaiModule,
+    HuggingFaceModule,
     EventsModule,
     TopicModule,
     UserModule,

@@ -10,11 +10,15 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 import { ChatHistoryService } from '../usecase';
 import { CreateChatHistoryDto, UpdateChatHistoryDto } from '../core';
+import { HuggingFaceService } from '../frameworks';
 
 @ApiTags('Chat History')
 @Controller('chat-history')
 export class ChatHistoryController {
-  constructor(private readonly chatHistoryService: ChatHistoryService) {}
+  constructor(
+    private readonly chatHistoryService: ChatHistoryService,
+    private readonly huggingFaceService: HuggingFaceService
+  ) {}
 
   @Get()
   getChatHistories() {
@@ -37,6 +41,15 @@ export class ChatHistoryController {
   @Post()
   addChatHistory(@Body() chatHistory: CreateChatHistoryDto) {
     return this.chatHistoryService.addChatHistory(chatHistory);
+  }
+
+  @Get('huggingface/:text')
+  async getHuggingFace(@Param('text') text: string) {
+    if (text) {
+      return this.huggingFaceService.getClassification(text);
+    } else {
+      return { error: 'Bad request' };
+    }
   }
 
   @Put(':id')
