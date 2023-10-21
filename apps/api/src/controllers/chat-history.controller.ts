@@ -6,17 +6,16 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ChatHistoryService } from '../usecase';
 import { CreateChatHistoryDto, UpdateChatHistoryDto } from '../core';
 
 @ApiTags('Chat History')
 @Controller('chat-history')
 export class ChatHistoryController {
-  constructor(
-    private readonly chatHistoryService: ChatHistoryService
-  ) {}
+  constructor(private readonly chatHistoryService: ChatHistoryService) {}
 
   @Get()
   getChatHistories() {
@@ -29,6 +28,17 @@ export class ChatHistoryController {
     @Param('limit') limit: number
   ) {
     return this.chatHistoryService.getPaginatedChatHistories(page, limit);
+  }
+
+  @Get('user/:userId')
+  @ApiQuery({ name: 'page', required: false, type: Number })
+  @ApiQuery({ name: 'limit', required: false, type: Number })
+  getByUserId(
+    @Param('userId') userId: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number
+  ) {
+    return this.chatHistoryService.getByUserId(userId, page, limit);
   }
 
   @Get(':id')

@@ -17,6 +17,21 @@ export class ChatHistoryService {
     });
   }
 
+  getByUserId(userId: string, page: number, limit: number) {
+    const queryOptions = {
+      where: { user_id: userId },
+    };
+
+    if (page && limit) {
+      Object.assign(queryOptions, {
+        skip: (page - 1) * limit,
+        take: limit,
+      });
+    }
+
+    return this.dataService.chatHistory.findMany(queryOptions);
+  }
+
   getChatHistory(id: string) {
     return this.dataService.chatHistory.findUnique({
       where: { id: id },
