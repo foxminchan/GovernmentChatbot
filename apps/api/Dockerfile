@@ -2,7 +2,7 @@ FROM docker.io/node:lts-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /usr/src/app
 COPY dist/apps/api/package*.json ./
-RUN npm install --only=production
+RUN npm install --only=production --ignore-scripts
 
 FROM docker.io/node:lts-alpine AS runner
 RUN apk add --no-cache dumb-init
