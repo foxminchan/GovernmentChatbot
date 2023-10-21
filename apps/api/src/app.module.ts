@@ -10,7 +10,7 @@ import {
 } from './controllers';
 import { DataModule, OpenaiModule } from './frameworks';
 import { LoggerMiddleware } from './middlewares';
-import { EventsModule } from './gateway';
+import { EventsGateway } from './gateway';
 
 @Module({
   imports: [
@@ -20,12 +20,11 @@ import { EventsModule } from './gateway';
         limit: 30,
       },
     ]),
+    ChatHistoryModule,
     DataModule,
     OpenaiModule,
-    EventsModule,
     TopicModule,
     UserModule,
-    ChatHistoryModule,
     CacheModule.register({
       ttl: 60,
       max: 100,
@@ -34,6 +33,7 @@ import { EventsModule } from './gateway';
   ],
   controllers: [TopicController, UserController, ChatHistoryController],
   providers: [
+    EventsGateway,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
