@@ -1,0 +1,13 @@
+cff-version: 1.0.0
+title: 'GovermentLLM: Smart chatbot for streamlined administrative procedures, powered by advanced language models'
+message: >-
+  If you use this application, please cite it using these metadata.
+type: software
+authors:
+  - family-names: Nguyen
+    given-names: Xuan Nhan
+  - name: 'Contributors to GovermentLLM'
+repository-code: 'https://github.com/foxminchan/GovermentLLM'
+abstract: >-
+  This repository hosts an innovative chatbot solution that intelligently manages and streamlines the process of resolving diverse administrative procedures. Powered by advanced language models, the chatbot ensures smooth navigation through complex tasks, ensuring an intuitive and user-friendly experience for all users.
+license: MIT
