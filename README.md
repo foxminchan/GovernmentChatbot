@@ -25,6 +25,8 @@
 This repository hosts an innovative chatbot solution that intelligently manages and streamlines the process of resolving diverse administrative procedures. Powered by advanced language models, the chatbot ensures smooth navigation through complex tasks, ensuring an intuitive and user-friendly experience for all users.
 </p>
 
+<img loading="lazy" src="./assets/images/architecture.png" alt="architecture" width="100%" height="auto" />
+
 # Getting Started
 
 ## 💻 Infrastructure
