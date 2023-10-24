@@ -10,7 +10,17 @@
     "vite",
     "workspace"
   ],
-  "scripts": {},
+  "scripts": {
+    "postinstall": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/foxminchan/GovermentLLM"
+  },
+  "author": {
+    "name": "Nguyen Xuan Nhan",
+    "url": "https://www.linkedin.com/in/nxnhan/"
+  },
   "private": true,
   "browserslist": [
     "> 1%",
