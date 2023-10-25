@@ -5,8 +5,8 @@ import axios, {
   HttpStatusCode,
 } from 'axios';
 import { injectable } from 'inversify';
+import { axiosConfig } from '../utils/api';
 import { IHttpService } from '../@types/interface';
-import axiosConfig from '../utils/api';
 import _omitBy from 'lodash/omitBy';
 
 @injectable()
@@ -87,7 +87,6 @@ export default class HttpService implements IHttpService {
 
   public setHttpConfigs(config?: Partial<AxiosRequestConfig>) {
     if (config?.baseURL) this.instance.defaults.baseURL = config.baseURL;
-
     this.instance.defaults = {
       ...this.instance.defaults,
       ..._omitBy(config, 'BaseURL'),

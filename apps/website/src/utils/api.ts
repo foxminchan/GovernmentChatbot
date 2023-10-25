@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 
 const commonConfig: AxiosRequestConfig = {
-  baseURL: process.env.API_BASEURL,
+  baseURL: import.meta.env.VITE_NODE_DOMAIN,
   withCredentials: true,
   timeout: 10000,
 };
@@ -10,4 +10,4 @@ const axiosConfig = (): AxiosRequestConfig => {
   return commonConfig;
 };
 
-export default axiosConfig;
+export { axiosConfig };
