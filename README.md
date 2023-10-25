@@ -41,6 +41,9 @@ This repository hosts an innovative chatbot solution that intelligently manages 
 	<li align="justify">
 		<b><a href="https://www.npmjs.com/" target="_blank">npm</a></b> - npm is the package manager for the Node JavaScript platform.
 	</li>
+	<li align="justify">
+		<b><a href="https://www.python.org/" target="_blank">Python</a></b> - Python is a programming language that lets you work quickly and integrate systems more effectively.
+	</li>
 </ul>
 
 ## 📦 Services
@@ -51,6 +54,10 @@ This repository hosts an innovative chatbot solution that intelligently manages 
 	</li>
 	<li align="justify">
 		<b><a href="https://openai.com/product" target="_blank">ChatGPT API</a></b> - ChatGPT is a large-scale pretrained generative model for conversation. It is trained on 147M conversation-like exchanges extracted from Reddit comment chains over a period spanning from 2005 through 2017.
+	</li>
+	<li align="justify">
+		<b><a href="https://colab.research.google.com/" target="_blank">Google Colab</a></b> - Google Colab is a free cloud service and it supports free GPU! You can;
+		</b>
 	</li>
 </ul>
 
