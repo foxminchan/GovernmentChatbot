@@ -70,12 +70,6 @@ npm install --force
 
 ## 🚀 Running the application
 
-For the API, you can run the following command:
-
-```bash
-npx nx serve api
-```
-
 For the website, you can run the following command:
 
 ```bash
@@ -88,6 +82,18 @@ For the docs, you can run the following command:
 npx nx serve docs
 ```
 
+For the API `(node only)`, you can run the following command:
+
+```bash
+npx nx serve node-api
+```
+
+For the API `(python only)`, you can run the following command:
+
+```bash
+cd apps/py-api && python.exe -m uvicorn main:app --reload
+```
+
 # Dependency Graph
 
 You can see the dependency graph of the project by running the following command:
@@ -95,12 +101,6 @@ You can see the dependency graph of the project by running the following command
 ```bash
 npx nx dep-graph
 ```
-
-Here is the dependency graph of the project:
-
-<p align="center">
-	<img loading="lazy"  src="./assets/images/graph.png" width="100%" alt="Dependency Graph">
-</p>
 
 # License
 
