@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-10-26T15:03:51.426Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.61" etag="32XReq6AfzplyyRsasEF" version="22.0.8" type="device">
+<mxfile host="app.diagrams.net" modified="2023-10-26T15:18:41.394Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.61" etag="9Y4YsyJTCKX4wZGJNzdo" version="22.0.8" type="device">
   <diagram name="Page-1" id="F2Gc_G2kpYElJH-ISqym">
-    <mxGraphModel dx="1226" dy="839" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
+    <mxGraphModel dx="496" dy="340" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -49,7 +49,7 @@
           <mxGeometry x="520" y="570" width="80" height="100" as="geometry" />
         </mxCell>
         <mxCell id="NIu-WmEBllqXz-R9u4Zu-4" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.mlq.ai/content/images/2023/08/chroma-logo-FB287847E7-seeklogo.com.png;" vertex="1" parent="1">
-          <mxGeometry x="528.75" y="600" width="62.5" height="40" as="geometry" />
+          <mxGeometry x="529.38" y="620" width="61.25" height="39.2" as="geometry" />
         </mxCell>
         <mxCell id="NIu-WmEBllqXz-R9u4Zu-6" value="OpenAI" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdn-icons-png.flaticon.com/512/12222/12222588.png;" vertex="1" parent="1">
           <mxGeometry x="810" y="435" width="60" height="60" as="geometry" />
