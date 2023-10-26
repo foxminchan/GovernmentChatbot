@@ -3,5 +3,3 @@ image:
 
 tasks:
   - init: npm install -f
-
-
