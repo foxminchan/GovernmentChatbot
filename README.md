@@ -28,6 +28,24 @@
 This repository hosts an innovative chatbot solution that intelligently manages and streamlines the process of resolving diverse administrative procedures. Powered by advanced language models, the chatbot ensures smooth navigation through complex tasks, ensuring an intuitive and user-friendly experience for all users.
 </p>
 
+# Methodology
+
+## 🤖 Retrieval Augmented Generation
+
+<p align="justify">
+Our approach, Retrieval Augmented Generation, combines the prowess of ChatGPT API, LangChain, ChromaDB, and Nestjs. This integration enables an advanced system that seamlessly merges information retrieval with sophisticated content generation, delivering precise and creative outputs.
+</p>
+
+<img loading="lazy" src="./assets/images/rag.png" alt="Retrieval Augmented Generation" width="100%" height="auto" />
+
+## 🤗 Train Sentiment Analysis
+
+<p align="justify">
+Our method, Train Sentiment Analysis, leverages FastAPI, Hugging Face, and PhoBERT to develop highly accurate sentiment analysis models. This enables businesses to extract valuable insights from textual data swiftly and precisely.
+</p>
+
+<img loading="lazy" src="./assets/images/tsa.png" alt="Train Sentiment Analysis" width="100%" height="auto" />
+
 # Getting Started
 
 ## 💻 Infrastructure
