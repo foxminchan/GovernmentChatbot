@@ -2,11 +2,14 @@
 
 <div align="center">
 	<p>
+		<a href="#" target="_blank">
+			<img loading="lazy" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Google Colab">
+		</a>
 		<a href="https://sonarcloud.io/summary/new_code?id=foxminchan_GovermentLLM" target="_blank">
 			<img loading="lazy" src="https://sonarcloud.io/api/project_badges/measure?project=foxminchan_GovermentLLM&metric=alert_status" alt="SonarCloud">
 		</a>
 	  <a href="https://gitpod.io/new/#https://github.com/foxminchan/GovermentLLM" target="_blank">
-			<img loading="lazy" src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod" alt="Gitpod">
+			<img loading="lazy" src="https://img.shields.io/badge/Gitpod-Ready%20to%20Code-blue?logo=gitpod" alt="Gitpod">
 		</a>
 	</p>
 </div>
@@ -24,8 +27,6 @@
 <p align="justify">
 This repository hosts an innovative chatbot solution that intelligently manages and streamlines the process of resolving diverse administrative procedures. Powered by advanced language models, the chatbot ensures smooth navigation through complex tasks, ensuring an intuitive and user-friendly experience for all users.
 </p>
-
-<img loading="lazy" src="./assets/images/architecture.png" alt="architecture" width="100%" height="auto" />
 
 # Getting Started
 
