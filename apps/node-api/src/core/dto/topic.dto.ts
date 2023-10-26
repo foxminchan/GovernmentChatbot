@@ -7,9 +7,6 @@ export class CreateTopicDto {
   @MaxLength(50, { message: 'Tên chủ đề không được quá 50 ký tự' })
   @IsString({ message: 'Tên chủ đề phải là chuỗi' })
   name: string;
-
-  @ApiProperty()
-  chat_id: string[];
 }
 
 export class UpdateTopicDto extends PartialType(CreateTopicDto) {}

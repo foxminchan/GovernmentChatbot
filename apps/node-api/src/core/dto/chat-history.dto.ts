@@ -15,7 +15,7 @@ export class CreateChatHistoryDto {
   user_id: string;
 
   @ApiProperty()
-  topic_id: string[];
+  topic_id: string;
 }
 
 export class UpdateChatHistoryDto extends PartialType(CreateChatHistoryDto) {}

@@ -4,7 +4,6 @@ import * as process from 'process';
 const prisma = new PrismaClient();
 
 async function main() {
-  // Topic seed data
   const lookup = await prisma.topic.create({
     data: {
       name: 'Tra cứu thông tin',

@@ -5,5 +5,5 @@ export class ChatHistory {
   message: string;
   date: Date;
   user: User;
-  topics: Topic[];
+  topics: Topic;
 }
