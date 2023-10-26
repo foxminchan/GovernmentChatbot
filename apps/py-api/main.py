@@ -1,3 +1,5 @@
+import asyncio
+
 from Secweb.ContentSecurityPolicy import ContentSecurityPolicy
 from Secweb.StrictTransportSecurity import HSTS
 from Secweb.xXSSProtection import xXSSProtection
@@ -5,6 +7,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 
+from core.Database import init
 from core.Enviroment import get_environment_variables
 
 env = get_environment_variables()
@@ -49,11 +52,11 @@ app.add_middleware(
 )
 
 
-@app.get("/")
+@app.on_event("startup")
+def startup_event():
+    asyncio.create_task(init())
+
+
+@app.get("/", include_in_schema=False)
 async def root():
-    return RedirectResponse(url='/docs')
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+    return RedirectResponse(url="/docs")
