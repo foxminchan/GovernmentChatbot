@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ChatHistoryService } from '../services';
+import { ChatHistoryService } from './chat-history.service';
 
 @Module({
   providers: [ChatHistoryService],

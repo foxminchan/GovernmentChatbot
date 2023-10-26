@@ -1,16 +1,16 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
 import { ChatHistoryModule, TopicModule, UserModule } from './usecase';
 import {
   ChatHistoryController,
   TopicController,
   UserController,
 } from './controllers';
-import { DataModule, OpenaiModule } from './frameworks';
+import { DataModule, NestCacheModule, OpenaiModule } from './frameworks';
 import { LoggerMiddleware } from './middlewares';
 import { EventsGateway } from './gateway';
+import { ClearCacheInterceptor, HttpCacheInterceptor } from './interceptors';
 
 @Module({
   imports: [
@@ -20,16 +20,12 @@ import { EventsGateway } from './gateway';
         limit: 30,
       },
     ]),
+    NestCacheModule,
     ChatHistoryModule,
     DataModule,
     OpenaiModule,
     TopicModule,
     UserModule,
-    CacheModule.register({
-      ttl: 60,
-      max: 100,
-      isGlobal: true,
-    }),
   ],
   controllers: [TopicController, UserController, ChatHistoryController],
   providers: [
@@ -40,7 +36,11 @@ import { EventsGateway } from './gateway';
     },
     {
       provide: APP_INTERCEPTOR,
-      useClass: CacheInterceptor,
+      useClass: HttpCacheInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ClearCacheInterceptor,
     },
   ],
 })

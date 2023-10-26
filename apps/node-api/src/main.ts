@@ -8,13 +8,8 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import {
-  BadRequestException,
-  Logger,
-  ValidationError,
-  ValidationPipe,
-} from '@nestjs/common';
-import { NotFoundExceptionFilter } from './exceptions';
+import { Logger } from '@nestjs/common';
+import { middleware } from './app.middleware';
 
 declare const module: NodeModule & {
   hot?: {
@@ -33,26 +28,13 @@ async function bootstrap() {
       rawBody: true,
       cors: true,
       forceCloseConnections: true,
+      snapshot: true,
+      bufferLogs: true,
     }
   );
 
-  app.setGlobalPrefix('api/v1/');
-  app.useGlobalFilters(new NotFoundExceptionFilter());
-  app.useGlobalPipes(
-    new ValidationPipe({
-      exceptionFactory: (validationErrors: ValidationError[] = []) => {
-        return new BadRequestException(
-          validationErrors.map((error) => ({
-            field: error.property,
-            error: Object.values(error.constraints),
-          }))
-        );
-      },
-    })
-  );
-
   app.register(fastifyCsrf);
-
+  app.register(compression, { encodings: ['gzip', 'deflate'] });
   app.register(helmet, {
     contentSecurityPolicy: {
       directives: {
@@ -64,7 +46,9 @@ async function bootstrap() {
     },
   });
 
-  app.register(compression, { encodings: ['gzip', 'deflate'] });
+  middleware(app);
+
+  app.enableShutdownHooks();
 
   const config = new DocumentBuilder()
     .setTitle('Goverment Chatbot')
@@ -72,13 +56,12 @@ async function bootstrap() {
       'Smart chatbot for streamlined administrative procedures, powered by advanced language models'
     )
     .setVersion('1.0')
+    .setLicense('MIT', 'https://opensource.org/licenses/MIT')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document);
 
   await app.listen(process.env.PORT || 3000);
-
-  Logger.log(`🚀 Application is running on: ${await app.getUrl()}`);
 
   if (module.hot) {
     module.hot.accept();
@@ -88,4 +71,11 @@ async function bootstrap() {
   }
 }
 
-bootstrap();
+void (async (): Promise<void> => {
+  try {
+    await bootstrap();
+    Logger.log(`🚀 Application is running`);
+  } catch (error) {
+    Logger.error(error, '❌ Error starting server');
+  }
+})();

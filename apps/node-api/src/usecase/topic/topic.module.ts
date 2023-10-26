@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TopicService } from '../services';
+import { TopicService } from './topic.service';
 
 @Module({
   providers: [TopicService],
