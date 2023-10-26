@@ -1,7 +1,7 @@
 from functools import lru_cache
 import os
 
-from pydantic import BaseSettings
+from pydantic.v1 import BaseSettings
 
 
 @lru_cache
@@ -11,7 +11,7 @@ def get_env_filename():
 
 
 class EnvironmentSettings(BaseSettings):
-    APP_NAME: str = "Government API"
+    APP_NAME: str
     DATABASE_URL: str
 
     class Config:

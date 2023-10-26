@@ -50,5 +50,5 @@ class User(Document):
         if not v or v.isspace():
             raise ValidationError(detail="ID card must not be empty or whitespace")
         if re.match(r"\d{9}", v) or re.match(r"\d{12}", v):
-            raise ValidationError(detail="ID card must not be longer than 20 characters")
+            raise ValidationError(detail="ID card must be 9 or 12 characters")
         return v
