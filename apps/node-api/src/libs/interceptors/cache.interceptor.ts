@@ -1,6 +1,5 @@
+import { ExecutionContext, Injectable } from '@nestjs/common';
 import { CACHE_KEY_METADATA, CacheInterceptor } from '@nestjs/cache-manager';
-import type { ExecutionContext } from '@nestjs/common';
-import { Injectable } from '@nestjs/common';
 import { IGNORE_CACHING_META } from '../@types/constants';
 
 @Injectable()

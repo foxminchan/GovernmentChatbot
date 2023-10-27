@@ -14,17 +14,17 @@ import {
   TopicModule,
   UserModule,
 } from './modules';
-import { EventsGateway } from './frameworks/gateway';
-import { LoggerMiddleware } from './libs/middlewares';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import {
   // AuthModule,
   DataModule,
   NestCacheModule,
   OpenaiModule,
 } from './frameworks';
+import { EventsGateway } from './frameworks/gateway';
+import { LoggerMiddleware } from './libs/middlewares';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
 @Module({
   imports: [
