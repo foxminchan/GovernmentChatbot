@@ -4,7 +4,7 @@ import {
   ValidationError,
   BadRequestException,
 } from '@nestjs/common';
-import { HttpExceptionFilter } from './filters';
+import { HttpExceptionFilter } from './libs/filters';
 
 export function middleware(app: INestApplication): INestApplication {
   app.setGlobalPrefix('api/v1/');

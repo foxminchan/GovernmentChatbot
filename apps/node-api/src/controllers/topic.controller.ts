@@ -8,7 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { TopicService } from '../usecase';
+import { TopicService } from '../modules';
 import { CreateTopicDto, UpdateTopicDto } from '../core';
 
 @ApiTags('Topic')

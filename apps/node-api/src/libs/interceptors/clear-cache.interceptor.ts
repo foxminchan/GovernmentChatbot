@@ -7,7 +7,7 @@ import type {
   ExecutionContext,
   NestInterceptor,
 } from '@nestjs/common';
-import { CacheService } from '../frameworks';
+import { CacheService } from '../../frameworks';
 
 @Injectable()
 export class ClearCacheInterceptor implements NestInterceptor {

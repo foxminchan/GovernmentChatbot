@@ -1,5 +1,5 @@
 import { ApiTags } from '@nestjs/swagger';
-import { UserService } from '../usecase';
+import { UserService } from '../modules';
 import {
   Body,
   Controller,

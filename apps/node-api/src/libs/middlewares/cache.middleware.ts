@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 import type { NestMiddleware } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
-import { CacheService } from '../frameworks';
+import { CacheService } from '../../frameworks';
 
 @Injectable()
 export class ClearCacheMiddleware implements NestMiddleware {

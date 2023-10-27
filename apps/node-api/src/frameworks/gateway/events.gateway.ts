@@ -5,8 +5,8 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
-import { OpenaiService } from '../frameworks';
-import { ChatHistoryService } from '../usecase';
+import { OpenaiService } from '..';
+import { ChatHistoryService } from '../../modules';
 import { Body } from '@nestjs/common';
 
 @WebSocketGateway({

@@ -9,7 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { ChatHistoryService } from '../usecase';
+import { ChatHistoryService } from '../modules';
 import { CreateChatHistoryDto, UpdateChatHistoryDto } from '../core';
 
 @ApiTags('Chat History')
