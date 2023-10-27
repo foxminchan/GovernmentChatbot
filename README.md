@@ -5,10 +5,10 @@
 		<a href="#" target="_blank">
 			<img loading="lazy" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Google Colab">
 		</a>
-		<a href="https://sonarcloud.io/summary/new_code?id=foxminchan_GovermentLLM" target="_blank">
-			<img loading="lazy" src="https://sonarcloud.io/api/project_badges/measure?project=foxminchan_GovermentLLM&metric=alert_status" alt="SonarCloud">
+		<a href="https://sonarcloud.io/summary/new_code?id=foxminchan_GovernmentLLM" target="_blank">
+			<img loading="lazy" src="https://sonarcloud.io/api/project_badges/measure?project=foxminchan_GovernmentLLM&metric=alert_status" alt="SonarCloud">
 		</a>
-	  <a href="https://gitpod.io/new/#https://github.com/foxminchan/GovermentLLM" target="_blank">
+	  <a href="https://gitpod.io/new/#https://github.com/foxminchan/GovernmentChatbot" target="_blank">
 			<img loading="lazy" src="https://img.shields.io/badge/Gitpod-Ready%20to%20Code-blue?logo=gitpod" alt="Gitpod">
 		</a>
 	</p>
@@ -16,10 +16,10 @@
 
 <hr>
 
-<h1 align="justify"> Goverment Chatbot - A LLM Application 🤖</h1>
+<h1 align="justify"> Government Chatbot - A LLM Application 🤖</h1>
 
 <p align="center">
-	Goverment Chatbot is a monorepo project built with <a href="https://nx.dev/">Nx</a> technology. It is a set of extensible dev tools for monorepos, which helps you develop like Google, Facebook, and Microsoft.
+	Government Chatbot is a monorepo project built with <a href="https://nx.dev/">Nx</a> technology. It is a set of extensible dev tools for monorepos, which helps you develop like Google, Facebook, and Microsoft.
 </p>
 
 # Overview
@@ -85,7 +85,7 @@ Our method, Train Sentiment Analysis, leverages FastAPI, Hugging Face, and PhoBE
 First, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/foxminchan/GovermentLLM
+git clone https://github.com/foxminchan/GovernmentLLM
 ```
 
 Next, navigate to the root directory of the project and install the dependencies:
