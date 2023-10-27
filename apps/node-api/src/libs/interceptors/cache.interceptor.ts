@@ -1,6 +1,7 @@
 import { CACHE_KEY_METADATA, CacheInterceptor } from '@nestjs/cache-manager';
 import type { ExecutionContext } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
+import { IGNORE_CACHING_META } from '../@types/constants';
 
 @Injectable()
 export class HttpCacheInterceptor extends CacheInterceptor {
@@ -9,7 +10,7 @@ export class HttpCacheInterceptor extends CacheInterceptor {
     const request = http.getRequest();
 
     const ignoreCaching: boolean = this.reflector.get(
-      'ignoreCaching',
+      IGNORE_CACHING_META,
       context.getHandler()
     );
 

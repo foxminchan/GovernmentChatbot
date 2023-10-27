@@ -1,18 +1,9 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
 import { TopicService } from '../modules';
+import { GenericController } from '../libs/decorators';
 import { CreateTopicDto, UpdateTopicDto } from '../core';
+import { Body, Delete, Get, Param, Post, Put } from '@nestjs/common';
 
-@ApiTags('Topic')
-@Controller('topic')
+@GenericController('topic')
 export class TopicController {
   constructor(private readonly topicService: TopicService) {}
 

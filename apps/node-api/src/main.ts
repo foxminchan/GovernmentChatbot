@@ -1,15 +1,15 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import helmet from '@fastify/helmet';
-import compression from '@fastify/compress';
-import fastifyCsrf from '@fastify/csrf-protection';
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import helmet from '@fastify/helmet';
 import { Logger } from '@nestjs/common';
+import { AppModule } from './app.module';
+import { NestFactory } from '@nestjs/core';
+import compression from '@fastify/compress';
 import { middleware } from './app.middleware';
+import fastifyCsrf from '@fastify/csrf-protection';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 declare const module: NodeModule & {
   hot?: {

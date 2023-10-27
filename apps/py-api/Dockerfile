@@ -1,5 +1,7 @@
-#
-FROM python:3.9.18-slim-bullseye
+FROM python:3.12.0-slim-bullseye
+RUN addgroup -S nonroot && adduser -S nonroot -G nonroot
+USER nonroot
+
 WORKDIR /code
 COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt

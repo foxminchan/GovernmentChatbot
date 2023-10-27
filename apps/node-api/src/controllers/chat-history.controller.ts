@@ -1,19 +1,10 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Query,
-} from '@nestjs/common';
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiQuery } from '@nestjs/swagger';
 import { ChatHistoryService } from '../modules';
+import { GenericController } from '../libs/decorators';
 import { CreateChatHistoryDto, UpdateChatHistoryDto } from '../core';
+import { Body, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 
-@ApiTags('Chat History')
-@Controller('chat-history')
+@GenericController('chat-history')
 export class ChatHistoryController {
   constructor(private readonly chatHistoryService: ChatHistoryService) {}
 
