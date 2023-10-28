@@ -19,8 +19,22 @@
 <h1 align="justify"> Government Chatbot - A LLM Application 🤖</h1>
 
 <p align="center">
-	Government Chatbot is a monorepo project built with <a href="https://nx.dev/">Nx</a> technology. It is a set of extensible dev tools for monorepos, which helps you develop like Google, Facebook, and Microsoft.
+Government Chatbot is a monorepo project built with <a href="https://nx.dev/">Nx</a> technology. It is a set of extensible dev tools for monorepos, which helps you develop like Google, Facebook, and Microsoft.
 </p>
+
+<h1>Table of Contents</h1>
+
+- [Overview](#overview)
+- [Methodology](#methodology)
+  - [🤖 Retrieval Augmented Generation](#-retrieval-augmented-generation)
+  - [🤗 Train Sentiment Analysis](#-train-sentiment-analysis)
+- [Getting Started](#getting-started)
+  - [💻 Infrastructure](#-infrastructure)
+  - [📦 Services](#-services)
+  - [🛠️ Setup](#️-setup)
+  - [🚀 Running the application](#-running-the-application)
+- [Dependency Graph](#dependency-graph)
+- [License](#license)
 
 # Overview
 
@@ -55,6 +69,9 @@ Our method, Train Sentiment Analysis, leverages FastAPI, Hugging Face, and PhoBE
 		<b><a href="https://www.docker.com/" target="_blank">Docker</a></b> - Docker is an open platform for developing, shipping, 	and running applications.
 	</li>
 	<li align="justify">
+		<b><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank">WSL 2</a></b> - The Windows Subsystem for Linux lets developers run a GNU/Linux environment.
+	</li>
+	<li align="justify">
 		<b><a href="https://nodejs.org/en/" target="_blank">Nodejs</a></b> - Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
 	</li>
 	<li align="justify">
@@ -62,6 +79,9 @@ Our method, Train Sentiment Analysis, leverages FastAPI, Hugging Face, and PhoBE
 	</li>
 	<li align="justify">
 		<b><a href="https://www.python.org/" target="_blank">Python</a></b> - Python is a programming language that lets you work quickly and integrate systems more effectively.
+	</li>
+	<li align="justify">
+		<b><a href="https://www.modular.com/mojo" target="_blank">Mojo</a></b> - Mojo combines the usability of Python with the performance of C, unlocking unparalleled programmability of AI hardware and extensibility of AI models.
 	</li>
 </ul>
 
@@ -119,6 +139,9 @@ For the API `(python only)`, you can run the following command:
 ```bash
 cd apps/py-api && python.exe -m uvicorn main:app --reload
 ```
+
+> Note:
+> If you want to run with Nx, make sure you have installed `poetry` and `uvicorn` globally.
 
 # Dependency Graph
 
