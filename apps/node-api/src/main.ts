@@ -4,6 +4,7 @@ import {
 } from '@nestjs/platform-fastify';
 import helmet from '@fastify/helmet';
 import { Logger } from '@nestjs/common';
+import otelSDK from './instrumentation';
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import compression from '@fastify/compress';
@@ -19,6 +20,7 @@ declare const module: NodeModule & {
 };
 
 async function bootstrap() {
+  otelSDK.start();
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter({

@@ -39,21 +39,27 @@ export class ChatHistoryService {
   }
 
   addChatHistory(chatHistory: CreateChatHistoryDto) {
-    return this.dataService.chatHistory.create({
-      data: chatHistory,
-    });
+    return this.dataService.$transaction([
+      this.dataService.chatHistory.create({
+        data: chatHistory,
+      }),
+    ]);
   }
 
   updateChatHistory(id: string, chatHistory: UpdateChatHistoryDto) {
-    return this.dataService.chatHistory.update({
-      where: { id: id },
-      data: chatHistory,
-    });
+    return this.dataService.$transaction([
+      this.dataService.chatHistory.update({
+        where: { id: id },
+        data: chatHistory,
+      }),
+    ]);
   }
 
   deleteChatHistory(id: string) {
-    return this.dataService.chatHistory.delete({
-      where: { id: id },
-    });
+    return this.dataService.$transaction([
+      this.dataService.chatHistory.delete({
+        where: { id: id },
+      }),
+    ]);
   }
 }

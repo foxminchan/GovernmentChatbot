@@ -25,4 +25,9 @@ export class EventsGateway {
       this.server.emit('gpt', response);
     }, 1000);
   }
+
+  @SubscribeMessage('chain')
+  async handleChain(@MessageBody() data: string) {
+    throw new Error(`Not implemented ${data}`);
+  }
 }

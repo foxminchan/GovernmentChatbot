@@ -24,21 +24,27 @@ export class UserService {
   }
 
   addUser(user: CreateUserDto) {
-    return this.dataService.user.create({
-      data: user,
-    });
+    return this.dataService.$transaction([
+      this.dataService.user.create({
+        data: user,
+      }),
+    ]);
   }
 
   updateUser(id: string, user: UpdateUserDto) {
-    return this.dataService.user.update({
-      where: { id: id },
-      data: user,
-    });
+    return this.dataService.$transaction([
+      this.dataService.user.update({
+        where: { id: id },
+        data: user,
+      }),
+    ]);
   }
 
   deleteUser(id: string) {
-    return this.dataService.user.delete({
-      where: { id: id },
-    });
+    return this.dataService.$transaction([
+      this.dataService.user.delete({
+        where: { id: id },
+      }),
+    ]);
   }
 }

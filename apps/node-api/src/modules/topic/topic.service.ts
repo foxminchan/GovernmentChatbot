@@ -17,21 +17,27 @@ export class TopicService {
   }
 
   addTopic(topic: CreateTopicDto) {
-    return this.dataService.topic.create({
-      data: topic,
-    });
+    return this.dataService.$transaction([
+      this.dataService.topic.create({
+        data: topic,
+      }),
+    ]);
   }
 
   updateTopic(id: string, topic: UpdateTopicDto) {
-    return this.dataService.topic.update({
-      where: { id: id },
-      data: topic,
-    });
+    return this.dataService.$transaction([
+      this.dataService.topic.update({
+        where: { id: id },
+        data: topic,
+      }),
+    ]);
   }
 
   deleteTopic(id: string) {
-    return this.dataService.topic.delete({
-      where: { id: id },
-    });
+    return this.dataService.$transaction([
+      this.dataService.topic.delete({
+        where: { id: id },
+      }),
+    ]);
   }
 }

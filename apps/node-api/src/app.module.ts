@@ -14,6 +14,7 @@ import {
   DataModule,
   OpenaiModule,
   VectorModule,
+  LoggerModule,
   LangChainModule,
   NestCacheModule,
 } from './frameworks';
@@ -21,6 +22,7 @@ import {
   ClearCacheInterceptor,
   HttpCacheInterceptor,
 } from './libs/interceptors';
+import { OpenTelemetryModule } from 'nestjs-otel';
 import { EventsGateway } from './frameworks/gateway';
 import { LoggerMiddleware } from './libs/middlewares';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
@@ -35,12 +37,21 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
         limit: 30,
       },
     ]),
+    OpenTelemetryModule.forRoot({
+      metrics: {
+        hostMetrics: true,
+        apiMetrics: {
+          enable: true,
+        },
+      },
+    }),
     DataModule,
     UserModule,
     TopicModule,
     OpenaiModule,
     VectorModule,
     AccountModule,
+    LoggerModule,
     LangChainModule,
     NestCacheModule,
     ChatHistoryModule,

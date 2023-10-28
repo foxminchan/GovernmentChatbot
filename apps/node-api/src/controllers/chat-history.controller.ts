@@ -38,7 +38,6 @@ export class ChatHistoryController {
   @SwaggerResponse({
     operation: 'Chat history fetch by user id with pagination',
     params: ['userId'],
-    query: ['page', 'limit'],
     response: ResponseChatHistoryDto,
   })
   @ApiQuery({ name: 'page', required: false, type: Number })
