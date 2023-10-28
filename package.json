@@ -110,6 +110,7 @@
     "@vitest/coverage-c8": "~0.32.0",
     "@vitest/ui": "~0.32.0",
     "autoprefixer": "10.4.13",
+    "css-loader": "^6.8.1",
     "eslint": "~8.46.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-import": "2.27.5",

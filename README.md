@@ -5,8 +5,8 @@
 		<a href="#" target="_blank">
 			<img loading="lazy" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Google Colab">
 		</a>
-		<a href="https://sonarcloud.io/summary/new_code?id=foxminchan_GovernmentLLM" target="_blank">
-			<img loading="lazy" src="https://sonarcloud.io/api/project_badges/measure?project=foxminchan_GovernmentLLM&metric=alert_status" alt="SonarCloud">
+		<a href="https://sonarcloud.io/summary/new_code?id=foxminchan_GovermentLLM" target="_blank">
+			<img loading="lazy" src="https://sonarcloud.io/api/project_badges/measure?project=foxminchan_GovermentLLM&metric=alert_status" alt="SonarCloud">
 		</a>
 	  <a href="https://gitpod.io/new/#https://github.com/foxminchan/GovernmentChatbot" target="_blank">
 			<img loading="lazy" src="https://img.shields.io/badge/Gitpod-Ready%20to%20Code-blue?logo=gitpod" alt="Gitpod">
