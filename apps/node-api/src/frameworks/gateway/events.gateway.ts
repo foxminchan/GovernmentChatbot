@@ -5,9 +5,7 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
-import { OpenaiService } from '..';
-import { Body } from '@nestjs/common';
-import { ChatHistoryService } from '../../modules';
+import { OpenaiService } from '../openai';
 
 @WebSocketGateway({
   cors: {
@@ -15,33 +13,16 @@ import { ChatHistoryService } from '../../modules';
   },
 })
 export class EventsGateway {
-  constructor(
-    private readonly openaiService: OpenaiService,
-    private readonly chatHistoryService: ChatHistoryService
-  ) {}
+  constructor(private readonly openaiService: OpenaiService) {}
 
   @WebSocketServer()
   server: Server;
 
-  @SubscribeMessage('events')
-  async handleEvent(
-    @MessageBody() data: string,
-    @Body('user_id') user_id: string,
-    @Body('topic_id') topic_id: string
-  ) {
+  @SubscribeMessage('gpt')
+  async handleEvent(@MessageBody() data: string) {
     const response = await this.openaiService.createChatCompletion(data);
     setTimeout(() => {
-      this.server.emit('events', response);
+      this.server.emit('gpt', response);
     }, 1000);
-
-    const chatData = {
-      message: data,
-      date: new Date(),
-      user_id: user_id,
-      topic_id: topic_id,
-    };
-
-    this.chatHistoryService.addChatHistory(chatData);
-    this.chatHistoryService.addChatHistory({ ...chatData, message: response });
   }
 }

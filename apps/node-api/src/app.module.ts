@@ -1,15 +1,22 @@
 import {
+  UserModule,
+  TopicModule,
   AccountModule,
   ChatHistoryModule,
-  TopicModule,
-  UserModule,
 } from './modules';
 import {
+  UserController,
+  TopicController,
   AccountController,
   ChatHistoryController,
-  TopicController,
-  UserController,
 } from './controllers';
+import {
+  DataModule,
+  OpenaiModule,
+  VectorModule,
+  LangChainModule,
+  NestCacheModule,
+} from './frameworks';
 import {
   ClearCacheInterceptor,
   HttpCacheInterceptor,
@@ -19,7 +26,6 @@ import { LoggerMiddleware } from './libs/middlewares';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { DataModule, NestCacheModule, OpenaiModule } from './frameworks';
 
 @Module({
   imports: [
@@ -33,7 +39,9 @@ import { DataModule, NestCacheModule, OpenaiModule } from './frameworks';
     UserModule,
     TopicModule,
     OpenaiModule,
+    VectorModule,
     AccountModule,
+    LangChainModule,
     NestCacheModule,
     ChatHistoryModule,
   ],

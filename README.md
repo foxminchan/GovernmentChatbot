@@ -80,9 +80,6 @@ Our method, Train Sentiment Analysis, leverages FastAPI, Hugging Face, and PhoBE
 	<li align="justify">
 		<b><a href="https://www.python.org/" target="_blank">Python</a></b> - Python is a programming language that lets you work quickly and integrate systems more effectively.
 	</li>
-	<li align="justify">
-		<b><a href="https://www.modular.com/mojo" target="_blank">Mojo</a></b> - Mojo combines the usability of Python with the performance of C, unlocking unparalleled programmability of AI hardware and extensibility of AI models.
-	</li>
 </ul>
 
 ## 📦 Services

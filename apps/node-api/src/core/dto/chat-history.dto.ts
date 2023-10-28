@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, MaxLength } from 'class-validator';
 
 export class CreateChatHistoryDto {
   @ApiProperty()
@@ -16,6 +16,11 @@ export class CreateChatHistoryDto {
 
   @ApiProperty()
   topic_id: string;
+
+  @ApiProperty()
+  @IsNumber({}, { message: 'Loại tin nhắn phải là số' })
+  @IsNotEmpty({ message: 'Loại tin nhắn không được để trống' })
+  chat_type: boolean;
 }
 
 export class UpdateChatHistoryDto extends PartialType(CreateChatHistoryDto) {}
