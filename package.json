@@ -91,7 +91,7 @@
     "@nx/node": "16.10.0",
     "@nx/react": "16.10.0",
     "@nx/vite": "16.10.0",
-    "@nx/webpack": "16.10.0",
+    "@nx/webpack": "17.0.2",
     "@nx/workspace": "16.10.0",
     "@nxlv/python": "^16.1.4",
     "@prisma/client": "^5.4.2",
