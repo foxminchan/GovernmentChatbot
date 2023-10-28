@@ -1,8 +1,8 @@
-import { Controller, applyDecorators } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
 import { capitalize } from 'helper-fns';
+import { ApiTags } from '@nestjs/swagger';
+import { Controller, applyDecorators } from '@nestjs/common';
 
-export function GenericController(name: string) {
+export function ApiController(name: string) {
   const decsToApply: (ClassDecorator | MethodDecorator | PropertyDecorator)[] =
     [ApiTags(capitalize(name)), Controller(name)];
 

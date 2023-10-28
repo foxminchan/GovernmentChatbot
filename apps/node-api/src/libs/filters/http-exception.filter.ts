@@ -1,28 +1,17 @@
-import {
-  ArgumentsHost,
-  Catch,
-  ExceptionFilter,
-  NotFoundException,
-} from '@nestjs/common';
+import type { Response } from 'express';
+import type { ArgumentsHost, ExceptionFilter } from '@nestjs/common';
+import { Catch, HttpException } from '@nestjs/common';
 
-@Catch(NotFoundException)
+@Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-  async catch(_exception: NotFoundException, host: ArgumentsHost) {
-    const ctx = host.switchToHttp();
-    const response = ctx.getResponse();
-    const statusCode = _exception.getStatus();
+  async catch(exception: HttpException, host: ArgumentsHost) {
+    const context = host.switchToHttp();
+    const response = context.getResponse<Response>();
+    const statusCode = exception.getStatus();
 
-    const message = _exception.getResponse() as {
-      key: string;
-      args: Record<string, unknown>;
-    };
-
-    response.status(statusCode).json({
+    response.status(statusCode).send({
       statusCode,
-      message: {
-        key: message.key,
-        args: message.args,
-      },
+      message: exception.message,
     });
   }
 }

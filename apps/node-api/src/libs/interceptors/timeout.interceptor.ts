@@ -1,16 +1,16 @@
 import {
-  CallHandler,
-  ExecutionContext,
-  NestInterceptor,
-  RequestTimeoutException,
-} from '@nestjs/common';
-import {
   Observable,
   TimeoutError,
   catchError,
   throwError,
   timeout,
 } from 'rxjs';
+import {
+  CallHandler,
+  ExecutionContext,
+  NestInterceptor,
+  RequestTimeoutException,
+} from '@nestjs/common';
 
 export class TimeoutInterceptor implements NestInterceptor {
   intercept(

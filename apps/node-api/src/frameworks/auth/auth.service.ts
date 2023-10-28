@@ -14,19 +14,13 @@ export class AuthService {
   validateUser(username: string, password: string) {
     return from(this.accountService.findUser(username)).pipe(
       switchMap((user) => {
-        if (!user) {
-          return null;
-        }
-        return from(argon2.verify(user.password, password)).pipe(
-          switchMap((match) => {
-            if (!match) {
-              return null;
-            }
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { password, ...result } = user;
-            return of(result);
-          })
-        );
+        return !user
+          ? null
+          : from(argon2.verify(user.password, password)).pipe(
+              switchMap((match) => {
+                return !match ? null : of({ password, ...user });
+              })
+            );
       })
     );
   }

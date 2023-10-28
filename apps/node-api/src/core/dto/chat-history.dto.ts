@@ -19,3 +19,8 @@ export class CreateChatHistoryDto {
 }
 
 export class UpdateChatHistoryDto extends PartialType(CreateChatHistoryDto) {}
+
+export class ResponseChatHistoryDto extends PartialType(CreateChatHistoryDto) {
+  @ApiProperty()
+  id: string;
+}

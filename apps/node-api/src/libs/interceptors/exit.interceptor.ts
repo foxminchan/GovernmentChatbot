@@ -3,9 +3,9 @@ import type {
   ExecutionContext,
   NestInterceptor,
 } from '@nestjs/common';
-import { Injectable } from '@nestjs/common';
-import type { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
+import type { Observable } from 'rxjs';
+import { Injectable } from '@nestjs/common';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable()

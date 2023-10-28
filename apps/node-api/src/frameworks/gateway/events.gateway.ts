@@ -6,8 +6,8 @@ import {
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 import { OpenaiService } from '..';
-import { ChatHistoryService } from '../../modules';
 import { Body } from '@nestjs/common';
+import { ChatHistoryService } from '../../modules';
 
 @WebSocketGateway({
   cors: {

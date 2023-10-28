@@ -29,3 +29,8 @@ export class CreateAccountDto {
 }
 
 export class UpdateAccountDto extends PartialType(CreateAccountDto) {}
+
+export class ResponseAccountDto extends PartialType(CreateAccountDto) {
+  @ApiProperty()
+  id: string;
+}

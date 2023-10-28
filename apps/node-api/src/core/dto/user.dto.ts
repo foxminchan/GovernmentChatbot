@@ -38,3 +38,8 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {}
+
+export class ResponseUserDto extends PartialType(CreateUserDto) {
+  @ApiProperty()
+  id: string;
+}

@@ -1,7 +1,9 @@
 import {
-  ClearCacheInterceptor,
-  HttpCacheInterceptor,
-} from './libs/interceptors';
+  AccountModule,
+  ChatHistoryModule,
+  TopicModule,
+  UserModule,
+} from './modules';
 import {
   AccountController,
   ChatHistoryController,
@@ -9,22 +11,15 @@ import {
   UserController,
 } from './controllers';
 import {
-  AccountModule,
-  ChatHistoryModule,
-  TopicModule,
-  UserModule,
-} from './modules';
-import {
-  // AuthModule,
-  DataModule,
-  NestCacheModule,
-  OpenaiModule,
-} from './frameworks';
+  ClearCacheInterceptor,
+  HttpCacheInterceptor,
+} from './libs/interceptors';
 import { EventsGateway } from './frameworks/gateway';
 import { LoggerMiddleware } from './libs/middlewares';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { DataModule, NestCacheModule, OpenaiModule } from './frameworks';
 
 @Module({
   imports: [
@@ -34,7 +29,6 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
         limit: 30,
       },
     ]),
-    // AuthModule,
     DataModule,
     UserModule,
     TopicModule,
