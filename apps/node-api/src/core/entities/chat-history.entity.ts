@@ -6,5 +6,5 @@ export class ChatHistory {
   date: Date;
   user: User;
   topics: Topic;
-  chat_type: boolean;
+  chat_type: number;
 }

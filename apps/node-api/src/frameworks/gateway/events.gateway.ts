@@ -6,6 +6,10 @@ import {
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 import { OpenaiService } from '../openai';
+import { LangChainService } from '../langchain';
+import { ChatHistoryService } from '../../modules';
+import { ChatType } from '../../libs/enums';
+import { Body } from '@nestjs/common';
 
 @WebSocketGateway({
   cors: {
@@ -13,7 +17,11 @@ import { OpenaiService } from '../openai';
   },
 })
 export class EventsGateway {
-  constructor(private readonly openaiService: OpenaiService) {}
+  constructor(
+    private readonly openaiService: OpenaiService,
+    private readonly langChainService: LangChainService,
+    private readonly chatHistoryService: ChatHistoryService
+  ) {}
 
   @WebSocketServer()
   server: Server;
@@ -27,7 +35,32 @@ export class EventsGateway {
   }
 
   @SubscribeMessage('chain')
-  async handleChain(@MessageBody() data: string) {
-    throw new Error(`Not implemented ${data}`);
+  async handleChain(
+    @MessageBody() data: string,
+    @Body() user_id: string,
+    @Body() topic_id: string
+  ) {
+    const response = await this.langChainService.selfQueryRetriever(data);
+    setTimeout(() => {
+      this.server.emit('chain', response);
+    }, 1000);
+
+    const chatData = {
+      message: data,
+      date: new Date(),
+      user_id: user_id,
+      topic_id: topic_id,
+    };
+
+    this.chatHistoryService.addChatHistory({
+      ...chatData,
+      chat_type: ChatType.HUMAN,
+    });
+
+    this.chatHistoryService.addChatHistory({
+      ...chatData,
+      message: response.message,
+      chat_type: ChatType.BOT,
+    });
   }
 }

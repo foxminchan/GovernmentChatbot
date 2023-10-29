@@ -20,7 +20,7 @@ export class CreateChatHistoryDto {
   @ApiProperty()
   @IsNumber({}, { message: 'Loại tin nhắn phải là số' })
   @IsNotEmpty({ message: 'Loại tin nhắn không được để trống' })
-  chat_type: boolean;
+  chat_type: number;
 }
 
 export class UpdateChatHistoryDto extends PartialType(CreateChatHistoryDto) {}

@@ -28,8 +28,10 @@ export class LangChainService {
 
   constructor() {
     this.embedder = new OpenAIEmbeddings({
-      openAIApiKey: process.env.OPENAI_API_KEY,
+      maxRetries: 3,
       batchSize: 1024,
+      timeout: 10000,
+      openAIApiKey: process.env.OPENAI_API_KEY,
     });
     this.openAI = new OpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
