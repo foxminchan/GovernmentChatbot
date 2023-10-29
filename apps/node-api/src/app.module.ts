@@ -12,9 +12,8 @@ import {
 } from './controllers';
 import {
   DataModule,
-  OpenaiModule,
-  VectorModule,
   LoggerModule,
+  OpenaiModule,
   LangChainModule,
   NestCacheModule,
 } from './frameworks';
@@ -49,9 +48,8 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
     UserModule,
     TopicModule,
     OpenaiModule,
-    VectorModule,
-    AccountModule,
     LoggerModule,
+    AccountModule,
     LangChainModule,
     NestCacheModule,
     ChatHistoryModule,

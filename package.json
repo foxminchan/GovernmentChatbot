@@ -62,7 +62,6 @@
     "argon2": "^0.31.1",
     "axios": "^1.0.0",
     "cache-manager": "^5.2.4",
-    "chromadb": "^1.5.11",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "clsx": "^1.2.1",
@@ -86,7 +85,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0",
-    "ulid": "^2.3.0"
+    "weaviate-ts-client": "^1.5.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.8.0",

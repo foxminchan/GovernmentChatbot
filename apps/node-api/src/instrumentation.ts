@@ -18,7 +18,7 @@ const metricReader = new PrometheusExporter({
 });
 
 const traceExporter = new OTLPTraceExporter({
-  url: 'http://otel-collector:4318/v1/traces',
+  url: process.env.OLTP_TRACE_EXPORTER,
 });
 
 const spanProcessor = new BatchSpanProcessor(traceExporter);
