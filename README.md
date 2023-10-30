@@ -2,9 +2,6 @@
 
 <div align="center">
 	<p>
-		<a href="#" target="_blank">
-			<img loading="lazy" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Google Colab">
-		</a>
 		<a href="https://sonarcloud.io/summary/new_code?id=foxminchan_GovermentLLM" target="_blank">
 			<img loading="lazy" src="https://sonarcloud.io/api/project_badges/measure?project=foxminchan_GovermentLLM&metric=alert_status" alt="SonarCloud">
 		</a>
@@ -26,8 +23,6 @@ Government Chatbot is a monorepo project built with <a href="https://nx.dev/">Nx
 
 - [Overview](#overview)
 - [Methodology](#methodology)
-  - [🤖 Retrieval Augmented Generation](#-retrieval-augmented-generation)
-  - [🤗 Train Sentiment Analysis](#-train-sentiment-analysis)
 - [Getting Started](#getting-started)
   - [💻 Infrastructure](#-infrastructure)
   - [📦 Services](#-services)
@@ -44,21 +39,11 @@ This repository hosts an innovative chatbot solution that intelligently manages 
 
 # Methodology
 
-## 🤖 Retrieval Augmented Generation
-
 <p align="justify">
-Our approach, Retrieval Augmented Generation, combines the prowess of ChatGPT API, LangChain, ChromaDB, and Nestjs. This integration enables an advanced system that seamlessly merges information retrieval with sophisticated content generation, delivering precise and creative outputs.
+Retrieval Augmented Generation (RAG) represents an innovative paradigm that harnesses the combined strengths of the ChatGPT API, LangChain, and Weaviate. This sophisticated integration facilitates a seamless amalgamation of information retrieval and content generation, resulting in outputs that are not only accurate and coherent but also infused with creativity and depth. By capitalizing on the individual capabilities of each component, RAG effectively bridges the gap between data-driven precision and the art of nuanced communication, catering to a diverse spectrum of user requirements and preferences.
 </p>
 
 <img loading="lazy" src="./assets/images/rag.png" alt="Retrieval Augmented Generation" width="100%" height="auto" />
-
-## 🤗 Train Sentiment Analysis
-
-<p align="justify">
-Our method, Train Sentiment Analysis, leverages FastAPI, Hugging Face, and PhoBERT to develop highly accurate sentiment analysis models. This enables businesses to extract valuable insights from textual data swiftly and precisely.
-</p>
-
-<img loading="lazy" src="./assets/images/tsa.png" alt="Train Sentiment Analysis" width="100%" height="auto" />
 
 # Getting Started
 
@@ -92,8 +77,7 @@ Our method, Train Sentiment Analysis, leverages FastAPI, Hugging Face, and PhoBE
 		<b><a href="https://openai.com/product" target="_blank">ChatGPT API</a></b> - ChatGPT is a large-scale pretrained generative model for conversation. It is trained on 147M conversation-like exchanges extracted from Reddit comment chains over a period spanning from 2005 through 2017.
 	</li>
 	<li align="justify">
-		<b><a href="https://colab.research.google.com/" target="_blank">Google Colab</a></b> - Google Colab is a free cloud service and it supports free GPU! You can;
-		</b>
+		<b><a href="https://weaviate.io/" target="_blank">Weaviate</a></b> - Weaviate is an open-source vector database. It allows you to store data objects and vector embeddings from your favorite ML-models, and scale seamlessly into billions of data objects.
 	</li>
 </ul>
 
@@ -125,16 +109,10 @@ For the docs, you can run the following command:
 npx nx serve docs
 ```
 
-For the API `(node only)`, you can run the following command:
+For the API , you can run the following command:
 
 ```bash
-npx nx serve node-api
-```
-
-For the API `(python only)`, you can run the following command:
-
-```bash
-cd apps/py-api && python.exe -m uvicorn main:app --reload
+npx nx serve api
 ```
 
 > Note:

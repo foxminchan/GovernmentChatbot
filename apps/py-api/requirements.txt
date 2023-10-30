@@ -1,6 +1,0 @@
-beanie~=1.23.1
-motor~=3.3.1
-pydantic~=2.4.2
-fastapi~=0.104.0
-Secweb~=1.7.2
-starlette~=0.31.1
