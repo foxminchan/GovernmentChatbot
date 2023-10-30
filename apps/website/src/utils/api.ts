@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 
 const commonConfig: AxiosRequestConfig = {
-  baseURL: import.meta.env.VITE_NODE_DOMAIN,
+  baseURL: import.meta.env.VITE_DEV_DOMAIN,
   withCredentials: true,
   timeout: 10000,
 };

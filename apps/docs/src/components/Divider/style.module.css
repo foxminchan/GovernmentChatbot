@@ -15,8 +15,4 @@
   .divider {
     margin: 2rem;
   }
-  .divider --vertical {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
 }

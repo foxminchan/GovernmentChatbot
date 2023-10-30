@@ -29,6 +29,12 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro"
+            style={{
+              borderRadius: '25px',
+              borderColor: '#426fcc',
+              backgroundColor: '#426fcc',
+              color: '#fff',
+            }}
           >
             Get Started 🚀
           </Link>
