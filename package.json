@@ -36,7 +36,11 @@
   },
   "dependencies": {
     "@docusaurus/core": "^2.4.3",
+    "@docusaurus/plugin-content-docs": "^2.4.3",
+    "@docusaurus/plugin-pwa": "^2.4.3",
+    "@docusaurus/plugin-sitemap": "^2.4.3",
     "@docusaurus/preset-classic": "^2.4.3",
+    "@docusaurus/types": "^2.4.3",
     "@fastify/compress": "^6.4.0",
     "@fastify/csrf-protection": "^6.3.0",
     "@fastify/helmet": "^11.1.1",
