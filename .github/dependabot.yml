@@ -5,6 +5,6 @@ updates:
     schedule:
       interval: "monthly"
   - package-ecosystem: "pip"
-    directory: "/apps/py-api"
+    directory: "/apps/crawler"
     schedule:
       interval: "weekly"
