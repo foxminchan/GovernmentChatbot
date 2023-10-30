@@ -115,8 +115,14 @@ For the API , you can run the following command:
 npx nx serve api
 ```
 
-> Note:
-> If you want to run with Nx, make sure you have installed `poetry` and `uvicorn` globally.
+For the crawler, you can run the following command:
+
+```bash
+npx nx serve crawler
+```
+
+> **Note:**
+> If you want to run with Nx, make sure you have installed `poetry` globally. Python version must be `>= 3.8 and < 3.11`.
 
 # Dependency Graph
 
