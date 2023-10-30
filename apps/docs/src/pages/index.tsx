@@ -7,6 +7,8 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 
 import styles from './index.module.css';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import WhatIs from '../components/WhatIsSection';
+import TechSection from '../components/TechStackSection';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -17,7 +19,7 @@ function HomepageHeader() {
           loading="lazy"
           width="250px"
           height="250px"
-          alt="redux-cool logo"
+          alt="government chatbot logo"
           className={styles.heroLogo}
           src={useBaseUrl('/img/logo.png')}
         />
@@ -46,6 +48,8 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
+        <WhatIs />
+        <TechSection />
       </main>
     </Layout>
   );

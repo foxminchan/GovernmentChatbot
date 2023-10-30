@@ -1,0 +1,16 @@
+.Boulder {
+  background-color: #d9ecff;
+  padding: 30px 15px;
+}
+
+.whatIs {
+  max-width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .whatIs {
+    max-width: 90%;
+  }
+}
