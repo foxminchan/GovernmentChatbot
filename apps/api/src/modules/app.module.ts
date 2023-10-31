@@ -1,32 +1,27 @@
 import {
-  UserModule,
-  TopicModule,
-  AccountModule,
-  ChatHistoryModule,
-} from './modules';
-import {
-  UserController,
-  TopicController,
-  AccountController,
-  ChatHistoryController,
-} from './controllers';
-import {
   DataModule,
   LoggerModule,
   OpenaiModule,
   LangChainModule,
   NestCacheModule,
-} from './frameworks';
+} from '../frameworks';
 import {
-  ClearCacheInterceptor,
+  UserController,
+  TopicController,
+  AccountController,
+  ChatHistoryController,
+} from '../controllers';
+import {
   HttpCacheInterceptor,
-} from './libs/interceptors';
+  ClearCacheInterceptor,
+} from '../libs/interceptors';
 import { OpenTelemetryModule } from 'nestjs-otel';
-import { EventsGateway } from './frameworks/gateway';
-import { LoggerMiddleware } from './libs/middlewares';
+import { EventsGateway } from '../frameworks/gateway';
+import { LoggerMiddleware } from '../libs/middlewares';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { UserModule, TopicModule, AccountModule, ChatHistoryModule } from '.';
 
 @Module({
   imports: [

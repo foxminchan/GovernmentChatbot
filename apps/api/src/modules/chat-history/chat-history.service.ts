@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DataService } from '../../frameworks';
+import { Criteria, constructQueryOptions } from '../../libs/helpers';
 import { CreateChatHistoryDto, UpdateChatHistoryDto } from '../../core';
 
 @Injectable()
@@ -10,25 +11,15 @@ export class ChatHistoryService {
     return this.dataService.chatHistory.findMany();
   }
 
-  getPaginatedChatHistories(page: number, limit: number) {
-    return this.dataService.chatHistory.findMany({
-      skip: (page - 1) * limit,
-      take: limit,
-    });
+  getFilterChatHistories(criteria: Criteria) {
+    const queryOptions = constructQueryOptions(criteria);
+    return this.dataService.chatHistory.findMany(queryOptions);
   }
 
-  getByUserId(userId: string, page: number, limit: number) {
-    const queryOptions = {
+  getByUserId(userId: string, criteria: Criteria) {
+    const queryOptions = constructQueryOptions(criteria, {
       where: { user_id: userId },
-    };
-
-    if (page && limit) {
-      Object.assign(queryOptions, {
-        skip: (page - 1) * limit,
-        take: limit,
-      });
-    }
-
+    });
     return this.dataService.chatHistory.findMany(queryOptions);
   }
 

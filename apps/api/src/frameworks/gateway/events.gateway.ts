@@ -5,17 +5,18 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
+import { UsePipes } from '@nestjs/common';
 import { OpenaiService } from '../openai';
 import { LangChainService } from '../langchain';
 import { ChatHistoryService } from '../../modules';
-import { ChatType } from '../../libs/enums';
-import { Body } from '@nestjs/common';
+import { WsValidationPipe } from '../../libs/pipes';
 
 @WebSocketGateway({
   cors: {
     origin: '*',
   },
 })
+@UsePipes(WsValidationPipe)
 export class EventsGateway {
   constructor(
     private readonly openaiService: OpenaiService,

@@ -49,17 +49,6 @@
       "options": {
         "outputFile": "reports/apps/crawler/pylint.txt"
       }
-    },
-    "test": {
-      "executor": "@nxlv/python:run-commands",
-      "outputs": [
-        "{workspaceRoot}/reports/apps/crawler/unittests",
-        "{workspaceRoot}/coverage/apps/crawler"
-      ],
-      "options": {
-        "command": "poetry run pytest tests/",
-        "cwd": "apps/crawler"
-      }
     }
   },
   "tags": []

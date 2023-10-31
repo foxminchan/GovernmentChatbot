@@ -1,7 +1,7 @@
 import {
   CompositePropagator,
-  W3CTraceContextPropagator,
   W3CBaggagePropagator,
+  W3CTraceContextPropagator,
 } from '@opentelemetry/core';
 import * as process from 'process';
 import { Logger } from '@nestjs/common';

@@ -1,7 +1,12 @@
+import {
+  ApiController,
+  PagingSwaggerResponse,
+  SwaggerResponse,
+} from '../libs/decorators';
 import { UserService } from '../modules';
-import { ApiController, SwaggerResponse } from '../libs/decorators';
-import { Body, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Criteria } from '../libs/helpers';
 import { CreateUserDto, ResponseUserDto, UpdateUserDto } from '../core';
+import { Body, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 
 @ApiController('user')
 export class UserController {
@@ -16,17 +21,13 @@ export class UserController {
     return this.userService.getUsers();
   }
 
-  @Get(':page/:limit')
-  @SwaggerResponse({
+  @Get('filter')
+  @PagingSwaggerResponse({
     operation: 'User fetch with pagination',
-    params: ['page', 'limit'],
     response: ResponseUserDto,
   })
-  getPaginatedUsers(
-    @Param('page') page: number,
-    @Param('limit') limit: number
-  ) {
-    return this.userService.getPaginatedUsers(page, limit);
+  getPaginatedUsers(@Query() criteria: Criteria) {
+    return this.userService.getFilterUsers(criteria);
   }
 
   @Get(':id')

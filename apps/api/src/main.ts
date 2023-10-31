@@ -2,14 +2,19 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import {
+  BadRequestException,
+  Logger,
+  ValidationError,
+  ValidationPipe,
+} from '@nestjs/common';
 import helmet from '@fastify/helmet';
-import { Logger } from '@nestjs/common';
 import otelSDK from './instrumentation';
-import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import compression from '@fastify/compress';
-import { middleware } from './app.middleware';
+import { AppModule } from './modules/app.module';
 import fastifyCsrf from '@fastify/csrf-protection';
+import { HttpExceptionFilter } from './libs/filters';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 declare const module: NodeModule & {
@@ -48,7 +53,20 @@ async function bootstrap() {
     },
   });
 
-  middleware(app);
+  app.setGlobalPrefix('api/v1/');
+  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      exceptionFactory: (validationErrors: ValidationError[] = []) => {
+        return new BadRequestException(
+          validationErrors.map((error) => ({
+            field: error.property,
+            error: Object.values(error.constraints),
+          }))
+        );
+      },
+    })
+  );
 
   app.enableShutdownHooks();
 

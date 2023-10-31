@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataService } from '../../frameworks';
 import { CreateUserDto, UpdateUserDto } from '../../core';
+import { Criteria, constructQueryOptions } from '../../libs/helpers';
 
 @Injectable()
 export class UserService {
@@ -10,11 +11,9 @@ export class UserService {
     return this.dataService.user.findMany();
   }
 
-  getPaginatedUsers(page: number, limit: number) {
-    return this.dataService.user.findMany({
-      skip: (page - 1) * limit,
-      take: limit,
-    });
+  getFilterUsers(criteria: Criteria) {
+    const queryOptions = constructQueryOptions(criteria);
+    return this.dataService.user.findMany(queryOptions);
   }
 
   getUser(id: string) {

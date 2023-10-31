@@ -3,10 +3,14 @@ import {
   ResponseChatHistoryDto,
   UpdateChatHistoryDto,
 } from '../core';
-import { ApiQuery } from '@nestjs/swagger';
 import { ChatHistoryService } from '../modules';
-import { ApiController, SwaggerResponse } from '../libs/decorators';
+import {
+  ApiController,
+  PagingSwaggerResponse,
+  SwaggerResponse,
+} from '../libs/decorators';
 import { Body, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Criteria } from '../libs/helpers';
 
 @ApiController('chat-history')
 export class ChatHistoryController {
@@ -21,33 +25,23 @@ export class ChatHistoryController {
     return this.chatHistoryService.getChatHistories();
   }
 
-  @Get(':page/:limit')
-  @SwaggerResponse({
+  @Get('filter')
+  @PagingSwaggerResponse({
     operation: 'Chat history fetch with pagination',
-    params: ['page', 'limit'],
     response: ResponseChatHistoryDto,
   })
-  getPaginatedChatHistories(
-    @Param('page') page: number,
-    @Param('limit') limit: number
-  ) {
-    return this.chatHistoryService.getPaginatedChatHistories(page, limit);
+  getPaginatedChatHistories(@Query() criteria: Criteria) {
+    return this.chatHistoryService.getFilterChatHistories(criteria);
   }
 
   @Get('user/:userId')
-  @SwaggerResponse({
+  @PagingSwaggerResponse({
     operation: 'Chat history fetch by user id with pagination',
     params: ['userId'],
     response: ResponseChatHistoryDto,
   })
-  @ApiQuery({ name: 'page', required: false, type: Number })
-  @ApiQuery({ name: 'limit', required: false, type: Number })
-  getByUserId(
-    @Param('userId') userId: string,
-    @Query('page') page: number,
-    @Query('limit') limit: number
-  ) {
-    return this.chatHistoryService.getByUserId(userId, page, limit);
+  getByUserId(@Param('userId') userId: string, @Query() criteria: Criteria) {
+    return this.chatHistoryService.getByUserId(userId, criteria);
   }
 
   @Get(':id')
