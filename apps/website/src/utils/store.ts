@@ -1,5 +1,5 @@
-import rootReducer from '../features/Guide';
 import thunk from 'redux-thunk';
+import rootReducer from '../features';
 import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore({
