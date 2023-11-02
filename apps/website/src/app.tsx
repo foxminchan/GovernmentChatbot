@@ -1,14 +1,12 @@
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
-import NxWelcome from './components/NxBase/nx-welcome';
-import { NotFound } from './components/NotFound/not-found';
+import { Route, Routes } from 'react-router-dom';
+import NxWelcome from './components/NxBase';
+import { NotFound } from './components/NotFound';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={NxWelcome} />
-        <Route path="*" component={NotFound} />
-      </Switch>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<NxWelcome title="Welcome" />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }

@@ -1,4 +1,4 @@
-import rootReducer from '../features';
+import rootReducer from '../features/Guide';
 import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 

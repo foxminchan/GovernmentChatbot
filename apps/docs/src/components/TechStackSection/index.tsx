@@ -42,7 +42,7 @@ const TechSection: React.FC = () => {
         }}
       >
         {TechList.map(({ url, logo }, idx) => (
-          <div className="col col--2" key={idx}>
+          <div className="col col--2" key={url}>
             <div className="col-demo text--center">
               <div className={styles.colDemoItems}>
                 <Link href={url}>
