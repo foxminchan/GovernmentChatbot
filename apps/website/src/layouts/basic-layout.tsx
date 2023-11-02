@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function BasicLayout({ children }: Props) {
+export default function BasicLayout({ children }: Readonly<Props>) {
   return (
     <div>
       <Header />

@@ -13,7 +13,7 @@ export default function Footer() {
             <p>Tổng đài hỗ trợ: 18001096</p>
           </div>
           <div className="inline-block px-10">
-            <p> Email: dichvucong@chinhphu.vn</p>
+            <p>Email: dichvucong@chinhphu.vn</p>
           </div>
         </div>
       </div>
