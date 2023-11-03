@@ -1,5 +1,5 @@
 import logo from '../../assets/images/logo.png';
-import Navbar from '../Navbar';
+import Navbar from './navbar';
 
 const textButton = [
   {name: 'Đăng kí', link: '/'},
