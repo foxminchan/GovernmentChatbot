@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { Container } from 'inversify';
-import HttpService from '../services/http.service';
-import { IHttpService } from '../@types/interface';
 import { TYPES } from '../@types/types';
+import HttpService from '../services/http.service';
+import { IHttpService } from '../@types/interfaces';
 
 const container = new Container();
 

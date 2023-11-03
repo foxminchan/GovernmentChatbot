@@ -4,10 +4,12 @@ import axios, {
   AxiosResponse,
   HttpStatusCode,
 } from 'axios';
+import Cookies from 'js-cookie';
+import _omitBy from 'lodash/omitBy';
 import { injectable } from 'inversify';
 import { axiosConfig } from '../utils/api';
-import { IHttpService } from '../@types/interface';
-import _omitBy from 'lodash/omitBy';
+import { StorageKeys } from '../@types/keys';
+import { IHttpService } from '../@types/interfaces';
 
 @injectable()
 export default class HttpService implements IHttpService {
@@ -35,11 +37,31 @@ export default class HttpService implements IHttpService {
     );
     axiosInstance.interceptors.response.use(
       async (response) => {
-        return response.data;
+        const accessToken = Cookies.get(StorageKeys.ACCESS_TOKEN);
+
+        if (accessToken) {
+          response.headers.Authorization = `Bearer ${accessToken}`;
+        }
+
+        if (response.headers.isRemoveAuthorization) {
+          delete response.headers.Authorization;
+          delete response.headers.isRemoveAuthorization;
+        }
+
+        return response;
       },
       (error) => {
-        if (error.response.status === HttpStatusCode.TooManyRequests) {
-          alert('Bạn đã gửi quá nhiều yêu cầu, vui lòng thử lại sau');
+        const statusCode = error?.response?.status;
+        switch (statusCode) {
+          case HttpStatusCode.Unauthorized: {
+            Cookies.remove(StorageKeys.ACCESS_TOKEN);
+            window.location.href = '/';
+            break;
+          }
+          case HttpStatusCode.TooManyRequests: {
+            alert('Bạn đã gửi quá nhiều yêu cầu, vui lòng thử lại sau');
+            break;
+          }
         }
         return Promise.reject(error);
       }

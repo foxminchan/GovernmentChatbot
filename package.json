@@ -75,6 +75,7 @@
     "clsx": "^1.2.1",
     "helper-fns": "^2.6.38",
     "inversify": "^6.0.2",
+    "js-cookie": "^3.0.5",
     "langchain": "^0.0.167",
     "lodash": "^4.17.21",
     "nestjs-i18n": "^10.3.7",
@@ -126,6 +127,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "@testing-library/react": "14.0.0",
     "@types/jest": "^29.4.0",
+    "@types/js-cookie": "^3.0.5",
     "@types/lodash": "^4.14.200",
     "@types/node": "18.14.2",
     "@types/passport-jwt": "^3.0.11",
@@ -170,5 +172,9 @@
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   }
 }
