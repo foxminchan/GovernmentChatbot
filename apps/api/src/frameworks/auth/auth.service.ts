@@ -1,8 +1,14 @@
+import {
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import * as argon2 from 'argon2';
+import { omit } from 'helper-fns';
 import { JwtService } from '@nestjs/jwt';
-import { from, of, switchMap } from 'rxjs';
-import { Injectable } from '@nestjs/common';
 import { AccontService } from '../../modules';
+import { LoginPayload } from '../../libs/helpers';
+import { from, of, switchMap, throwError } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -11,28 +17,40 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async login(user: { userId: string; username: string }) {
-    const payload = { email: user.username, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
-  }
+  validateUser(user: LoginPayload) {
+    return from(this.accountService.findUser(user.username)).pipe(
+      switchMap((res) => {
+        if (!res)
+          return throwError(
+            () => new ForbiddenException('You account has not been created yet')
+          );
 
-  validateUser(username: string, password: string) {
-    return from(this.accountService.findUser(username)).pipe(
-      switchMap((user) => {
-        return !user
-          ? null
-          : from(argon2.verify(user.password, password)).pipe(
-              switchMap((match) => {
-                return !match ? null : of({ password, ...user });
-              })
-            );
+        return from(argon2.verify(res.password, user.password)).pipe(
+          switchMap((isValid) => {
+            if (!isValid)
+              return throwError(
+                () => new UnauthorizedException('Invalid password or username')
+              );
+            return of(omit(res, ['password']));
+          })
+        );
       })
     );
   }
 
-  validateApiKey(apikey: string) {
-    return apikey === process.env.API_KEY;
+  async login(user: LoginPayload) {
+    return this.validateUser(user).pipe(
+      switchMap((res) => {
+        if (!res) throw new UnauthorizedException();
+        return of({
+          access_token: this.jwtService.sign({
+            email: res.username,
+            id: res.id,
+            role: res.role,
+            claims: res.claim,
+          }),
+        });
+      })
+    );
   }
 }

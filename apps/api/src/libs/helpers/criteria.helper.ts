@@ -1,4 +1,4 @@
-import { SortBy } from '../enums';
+import { SortBy } from '../@types/enums';
 import { IsEnum, IsNumber, IsPositive, IsString, Max } from 'class-validator';
 
 export class Criteria {

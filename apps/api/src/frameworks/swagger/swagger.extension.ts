@@ -6,7 +6,7 @@ import {
   SWAGGER_TITLE,
   SWAGGER_VERSION,
   license,
-} from '../../libs/constants';
+} from '../../libs/@types/constants';
 import { getMiddleware } from 'swagger-stats';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { isArray } from 'helper-fns';
