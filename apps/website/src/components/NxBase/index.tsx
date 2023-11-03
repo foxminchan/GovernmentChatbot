@@ -407,7 +407,7 @@ export function NxWelcome({ title }: { readonly title: string }) {
           `,
         }}
       />
-      <div className="wrapper">
+      <main className="wrapper">
         <div className="container">
           <div id="welcome">
             <h1>
@@ -835,7 +835,7 @@ export function NxWelcome({ title }: { readonly title: string }) {
             </svg>
           </p>
         </div>
-      </div>
+      </main>
     </>
   );
 }

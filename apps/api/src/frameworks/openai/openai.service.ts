@@ -15,7 +15,7 @@ export class OpenaiService {
     try {
       const chatCompletion = await this.openai.chat.completions.create({
         messages: [{ role: 'user', content: userContent }],
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-3.5-turbo-instruct-0914',
       });
       return chatCompletion.choices[0].message.content;
     } catch (error) {
