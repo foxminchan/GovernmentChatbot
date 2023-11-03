@@ -39,30 +39,30 @@ export class EventsGateway {
 
   @SubscribeMessage('chain')
   async handleChain(@MessageBody() chatBody: ChatBody) {
-    const response = await this.openaiService.createChatCompletion(
-      chatBody.message
+    (await this.openaiService.createChatCompletion(chatBody.message)).subscribe(
+      (response: string) => {
+        setTimeout(() => {
+          this.server.emit('chain', response);
+        }, 1000);
+
+        const chatData = {
+          message: chatBody.message,
+          date: new Date(),
+          user_id: chatBody.user_id,
+          topic_id: chatBody.topic_id,
+        };
+
+        this.chatHistoryService.addChatHistory({
+          ...chatData,
+          chat_type: ChatType.HUMAN,
+        });
+
+        this.chatHistoryService.addChatHistory({
+          ...chatData,
+          message: response,
+          chat_type: ChatType.BOT,
+        });
+      }
     );
-
-    setTimeout(() => {
-      this.server.emit('chain', response);
-    }, 1000);
-
-    const chatData = {
-      message: chatBody.message,
-      date: new Date(),
-      user_id: chatBody.user_id,
-      topic_id: chatBody.topic_id,
-    };
-
-    this.chatHistoryService.addChatHistory({
-      ...chatData,
-      chat_type: ChatType.HUMAN,
-    });
-
-    this.chatHistoryService.addChatHistory({
-      ...chatData,
-      message: response,
-      chat_type: ChatType.BOT,
-    });
   }
 }
