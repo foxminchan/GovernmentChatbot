@@ -34,11 +34,11 @@ async function bootstrap() {
     })
   );
 
-  app.register(fastifyCsrfProtection),
-    app.register(cors, {
-      credentials: true,
-      origin: true,
-    });
+  app.register(fastifyCsrfProtection);
+  app.register(cors, {
+    credentials: true,
+    origin: true,
+  });
   app.register(compression, { encodings: ['gzip', 'deflate'] });
   app.register(helmet, {
     contentSecurityPolicy: {
