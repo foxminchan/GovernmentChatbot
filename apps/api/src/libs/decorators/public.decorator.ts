@@ -1,7 +1,7 @@
 import {
   IS_PUBLIC_KEY_META,
   SWAGGER_API_SECURITY_KEY_META,
-} from '../constants';
+} from '../@types/constants';
 import { SetMetadata, applyDecorators } from '@nestjs/common';
 
 const publicAuthMiddleware = SetMetadata(IS_PUBLIC_KEY_META, true);

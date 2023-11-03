@@ -4,6 +4,7 @@ import {
   OpenaiModule,
   LangChainModule,
   NestCacheModule,
+  AuthModule,
 } from '../frameworks';
 import {
   UserController,
@@ -18,8 +19,8 @@ import {
 import { OpenTelemetryModule } from 'nestjs-otel';
 import { EventsGateway } from '../frameworks/gateway';
 import { LoggerMiddleware } from '../libs/middlewares';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserModule, TopicModule, AccountModule, ChatHistoryModule } from '.';
 
@@ -39,6 +40,7 @@ import { UserModule, TopicModule, AccountModule, ChatHistoryModule } from '.';
         },
       },
     }),
+    AuthModule,
     DataModule,
     UserModule,
     TopicModule,
@@ -57,10 +59,6 @@ import { UserModule, TopicModule, AccountModule, ChatHistoryModule } from '.';
   ],
   providers: [
     EventsGateway,
-    {
-      provide: APP_GUARD,
-      useClass: ThrottlerGuard,
-    },
     {
       provide: APP_INTERCEPTOR,
       useClass: HttpCacheInterceptor,

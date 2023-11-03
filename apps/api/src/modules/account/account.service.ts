@@ -7,16 +7,6 @@ import { DataService } from '../../frameworks';
 export class AccontService {
   constructor(private readonly dataService: DataService) {}
 
-  getAllAccounts() {
-    return this.dataService.account.findMany();
-  }
-
-  getById(id: string) {
-    return this.dataService.account.findUnique({
-      where: { id },
-    });
-  }
-
   findUser(username: string) {
     return this.dataService.account.findUnique({
       where: { username },
@@ -31,27 +21,6 @@ export class AccontService {
           ...account,
           password: hash,
         },
-      }),
-    ]);
-  }
-
-  async updateAccount(id: string, account: CreateAccountDto) {
-    const hash = await argon2.hash(account.password);
-    return this.dataService.$transaction([
-      this.dataService.account.update({
-        where: { id },
-        data: {
-          ...account,
-          password: hash,
-        },
-      }),
-    ]);
-  }
-
-  deleteAccount(id: string) {
-    return this.dataService.$transaction([
-      this.dataService.account.delete({
-        where: { id },
       }),
     ]);
   }

@@ -10,10 +10,13 @@ export class CreateAccountDto {
 
   @ApiProperty()
   @IsNotEmpty({ message: 'Mật khẩu không được để trống' })
-  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
-    message:
-      'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số',
-  })
+  @Matches(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    {
+      message:
+        'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số',
+    }
+  )
   password: string;
 
   @ApiProperty()
@@ -22,7 +25,7 @@ export class CreateAccountDto {
   role: string;
 
   @ApiProperty()
-  claims: string[];
+  claim: string[];
 
   @ApiProperty()
   user_id: string;

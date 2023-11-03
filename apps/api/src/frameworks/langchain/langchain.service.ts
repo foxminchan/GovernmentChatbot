@@ -1,3 +1,4 @@
+import { from, map } from 'rxjs';
 import { Injectable } from '@nestjs/common';
 import { OpenAI } from 'langchain/llms/openai';
 import weaviate, { WeaviateClient } from 'weaviate-ts-client';
@@ -42,8 +43,11 @@ export class LangChainService {
   }
 
   private async getRetriever() {
-    const vectorStore = await this.getWeaviateStore();
-    return vectorStore.asRetriever({ k: 10 });
+    return from(this.getWeaviateStore()).pipe(
+      map((store) => {
+        return store.asRetriever({ k: 10 });
+      })
+    );
   }
 
   // private createRetrieverChain(llm: BaseLanguageModel, retriever: Runnable) {}
@@ -59,8 +63,11 @@ export class LangChainService {
 
   async queryDocument(query: string) {
     const store = await this.getWeaviateStore();
-    const results = await store.similaritySearch(query);
-    return results;
+    return from(store.similaritySearch(query)).pipe(
+      map((results) => {
+        return results;
+      })
+    );
   }
 
   async deleteDocument(filter: WeaviateFilter) {

@@ -1,5 +1,7 @@
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+import React, { Suspense } from 'react';
+
+const Footer = React.lazy(() => import('../components/Footer'));
+const Header = React.lazy(() => import('../components/Header'));
 
 type Props = {
   children: React.ReactNode;
@@ -8,9 +10,13 @@ type Props = {
 export default function BasicLayout({ children }: Readonly<Props>) {
   return (
     <div>
-      <Header />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Header />
+      </Suspense>
       <div className="container mx-auto px-4">{children}</div>
-      <Footer />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }

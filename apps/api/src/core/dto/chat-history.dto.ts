@@ -1,4 +1,4 @@
-import { ChatType } from '../../libs/enums';
+import { ChatType } from '../../libs/@types/enums';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
