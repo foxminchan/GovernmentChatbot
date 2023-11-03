@@ -19,7 +19,8 @@ import { OpenTelemetryModule } from 'nestjs-otel';
 import { EventsGateway } from '../frameworks/gateway';
 import { LoggerMiddleware } from '../libs/middlewares';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerBehindProxyGuard } from '../libs/guards';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserModule, TopicModule, AccountModule, ChatHistoryModule } from '.';
 
@@ -59,7 +60,7 @@ import { UserModule, TopicModule, AccountModule, ChatHistoryModule } from '.';
     EventsGateway,
     {
       provide: APP_GUARD,
-      useClass: ThrottlerGuard,
+      useClass: ThrottlerBehindProxyGuard,
     },
     {
       provide: APP_INTERCEPTOR,

@@ -12,10 +12,10 @@ import helmet from '@fastify/helmet';
 import otelSDK from './instrumentation';
 import { NestFactory } from '@nestjs/core';
 import compression from '@fastify/compress';
+import { SetupSwagger } from './frameworks';
 import { AppModule } from './modules/app.module';
 import fastifyCsrf from '@fastify/csrf-protection';
 import { HttpExceptionFilter } from './libs/filters';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 declare const module: NodeModule & {
   hot?: {
@@ -70,16 +70,7 @@ async function bootstrap() {
 
   app.enableShutdownHooks();
 
-  const config = new DocumentBuilder()
-    .setTitle('Goverment Chatbot')
-    .setDescription(
-      'Smart chatbot for streamlined administrative procedures, powered by advanced language models'
-    )
-    .setVersion('1.0')
-    .setLicense('MIT', 'https://opensource.org/licenses/MIT')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/', app, document);
+  SetupSwagger(app);
 
   await app.listen(process.env.PORT || 3000);
 

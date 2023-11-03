@@ -11,6 +11,13 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
+  async login(user: { userId: string; username: string }) {
+    const payload = { email: user.username, sub: user.userId };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+  }
+
   validateUser(username: string, password: string) {
     return from(this.accountService.findUser(username)).pipe(
       switchMap((user) => {
@@ -25,10 +32,7 @@ export class AuthService {
     );
   }
 
-  async login(user: { userId: string; username: string }) {
-    const payload = { email: user.username, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+  validateApiKey(apikey: string) {
+    return apikey === process.env.API_KEY;
   }
 }
