@@ -1,7 +1,7 @@
-import * as argon2 from 'argon2';
 import { Injectable } from '@nestjs/common';
 import { CreateAccountDto } from '../../core';
 import { DataService } from '../../frameworks';
+import { CryptoUtils } from '../../libs/utils';
 
 @Injectable()
 export class AccontService {
@@ -14,12 +14,12 @@ export class AccontService {
   }
 
   async createAccount(account: CreateAccountDto) {
-    const hash = await argon2.hash(account.password);
+    const hashPassword = await CryptoUtils.hashString(account.password);
     return this.dataService.$transaction([
       this.dataService.account.create({
         data: {
           ...account,
-          password: hash,
+          password: hashPassword,
         },
       }),
     ]);

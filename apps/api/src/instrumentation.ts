@@ -4,7 +4,6 @@ import {
   W3CTraceContextPropagator,
 } from '@opentelemetry/core';
 import * as process from 'process';
-import { Logger } from '@nestjs/common';
 import { NodeSDK } from '@opentelemetry/sdk-node';
 import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
 import { PrometheusExporter } from '@opentelemetry/exporter-prometheus';
@@ -41,17 +40,3 @@ const otelSDK = new NodeSDK({
 });
 
 export default otelSDK;
-
-if (typeof process === 'object' && typeof process.on === 'function') {
-  process.on('SIGTERM', () => {
-    otelSDK
-      .shutdown()
-      .then(
-        () => Logger.log('SDK shut down successfully'),
-        (err) => Logger.log('Error shutting down SDK', err)
-      )
-      .finally(() => process.exit(0));
-  });
-} else {
-  Logger.error('Process.on is not available.');
-}

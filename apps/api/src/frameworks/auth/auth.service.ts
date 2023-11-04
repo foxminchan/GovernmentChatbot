@@ -3,10 +3,10 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import * as argon2 from 'argon2';
 import { omit } from 'helper-fns';
 import { JwtService } from '@nestjs/jwt';
 import { AccontService } from '../../modules';
+import { CryptoUtils } from '../../libs/utils';
 import { LoginPayload } from '../../libs/helpers';
 import { from, of, switchMap, throwError } from 'rxjs';
 
@@ -25,13 +25,14 @@ export class AuthService {
             () => new ForbiddenException('You account has not been created yet')
           );
 
-        return from(argon2.verify(res.password, user.password)).pipe(
+        return from(CryptoUtils.verifyHash(res.password, user.password)).pipe(
           switchMap((isValid) => {
-            if (!isValid)
-              return throwError(
-                () => new UnauthorizedException('Invalid password or username')
-              );
-            return of(omit(res, ['password']));
+            return isValid
+              ? of(omit(res, ['password']))
+              : throwError(
+                  () =>
+                    new UnauthorizedException('Invalid password or username')
+                );
           })
         );
       })

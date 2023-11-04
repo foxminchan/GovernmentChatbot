@@ -11,6 +11,7 @@ import {
 import cors from '@fastify/cors';
 import helmet from '@fastify/helmet';
 import otelSDK from './instrumentation';
+import { AppUtils } from './libs/utils';
 import { NestFactory } from '@nestjs/core';
 import compression from '@fastify/compress';
 import { SetupSwagger } from './frameworks';
@@ -66,9 +67,10 @@ async function bootstrap() {
     })
   );
 
-  app.enableShutdownHooks();
-
   SetupSwagger(app);
+
+  app.enableShutdownHooks();
+  AppUtils.processAppWithGrace(app);
 
   await app.listen(process.env.PORT || 3000);
 
