@@ -1,5 +1,5 @@
 import logo from '../../assets/images/logo.png';
-import Navbar from './navbar';
+import Navbar from '../Navbar/navbar';
 
 const textButton = [
   {name: 'Đăng kí', link: '/'},
@@ -8,16 +8,16 @@ const textButton = [
 export default function Header() {
   return (
   <header>
-    <div className=" h-32 flex items-center">
-      <div className=" h-28 w-full flex items-center justify-center ">
+    <div className="flex items-center h-32">
+      <div className="flex items-center justify-center w-full h-28">
         <div className="!relative h-full w-4/5 ">
           <div>
-            <img src={logo} alt="logo" className=" relative w-auto h-24 ml-1" loading='lazy'/>
+            <img src={logo} alt="logo" className="relative w-auto h-24 ml-1" loading='lazy'/>
           </div>
-          <div className=" absolute h-full w-auto top-0 right-4 justify-center items-center flex  ">
+          <div className="absolute top-0 flex items-center justify-center w-auto h-full right-4">
             {textButton.map((item) => (
-              <button key={item.name} className="bg-transparent hover:bg-japonica-400 text-dark-moderate-blue-800 font-medium hover:text-white border border-japonica-400 hover:border-transparent rounded 
-              text-lg  mr-2 ml-3 w-32 h-10 text-center leading-6 font-nunito">
+              <button key={item.name} 
+              className="w-32 h-10 ml-3 mr-2 text-lg font-medium leading-6 text-center bg-transparent border rounded hover:bg-japonica-400 text-dark-moderate-blue-800 hover:text-white border-japonica-400 hover:border-transparent font-nunito">
                   {item.name}
               </button>
             ))}
