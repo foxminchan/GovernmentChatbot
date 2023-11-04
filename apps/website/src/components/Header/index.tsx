@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 
 const textButton = [
-  { name: 'Đăng kí', link: '/sign-up' },
+  { name: 'Đăng ký', link: '/sign-up' },
   { name: 'Đăng nhập', link: '/sign-in' },
 ];
 
