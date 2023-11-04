@@ -22,7 +22,7 @@ export class AuthService {
       switchMap((res) => {
         if (!res)
           return throwError(
-            () => new ForbiddenException('You account has not been created yet')
+            () => new ForbiddenException('Tài khoản của bạn không tồn tại')
           );
 
         return from(CryptoUtils.verifyHash(res.password, user.password)).pipe(
@@ -31,7 +31,9 @@ export class AuthService {
               ? of(omit(res, ['password']))
               : throwError(
                   () =>
-                    new UnauthorizedException('Invalid password or username')
+                    new UnauthorizedException(
+                      'Tên đăng nhập hoặc mật khẩu không hợp lệ'
+                    )
                 );
           })
         );
@@ -45,8 +47,8 @@ export class AuthService {
         if (!res) throw new UnauthorizedException();
         return of({
           access_token: this.jwtService.sign({
+            sub: res.user_id,
             email: res.username,
-            id: res.id,
             role: res.role,
             claims: res.claim,
           }),

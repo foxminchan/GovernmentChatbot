@@ -1,5 +1,12 @@
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsString,
+  Matches,
+  MaxLength,
+} from 'class-validator';
+import { Claims, Roles } from '../../libs/@types/enums';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, Matches, MaxLength } from 'class-validator';
 
 export class CreateAccountDto {
   @ApiProperty()
@@ -20,12 +27,15 @@ export class CreateAccountDto {
   password: string;
 
   @ApiProperty()
-  @IsNotEmpty({ message: 'Vai trò không được để trống' })
-  @IsString({ message: 'Vai trò phải là chuỗi' })
-  role: string;
+  @IsEnum(Roles, { each: true, message: 'Vai trò phải là ADMIN hoặc CITIZEN' })
+  role: string = Roles.CITIZEN;
 
   @ApiProperty()
-  claim: string[];
+  @IsEnum(Claims, {
+    each: true,
+    message: 'Quyền phải là manager, create, read, update hoặc delete',
+  })
+  claim: string[] = [Claims.Read, Claims.Create];
 
   @ApiProperty()
   user_id: string;

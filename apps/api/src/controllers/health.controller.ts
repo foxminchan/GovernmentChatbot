@@ -20,7 +20,7 @@ export class HealthController {
     return 'Http working fine';
   }
 
-  @Get()
+  @Get('status')
   @HealthCheck()
   check() {
     return this.health.check([
@@ -29,12 +29,12 @@ export class HealthController {
       () =>
         this.disk.checkStorage('disk health', {
           thresholdPercent: 0.5,
-          path: '/',
+          path: 'C:\\',
         }),
       () =>
         this.disk.checkStorage('disk health', {
           threshold: 250 * 1024 * 1024 * 1024,
-          path: '/',
+          path: 'C:\\',
         }),
     ]);
   }

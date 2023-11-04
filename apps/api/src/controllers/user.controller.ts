@@ -3,15 +3,26 @@ import {
   PagingSwaggerResponse,
   SwaggerResponse,
 } from '../libs/decorators';
+import {
+  Body,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from '../modules';
 import { Criteria } from '../libs/helpers';
+import { JwtAuthGuard } from '../libs/guards';
 import { CreateUserDto, ResponseUserDto, UpdateUserDto } from '../core';
-import { Body, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 
 @ApiController('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   @SwaggerResponse({
     operation: 'User fetch',
@@ -21,6 +32,7 @@ export class UserController {
     return this.userService.getUsers();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('filter')
   @PagingSwaggerResponse({
     operation: 'User fetch with pagination',
@@ -30,6 +42,7 @@ export class UserController {
     return this.userService.getFilterUsers(criteria);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   @SwaggerResponse({
     operation: 'User fetch by id',
@@ -40,6 +53,7 @@ export class UserController {
     return this.userService.getUser(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   @SwaggerResponse({
     operation: 'Create user',
@@ -49,6 +63,7 @@ export class UserController {
     return this.userService.addUser(user);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   @SwaggerResponse({
     operation: 'Update user',
@@ -59,6 +74,7 @@ export class UserController {
     return this.userService.updateUser(id, user);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @SwaggerResponse({
     operation: 'Delete user',

@@ -1,5 +1,3 @@
-import { INestApplication } from '@nestjs/common';
-import { swaggerOptions } from './swagger.plugin';
 import {
   IS_PUBLIC_KEY_META,
   SWAGGER_DESCRIPTION,
@@ -7,9 +5,11 @@ import {
   SWAGGER_VERSION,
   license,
 } from '../../libs/@types/constants';
-import { getMiddleware } from 'swagger-stats';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { isArray } from 'helper-fns';
+import { getMiddleware } from 'swagger-stats';
+import { INestApplication } from '@nestjs/common';
+import { swaggerOptions } from './swagger.plugin';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function SetupSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
@@ -17,7 +17,6 @@ export function SetupSwagger(app: INestApplication) {
     .setDescription(SWAGGER_DESCRIPTION)
     .setVersion(SWAGGER_VERSION)
     .setLicense(license.NAME, license.URL)
-    .addBearerAuth()
     .addBearerAuth(
       { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
       'accessToken'
