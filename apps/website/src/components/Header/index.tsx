@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 
 const textButton = [
-  { name: 'Đăng kí', link: '/' },
-  { name: 'Đăng nhập', link: '/' },
+  { name: 'Đăng kí', link: '/sign-up' },
+  { name: 'Đăng nhập', link: '/sign-in' },
 ];
 
 export default function Header() {
@@ -21,12 +22,11 @@ export default function Header() {
             </div>
             <div className="absolute top-0 flex items-center justify-center w-auto h-full right-4">
               {textButton.map((item) => (
-                <button
-                  key={item.name}
-                  className="w-32 h-10 ml-3 mr-2 text-lg font-medium leading-6 text-center bg-transparent border rounded hover:bg-japonica-400 text-dark-moderate-blue-800 hover:text-white border-japonica-400 hover:border-transparent font-nunito"
-                >
-                  {item.name}
-                </button>
+                <Link to={item.link} key={item.name}>
+                  <button className="w-32 h-10 ml-3 mr-2 text-lg font-medium leading-6 text-center bg-transparent border rounded hover:bg-japonica-400 text-dark-moderate-blue-800 hover:text-white border-japonica-400 hover:border-transparent font-nunito">
+                    {item.name}
+                  </button>
+                </Link>
               ))}
             </div>
           </div>

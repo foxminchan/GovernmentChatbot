@@ -7,7 +7,7 @@ export default function App() {
   return (
     <BasicLayout>
       <Routes>
-        <Route index element={<Home />} />
+        <Route index element={<Home title="Trang chủ" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BasicLayout>

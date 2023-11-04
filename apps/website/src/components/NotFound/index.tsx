@@ -1,6 +1,9 @@
+import useMetadata from '../../hooks/use-metadata';
+
 export function NotFound() {
+  useMetadata();
   return (
-    <div className="flex bg-white place-content-center">
+    <div className="flex items-center justify-center pt-[15vh] ">
       <div className="m-auto text-center">
         <h1 className="font-black text-red-200 text-9xl">404</h1>
         <p className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">

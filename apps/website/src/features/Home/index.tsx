@@ -1,5 +1,10 @@
-import React from 'react';
+import useMetadata from '../../hooks/use-metadata';
 
-export default function Home() {
+type Props = {
+  title: string;
+};
+
+export default function Home(props: Readonly<Props>) {
+  useMetadata(props.title);
   return <div>Home</div>;
 }

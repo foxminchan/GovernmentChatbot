@@ -4,15 +4,15 @@ import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const navItems = [
-  { name: 'Giới thiệu', link: '/', currrent: false, width: 'w-28' },
-  { name: 'Thanh toán trực tuyến', link: '/', currrent: false, width: 'w-60' },
-  { name: 'Chatbot', link: '/', currrent: false, width: 'w-28' },
-  { name: 'Hỗ trợ', link: '/', currrent: false, subMenu: true, width: 'w-24' },
+  { name: 'Giới thiệu', link: '/introduction', currrent: false, width: 'w-28' },
+  { name: 'Thanh toán trực tuyến', link: '/online-payment', currrent: false, width: 'w-60' },
+  { name: 'Chatbot', link: '/chat', currrent: false, width: 'w-28' },
+  { name: 'Hỗ trợ', link: '/support', currrent: false, subMenu: true, width: 'w-24' },
 ];
 const navSupport = [
-  { name: 'Điều khoản sử dụng', link: '/', currrent: false },
-  { name: 'Hướng dẫn sử dụng', link: '/', currrent: false },
-  { name: 'Thông báo', link: '/', currrent: false },
+  { name: 'Điều khoản sử dụng', link: '/policy', currrent: false },
+  { name: 'Hướng dẫn sử dụng', link: '/guide', currrent: false },
+  { name: 'Thông báo', link: '/notification', currrent: false },
 ];
 
 export default function Navbar() {
