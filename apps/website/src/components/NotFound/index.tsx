@@ -1,12 +1,10 @@
-import React, { Suspense } from 'react';
-
-const Footer = React.lazy(() => import('../../components/Footer'));
+import BasicLayout from '../../layouts/basic-layout';
 
 export function NotFound() {
   return (
-    <>
-      <main className="grid h-screen px-4 bg-white place-content-center">
-        <div className="text-center">
+    <BasicLayout>
+      <div className="flex bg-white place-content-center">
+        <div className="m-auto text-center">
           <h1 className="font-black text-red-200 text-9xl">404</h1>
           <p className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Ôi không!
@@ -16,15 +14,12 @@ export function NotFound() {
           </p>
           <a
             href="/"
-            className="inline-block px-5 py-3 mt-6 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-700 focus:outline-none focus:ring"
+            className="inline-block px-5 py-3 mt-6 text-sm font-medium text-white rounded bg-japonica-600 hover:bg-indigo-700 focus:outline-none focus:ring"
           >
             Quay lại trang chủ
           </a>
         </div>
-      </main>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Footer />
-      </Suspense>
-    </>
+      </div>
+    </BasicLayout>
   );
 }
