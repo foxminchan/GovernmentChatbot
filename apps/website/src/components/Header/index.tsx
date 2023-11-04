@@ -12,7 +12,7 @@ export default function Header() {
       <div className=" h-28 w-full flex items-center justify-center ">
         <div className="!relative h-full w-4/5 ">
           <div>
-            <img src={logo} alt="logo" className=" relative w-auto h-24 ml-1"/>
+            <img src={logo} alt="logo" className=" relative w-auto h-24 ml-1" loading='lazy'/>
           </div>
           <div className=" absolute h-full w-auto top-0 right-4 justify-center items-center flex  ">
             {textButton.map((item) => (
