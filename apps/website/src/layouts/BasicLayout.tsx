@@ -6,12 +6,12 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function BasicLayout({ children }: Readonly<Props>) {
+export default function BasicLayout(props: Readonly<Props>) {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <Navbar />
-      {children}
+      {props.children}
       <Footer />
     </div>
   );

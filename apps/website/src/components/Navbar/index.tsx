@@ -1,20 +1,20 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { FaBars, FaHome } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 
 const navItems = [
-  { name: 'Giới thiệu', link: '/introduction', currrent: false, width: 'w-28' },
+  { name: 'Giới thiệu', link: '/gioi-thieu', currrent: false, width: 'w-28' },
   {
     name: 'Thanh toán trực tuyến',
-    link: '/online-payment',
+    link: '/thanh-toan-truc-tuyen',
     currrent: false,
     width: 'w-60',
   },
-  { name: 'Chatbot', link: '/chat', currrent: false, width: 'w-28' },
+  { name: 'Chatbot', link: '/chat-bot', currrent: false, width: 'w-28' },
   {
     name: 'Hỗ trợ',
-    link: '/policy',
+    link: '/dieu-khoan-su-dung',
     currrent: false,
     subMenu: true,
     width: 'w-24',
@@ -22,14 +22,14 @@ const navItems = [
 ];
 
 const navSupport = [
-  { name: 'Điều khoản sử dụng', link: '/policy', currrent: false },
-  { name: 'Hướng dẫn sử dụng', link: '/guide', currrent: false },
-  { name: 'Thông báo', link: '/notification', currrent: false },
+  { name: 'Điều khoản sử dụng', link: '/dieu-khoan-su-dung', currrent: false },
+  { name: 'Hướng dẫn sử dụng', link: '/huong-dan-su-dung', currrent: false },
+  { name: 'Thông báo', link: '/thong-bao', currrent: false },
 ];
 
 const navToggleMenu = [
-  { name: 'Đăng nhập', link: '/sign-in', currrent: false },
-  { name: 'Đăng ký', link: '/sign-up', currrent: false },
+  { name: 'Đăng nhập', link: '/dang-nhap', currrent: false },
+  { name: 'Đăng ký', link: '/dang-ky', currrent: false },
 ];
 
 export default function Navbar() {
@@ -62,13 +62,27 @@ export default function Navbar() {
         <div className="absolute top-0 left-0 w-full h-full bg-[#00000033] md:hidden"></div>
       )}
       <div className="relative flex w-auto h-full left-44">
-        <div className="w-12 h-full bg-japonica-500">
-          <Link
+        <div
+          className={clsx(
+            'w-12 h-full',
+            window.location.pathname === '/'
+              ? 'bg-japonica-500'
+              : 'bg-white-smoke-100'
+          )}
+        >
+          <NavLink
             to="/"
             className="flex items-center justify-center w-full h-full"
           >
-            <FaHome className="w-5 h-5 text-white" />
-          </Link>
+            <FaHome
+              className={clsx(
+                'w-5 h-5',
+                window.location.pathname === '/'
+                  ? 'text-white'
+                  : 'text-dark-moderate-blue-800'
+              )}
+            />
+          </NavLink>
         </div>
         <div className="hidden md:flex">
           <ul className="flex h-full">
@@ -82,30 +96,42 @@ export default function Navbar() {
                   'hover:bg-japonica-500',
                   'hover:text-white',
                   'text-dark-moderate-blue-800',
-                  item.width
+                  item.width,
+                  window.location.pathname === item.link ||
+                    (item.subMenu &&
+                      navSupport.some((subItem) =>
+                        window.location.pathname.includes(subItem.link)
+                      ))
+                    ? 'bg-japonica-500 text-white'
+                    : 'bg-white-smoke-100'
                 )}
               >
-                <Link
+                <NavLink
                   to={item.link}
                   className="flex items-center justify-center w-full h-full"
                 >
                   <span className="text-xl font-medium">{item.name}</span>
-                </Link>
+                </NavLink>
                 {item.subMenu && subMenuVisibility[item.name] && (
                   <ul>
                     {navSupport.map((subItem) => (
                       <li
                         key={subItem.name}
-                        className="w-56 h-12 text-white bg-japonica-400 hover:bg-japonica-500 hover:text-white"
+                        className={clsx(
+                          'w-56 h-12 text-white hover:bg-japonica-500 hover:text-white',
+                          window.location.pathname === subItem.link
+                            ? 'bg-japonica-500 text-white'
+                            : 'bg-japonica-400'
+                        )}
                       >
-                        <Link
+                        <NavLink
                           to={subItem.link}
                           className="flex items-center w-full h-full px-3 text-left"
                         >
                           <span className="text-xl font-medium">
                             {subItem.name}
                           </span>
-                        </Link>
+                        </NavLink>
                       </li>
                     ))}
                   </ul>
@@ -133,26 +159,40 @@ export default function Navbar() {
             {navItems.map((item) => (
               <li
                 key={item.name}
-                className="w-full h-12 text-center hover:bg-japonica-500 hover:text-white"
+                className={clsx(
+                  'w-full h-12 text-center hover:bg-japonica-500 hover:text-white',
+                  window.location.pathname === item.link ||
+                    (item.subMenu &&
+                      navSupport.some((subItem) =>
+                        window.location.pathname.includes(subItem.link)
+                      ))
+                    ? 'bg-japonica-500 text-white'
+                    : 'bg-white-smoke-100'
+                )}
               >
-                <Link
+                <NavLink
                   to={item.link}
                   onClick={toggleMenu}
                   className="flex items-center w-full h-full px-3"
                 >
                   <span className="text-xl font-medium">{item.name}</span>
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
           {navToggleMenu.map((item) => (
-            <Link
+            <NavLink
               to={item.link}
               key={item.name}
-              className="flex items-center justify-center w-full h-12 my-2 border rounded border-japonica-500 hover:bg-japonica-500 hover:text-white"
+              className={clsx(
+                'flex items-center justify-center w-full h-12 my-2 border rounded border-japonica-500 hover:bg-japonica-500 hover:text-white',
+                window.location.pathname === item.link
+                  ? 'bg-japonica-500 text-white'
+                  : 'bg-white-smoke-100'
+              )}
             >
               <span className="text-xl font-medium">{item.name}</span>
-            </Link>
+            </NavLink>
           ))}
         </div>
       )}

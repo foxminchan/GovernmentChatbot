@@ -2,8 +2,8 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
-import logo from '../../assets/images/quoc_huy.svg';
-import caption from '../../assets/images/caption.svg';
+import Logo from '../../assets/images/quoc_huy.svg';
+import Caption from '../../assets/images/caption.svg';
 
 type Props = {
   title: string;
@@ -21,13 +21,13 @@ export default function SignUp(props: Readonly<Props>) {
         }}
       >
         <img
-          src={logo}
+          src={Logo}
           alt="Quốc huy"
           className="w-auto h-24 ml-1"
           loading="lazy"
         />
         <img
-          src={caption}
+          src={Caption}
           alt="Caption"
           className="w-auto h-24 ml-1"
           loading="lazy"
@@ -114,7 +114,7 @@ export default function SignUp(props: Readonly<Props>) {
           <div className="flex items-center justify-center mt-4">
             <span className="mr-2">Đã có tài khoản?</span>
             <a
-              href="/sign-in"
+              href="/dang-nhap"
               className="text-japonica-400 hover:text-japonica-500"
             >
               Đăng nhập
