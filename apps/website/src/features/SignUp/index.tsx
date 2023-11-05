@@ -93,7 +93,7 @@ export default function SignUp(props: Readonly<Props>) {
               />
             </Grid>
             <Grid item xs={12}>
-              <span className="text-xs text-justify text-gray-500">
+              <p className="text-xs leading-5 text-justify text-gray-500">
                 Bằng cách nhấp vào Đăng ký, bạn đồng ý với{' '}
                 <a
                   href="/policy"
@@ -102,7 +102,7 @@ export default function SignUp(props: Readonly<Props>) {
                   Điều khoản, Chính sách chia sẻ thông tin
                 </a>{' '}
                 của chúng tôi.
-              </span>
+              </p>
             </Grid>
           </Grid>
           <button

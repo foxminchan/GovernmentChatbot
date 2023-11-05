@@ -8,11 +8,11 @@ type Props = {
 
 export default function BasicLayout({ children }: Readonly<Props>) {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header />
       <Navbar />
-      <main className="container px-4 mx-auto">{children}</main>
+      {children}
       <Footer />
-    </>
+    </div>
   );
 }
