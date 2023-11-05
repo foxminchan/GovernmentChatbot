@@ -20,6 +20,7 @@ const navItems = [
     width: 'w-24',
   },
 ];
+
 const navSupport = [
   { name: 'Điều khoản sử dụng', link: '/policy', currrent: false },
   { name: 'Hướng dẫn sử dụng', link: '/guide', currrent: false },
@@ -35,7 +36,7 @@ export default function Navbar() {
   const [subMenuVisibility, setSubMenuVisibility] = useState<
     Record<string, boolean>
   >({});
-  const [menuVisible, setMenuVisible] = useState(false); // Thêm state cho việc ẩn/hiện menu
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const showSubMenu = (itemName: string) => {
     setSubMenuVisibility((prevVisibility) => ({
