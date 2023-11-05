@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="left-0 w-full px-10 mt-auto text-center bg-orange-900">
+    <footer className="left-0 hidden w-full px-10 mt-auto text-center bg-orange-900 md:block">
       <div className="box-border text-white">
         <div className="container py-3">
           <div className="inline-block px-10">
