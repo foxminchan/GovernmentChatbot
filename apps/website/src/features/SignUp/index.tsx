@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Logo from '../../assets/images/quoc_huy.svg';
@@ -95,12 +96,12 @@ export default function SignUp(props: Readonly<Props>) {
             <Grid item xs={12}>
               <p className="text-xs leading-5 text-justify text-gray-500">
                 Bằng cách nhấp vào Đăng ký, bạn đồng ý với{' '}
-                <a
-                  href="/policy"
+                <Link
+                  to="/dieu-khoan-su-dung"
                   className="text-japonica-400 hover:text-japonica-500"
                 >
                   Điều khoản, Chính sách chia sẻ thông tin
-                </a>{' '}
+                </Link>{' '}
                 của chúng tôi.
               </p>
             </Grid>
@@ -113,12 +114,12 @@ export default function SignUp(props: Readonly<Props>) {
           </button>
           <div className="flex items-center justify-center mt-4">
             <span className="mr-2">Đã có tài khoản?</span>
-            <a
-              href="/dang-nhap"
+            <Link
+              to="/dang-nhap"
               className="text-japonica-400 hover:text-japonica-500"
             >
               Đăng nhập
-            </a>
+            </Link>
           </div>
         </Box>
       </Box>

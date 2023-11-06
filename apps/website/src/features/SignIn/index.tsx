@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -59,12 +60,12 @@ export default function SignIn(props: Readonly<Props>) {
         </Box>
         <div className="flex items-center justify-center mt-4">
           <span className="mr-2">Bạn chưa có tài khoản?</span>
-          <a
-            href="/dang-ky"
+          <Link
+            to="/dang-ky"
             className="text-japonica-400 hover:text-japonica-500"
           >
             Đăng ký
-          </a>
+          </Link>
         </div>
       </Box>
     </Container>
