@@ -42,6 +42,7 @@ export default function SignUp(props: Readonly<Props>) {
                 label="Số CMND/CCCD"
                 type="number"
                 id="id_card"
+                autoFocus
               />
             </Grid>
             <Grid item xs={12}>
@@ -51,7 +52,6 @@ export default function SignUp(props: Readonly<Props>) {
                 fullWidth
                 id="name"
                 label="Họ và tên"
-                autoFocus
               />
             </Grid>
             <Grid item xs={12} sm={6}>

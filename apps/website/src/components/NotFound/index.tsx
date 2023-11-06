@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import useMetadata from '../../hooks/useMetadata';
 
-export function NotFound() {
+export default function NotFound() {
   useMetadata();
   return (
     <main className="flex items-center justify-center pt-[17vh]">
@@ -15,7 +15,7 @@ export function NotFound() {
         </p>
         <Link
           to="/"
-          className="inline-block px-5 py-3 mt-6 text-sm font-medium text-white rounded bg-japonica-600 hover:bg-indigo-700 focus:outline-none focus:ring"
+          className="inline-block px-5 py-3 mt-6 text-sm font-medium text-white rounded bg-japonica-600 hover:bg-japonica-800 focus:outline-none focus:ring"
         >
           Quay lại trang chủ
         </Link>

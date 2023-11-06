@@ -1,19 +1,51 @@
-import Home from './features/Home';
-import SignUp from './features/SignUp';
-import SignIn from './features/SignIn';
-import { Route, Routes } from 'react-router-dom';
-import { NotFound } from './components/NotFound';
+import { Suspense } from 'react';
+import loadable from '@loadable/component';
 import BasicLayout from './layouts/BasicLayout';
+import { Route, Routes } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
+
+const Home = loadable(() => import('./features/Home'));
+const SignUp = loadable(() => import('./features/SignUp'));
+const SignIn = loadable(() => import('./features/SignIn'));
+const NotFound = loadable(() => import('./components/NotFound'));
 
 export default function App() {
   return (
-    <BasicLayout>
-      <Routes>
-        <Route index element={<Home title="Trang chủ" />} />
-        <Route path="/dang-nhap" element={<SignIn title="Đăng nhập" />} />
-        <Route path="/dang-ky" element={<SignUp title="Đăng ký" />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BasicLayout>
+    <Routes>
+      <Route path="/" element={<BasicLayout />}>
+        <Route
+          index
+          element={
+            <Suspense fallback={<CircularProgress />}>
+              <Home title="Trang chủ" />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/dang-nhap"
+          element={
+            <Suspense fallback={<CircularProgress />}>
+              <SignIn title="Đăng nhập" />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/dang-ky"
+          element={
+            <Suspense fallback={<CircularProgress />}>
+              <SignUp title="Đăng ký" />
+            </Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<CircularProgress />}>
+              <NotFound />
+            </Suspense>
+          }
+        />
+      </Route>
+    </Routes>
   );
 }

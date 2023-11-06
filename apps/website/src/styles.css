@@ -5,23 +5,23 @@
 @layer base {
   @font-face {
     font-family: FontApi;
-    src: url(/assets/fonts/ap.ttf) format('tff');
+    src: url(assets/fonts/ap.ttf) format('tff');
   }
   @font-face {
     font-family: FontAwesome;
-    src: url(/assets/fonts/fontawesome-webfont.woff2) format('woff2');
+    src: url(assets/fonts/fontawesome-webfont.woff2) format('woff2');
   }
   @font-face {
     font-family: NunitoSansBold;
-    src: url(/assets/fonts/NunitoSans-Bold.woff) format('woff');
+    src: url(assets/fonts/NunitoSans-Bold.woff) format('woff');
   }
   @font-face {
     font-family: NunitoSansRegular;
-    src: url(/assets/fonts/NunitoSans-Regular.woff) format('woff');
+    src: url(assets/fonts/NunitoSans-Regular.woff) format('woff');
   }
   @font-face {
     font-family: NunitoSansSemiBold;
-    src: url(/assets/fonts/NunitoSans-SemiBold.woff) format('woff');
+    src: url(assets/fonts/NunitoSans-SemiBold.woff) format('woff');
   }
 
   * {
