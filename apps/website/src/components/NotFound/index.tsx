@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import useMetadata from '../../hooks/useMetadata';
 
 export function NotFound() {
@@ -12,12 +13,12 @@ export function NotFound() {
         <p className="mt-4 text-gray-500">
           Trang bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.
         </p>
-        <a
-          href="/"
+        <Link
+          to="/"
           className="inline-block px-5 py-3 mt-6 text-sm font-medium text-white rounded bg-japonica-600 hover:bg-indigo-700 focus:outline-none focus:ring"
         >
           Quay lại trang chủ
-        </a>
+        </Link>
       </div>
     </main>
   );
