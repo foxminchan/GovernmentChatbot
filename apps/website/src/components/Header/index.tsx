@@ -21,7 +21,7 @@ export default function Header() {
         <div className="absolute top-0 right-0 flex items-center justify-center h-full">
           {textButton.map((item) => (
             <Link to={item.link} key={item.name}>
-              <button className="hidden h-10 w-auto mx-[3px] text-lg font-medium leading-6 text-center bg-transparent border rounded hover:bg-japonica-400 text-dark-moderate-blue-800 hover:text-white border-japonica-400 hover:border-transparent font-nunito sm:w-[130px] sm:inline">
+              <button className="hidden h-10 w-auto mx-[3px] text-lg font-medium leading-6 text-center bg-transparent border rounded hover:bg-japonica-400 text-dark-moderate-blue-800 hover:text-white border-japonica-400 hover:border-transparent font-nunito sm:w-[130px] lg:inline">
                 {item.name}
               </button>
             </Link>

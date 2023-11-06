@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import { Container } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { FaBars, FaHome } from 'react-icons/fa';
 
@@ -59,9 +60,12 @@ export default function Navbar() {
   return (
     <nav className="w-full h-11 bg-white-smoke-100 left-44">
       {menuVisible && (
-        <div className="absolute top-0 left-0 w-full h-full bg-[#00000033] md:hidden"></div>
+        <Container
+          className="absolute top-0 left-0 w-full h-full bg-[#00000033] lg:hidden"
+          onClick={toggleMenu}
+        ></Container>
       )}
-      <div className="relative flex w-auto h-full left-44">
+      <div className="relative left-0 flex justify-center w-auto h-full lg:left-44 lg:justify-start">
         <div
           className={clsx(
             'w-12 h-full',
@@ -84,7 +88,7 @@ export default function Navbar() {
             />
           </NavLink>
         </div>
-        <div className="hidden md:flex">
+        <div className="hidden lg:flex">
           <ul className="flex h-full">
             {navItems.map((item) => (
               <li
@@ -140,7 +144,7 @@ export default function Navbar() {
             ))}
           </ul>
         </div>
-        <div className="md:hidden bg-japonica-500">
+        <div className="lg:hidden bg-japonica-500">
           <button onClick={toggleMenu} className="flex items-center px-3 py-2">
             <FaBars className="w-6 h-6" color="white" />
           </button>
@@ -149,7 +153,7 @@ export default function Navbar() {
       {menuVisible && (
         <div
           className={clsx(
-            'md:hidden bg-white-smoke-100 top-0 left-0 px-[15px] pt-2 absolute z-10',
+            'lg:hidden bg-white-smoke-100 top-0 left-0 px-[15px] pt-2 absolute z-10',
             menuVisible
               ? 'h-full w-[260px] transition-all duration-[0.3s]'
               : 'w-0 transition-all duration-[0.3s]'
