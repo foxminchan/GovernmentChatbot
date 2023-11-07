@@ -3,7 +3,7 @@ import {
   ApplyNoneCache,
   SwaggerResponse,
 } from '../libs/decorators';
-import { AccontService } from '../modules';
+import { AccountService } from '../modules';
 import { AuthService } from '../frameworks';
 import { JwtAuthGuard } from '../libs/guards';
 import { LoginPayload } from '../libs/helpers';
@@ -13,7 +13,7 @@ import { Body, Get, Param, Post, UseGuards } from '@nestjs/common';
 @ApiController('auth')
 export class AccountController {
   constructor(
-    private readonly accountService: AccontService,
+    private readonly accountService: AccountService,
     private readonly authService: AuthService
   ) {}
 

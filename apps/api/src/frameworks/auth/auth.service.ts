@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { omit } from 'helper-fns';
 import { JwtService } from '@nestjs/jwt';
-import { AccontService } from '../../modules';
+import { AccountService } from '../../modules';
 import { CryptoUtils } from '../../libs/utils';
 import { LoginPayload } from '../../libs/helpers';
 import { from, of, switchMap, throwError } from 'rxjs';
@@ -13,7 +13,7 @@ import { from, of, switchMap, throwError } from 'rxjs';
 @Injectable()
 export class AuthService {
   constructor(
-    private accountService: AccontService,
+    private accountService: AccountService,
     private jwtService: JwtService
   ) {}
 

@@ -1,48 +1,69 @@
 import {
   MessageBody,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  OnGatewayInit,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { Server } from 'socket.io';
-import { UsePipes } from '@nestjs/common';
+import { UsePipes, Logger } from '@nestjs/common';
 import { OpenaiService } from '../openai';
-import { ChatType } from '../../libs/@types/enums';
 import { ChatBody } from '../../libs/helpers';
+import { Namespace, Socket } from 'socket.io';
 import { LangChainService } from '../langchain';
+import { ChatType } from '../../libs/@types/enums';
 import { ChatHistoryService } from '../../modules';
 import { WsValidationPipe } from '../../libs/pipes';
 
 @WebSocketGateway({
+  namespace: 'chat',
   cors: {
     origin: '*',
   },
 })
 @UsePipes(WsValidationPipe)
-export class EventsGateway {
+export class SocketGateway
+  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
+{
+  private readonly logger = new Logger(SocketGateway.name);
+
   constructor(
     private readonly openaiService: OpenaiService,
     private readonly langChainService: LangChainService,
     private readonly chatHistoryService: ChatHistoryService
   ) {}
 
-  @WebSocketServer()
-  server: Server;
+  handleDisconnect(client: Socket) {
+    this.logger.debug(`Client disconnected: ${client.id}`);
+    client.disconnect();
+  }
 
-  @SubscribeMessage('gpt')
+  handleConnection(client: Socket) {
+    this.logger.debug(`Client connected: ${client.id}`);
+  }
+
+  afterInit(server: Socket) {
+    this.logger.log(`💬 Websocket Gateway initialized ${server.id} `);
+  }
+
+  @WebSocketServer()
+  server: Namespace;
+
+  @SubscribeMessage('withOpenAI')
   async handleEvent(@MessageBody() data: string) {
     const response = await this.openaiService.createChatCompletion(data);
     setTimeout(() => {
-      this.server.emit('gpt', response);
+      this.server.emit('response', response);
     }, 1000);
   }
 
-  @SubscribeMessage('chain')
+  @SubscribeMessage('withLangChain')
   async handleChain(@MessageBody() chatBody: ChatBody) {
     (await this.openaiService.createChatCompletion(chatBody.message)).subscribe(
       (response: string) => {
         setTimeout(() => {
-          this.server.emit('chain', response);
+          this.server.emit('receive', response);
         }, 1000);
 
         const chatData = {

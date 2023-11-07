@@ -16,8 +16,9 @@ import { NestFactory } from '@nestjs/core';
 import compression from '@fastify/compress';
 import { SetupSwagger } from './frameworks';
 import { AppModule } from './modules/app.module';
-import fastifyCsrfProtection from '@fastify/csrf-protection';
+import { IoAdapter } from '@nestjs/platform-socket.io';
 import { NotFoundExceptionFilter } from './libs/filters';
+import fastifyCsrfProtection from '@fastify/csrf-protection';
 
 declare const module: NodeModule & {
   hot?: {
@@ -30,9 +31,7 @@ async function bootstrap() {
   otelSDK.start();
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter({
-      logger: true,
-    })
+    new FastifyAdapter()
   );
 
   app.register(fastifyCsrfProtection);
@@ -70,6 +69,7 @@ async function bootstrap() {
   SetupSwagger(app);
 
   app.enableShutdownHooks();
+  app.useWebSocketAdapter(new IoAdapter(app));
   AppUtils.processAppWithGrace(app);
 
   await app.listen(process.env.PORT || 3000);

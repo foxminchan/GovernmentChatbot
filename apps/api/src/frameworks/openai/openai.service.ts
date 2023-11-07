@@ -16,7 +16,7 @@ export class OpenaiService {
     return from(
       this.openai.chat.completions.create({
         messages: [{ role: 'user', content: userContent }],
-        model: 'gpt-3.5-turbo-instruct-0914',
+        model: process.env.OPENAI_MODEL || 'gpt-3.5-turbo-instruct',
       })
     ).pipe(
       map((chatCompletion) => chatCompletion.choices[0].message.content),
