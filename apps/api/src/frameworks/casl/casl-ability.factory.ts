@@ -5,9 +5,9 @@ import {
   type InferSubjects,
   type MongoAbility,
 } from '@casl/ability';
+import { Injectable } from '@nestjs/common';
 import { Claims, Roles } from '../../libs/@types/enums';
 import { Account, ChatHistory, Topic, User } from '../../core';
-import { Injectable } from '@nestjs/common';
 
 export type Subjects =
   | InferSubjects<

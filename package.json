@@ -82,6 +82,7 @@
     "inversify": "^6.0.2",
     "js-cookie": "^3.0.5",
     "langchain": "^0.0.167",
+    "llmonitor": "^0.5.9",
     "lodash": "^4.17.21",
     "nestjs-i18n": "^10.3.7",
     "nestjs-otel": "^5.1.5",

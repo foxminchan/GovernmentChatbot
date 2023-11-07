@@ -12,5 +12,9 @@
     "javascriptreact",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+  "sonarlint.connectedMode.project": {
+    "connectionId": "foxminchan",
+    "projectKey": "foxminchan_GovermentLLM"
+  }
 }
