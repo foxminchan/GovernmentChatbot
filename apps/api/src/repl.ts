@@ -18,8 +18,4 @@ async function bootstrap() {
   });
 }
 
-try {
-  (async () => await bootstrap())();
-} catch (error) {
-  logger.error(error);
-}
+(async () => await bootstrap())();

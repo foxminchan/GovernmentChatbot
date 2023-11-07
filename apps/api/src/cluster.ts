@@ -6,7 +6,7 @@ import { isUndefined } from 'helper-fns';
 export class Cluster {
   private static readonly logger = new Logger(Cluster.name);
 
-  public static createCluster(main: () => Promise<void>): void {
+  public static async createCluster(main: () => Promise<void>): Promise<void> {
     const cpuCount = this.getCpuCount();
 
     if (cluster.isPrimary) {
@@ -25,7 +25,7 @@ export class Cluster {
       });
     } else {
       try {
-        main();
+        await main();
       } catch (error) {
         this.logger.error(error);
       }
