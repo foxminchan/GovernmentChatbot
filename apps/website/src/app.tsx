@@ -8,6 +8,7 @@ const Home = loadable(() => import('./features/Home'));
 const SignUp = loadable(() => import('./features/SignUp'));
 const SignIn = loadable(() => import('./features/SignIn'));
 const NotFound = loadable(() => import('./components/NotFound'));
+const Introduction = loadable(() => import('./features/Intro'));
 
 export default function App() {
   return (
@@ -34,6 +35,14 @@ export default function App() {
           element={
             <Suspense fallback={<CircularProgress />}>
               <SignUp title="Đăng ký" />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/gioi-thieu"
+          element={
+            <Suspense fallback={<CircularProgress />}>
+              <Introduction title="Giới thiệu" />
             </Suspense>
           }
         />
