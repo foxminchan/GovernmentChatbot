@@ -15,10 +15,10 @@ export class LangChainService {
     apiKey: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY || undefined),
   });
   private metadataKeys: string[] = [
-    'government',
-    'law',
-    'administrative',
-    'judicial',
+    'tư pháp',
+    'chính phủ',
+    'pháp luật',
+    'thủ tục hành chính',
   ];
   private storeConfig = {
     client: this.client,
@@ -29,8 +29,8 @@ export class LangChainService {
   constructor() {
     this.embedder = new OpenAIEmbeddings({
       maxRetries: 3,
-      batchSize: 1024,
       timeout: 10000,
+      batchSize: 1024,
       openAIApiKey: process.env.OPENAI_API_KEY,
     });
     this.openAI = new OpenAI({

@@ -5,7 +5,7 @@ import {
   MemoryHealthIndicator,
 } from '@nestjs/terminus';
 import { Get } from '@nestjs/common';
-import { ApiController } from '../libs/decorators';
+import { ApiController, Key } from '../libs/decorators';
 
 @ApiController('health')
 export class HealthController {
@@ -20,6 +20,7 @@ export class HealthController {
     return 'Http working fine';
   }
 
+  @Key()
   @Get('status')
   @HealthCheck()
   check() {

@@ -10,6 +10,7 @@ export class AccountService {
   findUser(username: string) {
     return this.dataService.account.findUnique({
       where: { username },
+      include: { user: true },
     });
   }
 

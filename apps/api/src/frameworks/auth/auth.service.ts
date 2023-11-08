@@ -48,9 +48,12 @@ export class AuthService {
         return of({
           access_token: this.jwtService.sign({
             sub: res.user_id,
+            name: res.user.name,
             email: res.username,
-            role: res.role,
-            claims: res.claim,
+            policy: {
+              role: res.role,
+              claims: res.claim,
+            },
           }),
         });
       })

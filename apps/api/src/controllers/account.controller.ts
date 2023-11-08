@@ -1,14 +1,14 @@
 import {
   ApiController,
   ApplyNoneCache,
+  Auth,
   SwaggerResponse,
 } from '../libs/decorators';
 import { AccountService } from '../modules';
 import { AuthService } from '../frameworks';
-import { JwtAuthGuard } from '../libs/guards';
 import { LoginPayload } from '../libs/helpers';
-import { CreateAccountDto, ResponseAccountDto } from '../core';
-import { Body, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Account, CreateAccountDto } from '../core';
+import { Body, Get, Param, Post } from '@nestjs/common';
 
 @ApiController('auth')
 export class AccountController {
@@ -17,13 +17,13 @@ export class AccountController {
     private readonly authService: AuthService
   ) {}
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @ApplyNoneCache()
   @Get(':username')
   @SwaggerResponse({
     operation: 'Account fetch by username',
     params: ['username'],
-    response: ResponseAccountDto,
+    response: Account,
   })
   getAccounts(@Param('username') username: string) {
     return this.accountService.findUser(username);

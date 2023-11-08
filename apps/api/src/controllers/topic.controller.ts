@@ -1,7 +1,7 @@
 import { TopicService } from '../modules';
 import { ApiController, SwaggerResponse } from '../libs/decorators';
 import { Body, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateTopicDto, ResponseTopicDto, UpdateTopicDto } from '../core';
+import { CreateTopicDto, Topic, UpdateTopicDto } from '../core';
 
 @ApiController('topic')
 export class TopicController {
@@ -10,7 +10,7 @@ export class TopicController {
   @Get()
   @SwaggerResponse({
     operation: 'Topic fetch',
-    response: ResponseTopicDto,
+    response: Topic,
   })
   getTopics() {
     return this.topicService.getTopics();
@@ -20,7 +20,7 @@ export class TopicController {
   @SwaggerResponse({
     operation: 'Topic fetch by id',
     params: ['id'],
-    response: ResponseTopicDto,
+    response: Topic,
   })
   getTopic(@Param('id') id: string) {
     return this.topicService.getTopic(id);

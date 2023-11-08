@@ -8,24 +8,33 @@ export class ChatHistoryService {
   constructor(private readonly dataService: DataService) {}
 
   getChatHistories() {
-    return this.dataService.chatHistory.findMany();
+    return this.dataService.chatHistory.findMany({
+      include: { user: true, topic: true },
+    });
   }
 
   getFilterChatHistories(criteria: Criteria) {
     const queryOptions = constructQueryOptions(criteria);
-    return this.dataService.chatHistory.findMany(queryOptions);
+    return this.dataService.chatHistory.findMany({
+      ...queryOptions,
+      include: { user: true, topic: true },
+    });
   }
 
   getByUserId(userId: string, criteria: Criteria) {
     const queryOptions = constructQueryOptions(criteria, {
       where: { user_id: userId },
     });
-    return this.dataService.chatHistory.findMany(queryOptions);
+    return this.dataService.chatHistory.findMany({
+      ...queryOptions,
+      include: { user: true, topic: true },
+    });
   }
 
   getChatHistory(id: string) {
     return this.dataService.chatHistory.findUnique({
       where: { id: id },
+      include: { user: true, topic: true },
     });
   }
 

@@ -1,23 +1,23 @@
-import { JwtAuthGuard } from '../guards';
+import { ApiKeyAuthGuard } from '../guards';
 import type { CanActivate, Type } from '@nestjs/common';
 import { UseGuards, applyDecorators } from '@nestjs/common';
-import { ApiBearerAuth, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiSecurity, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
-interface AuthGuard {
+interface KeyGuard {
   guards?: Type<CanActivate>[];
   unauthorizedResponse?: string;
 }
 
-export function Auth(_options?: AuthGuard) {
+export function Key(_options?: KeyGuard) {
   const options = {
-    guards: [JwtAuthGuard],
-    unauthorizedResponse: 'Bạn không có quyền truy cập vào tài nguyên này',
+    guards: [ApiKeyAuthGuard],
+    unauthorizedResponse: 'Tài nguyên chỉ dành cho người dùng có API Key',
     ..._options,
-  } satisfies AuthGuard;
+  } satisfies KeyGuard;
 
   return applyDecorators(
     UseGuards(...options.guards),
-    ApiBearerAuth(),
+    ApiSecurity('X-Api-Key'),
     ApiUnauthorizedResponse({ description: options.unauthorizedResponse })
   );
 }

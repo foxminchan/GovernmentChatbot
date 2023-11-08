@@ -16,7 +16,7 @@ import {
 import { UserService } from '../modules';
 import { Criteria } from '../libs/helpers';
 import { JwtAuthGuard } from '../libs/guards';
-import { CreateUserDto, ResponseUserDto, UpdateUserDto } from '../core';
+import { CreateUserDto, User, UpdateUserDto } from '../core';
 
 @ApiController('user')
 export class UserController {
@@ -26,7 +26,7 @@ export class UserController {
   @Get()
   @SwaggerResponse({
     operation: 'User fetch',
-    response: ResponseUserDto,
+    response: User,
   })
   getUsers() {
     return this.userService.getUsers();
@@ -36,7 +36,7 @@ export class UserController {
   @Get('filter')
   @PagingSwaggerResponse({
     operation: 'User fetch with pagination',
-    response: ResponseUserDto,
+    response: User,
   })
   getPaginatedUsers(@Query() criteria: Criteria) {
     return this.userService.getFilterUsers(criteria);
@@ -47,7 +47,7 @@ export class UserController {
   @SwaggerResponse({
     operation: 'User fetch by id',
     params: ['id'],
-    response: ResponseUserDto,
+    response: User,
   })
   getUser(@Param('id') id: string) {
     return this.userService.getUser(id);

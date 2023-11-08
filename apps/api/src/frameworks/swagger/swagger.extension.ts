@@ -17,10 +17,7 @@ export function SetupSwagger(app: INestApplication) {
     .setDescription(SWAGGER_DESCRIPTION)
     .setVersion(SWAGGER_VERSION)
     .setLicense(license.NAME, license.URL)
-    .addBearerAuth(
-      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-      'accessToken'
-    )
+    .addBearerAuth()
     .addApiKey({ type: 'apiKey', in: 'header', name: 'X-Api-Key' }, 'apiKey')
     .build();
 
