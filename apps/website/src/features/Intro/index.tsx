@@ -55,7 +55,7 @@ const timeLine = [
   },
 ];
 
-export default function Payment(props: Readonly<Props>) {
+export default function Intro(props: Readonly<Props>) {
   useMetadata(props.title);
   const listItemIntro = itemIntroInfo.map((item) => (
     <div className="p-4 mb-0">
@@ -135,24 +135,27 @@ export default function Payment(props: Readonly<Props>) {
           <div className="relative block h-auto pl-0 m-0 mb-5 text-3xl font-medium text-justify">
             Lộ trình thực hiện
           </div>
-          {timeLine.map((item) => (
-            <div className="pr-5 -ml-4 -mr-4">
-              <div className={clsx('float-left px-4', item.width)}>
+          <div className="pr-5 -ml-4 -mr-4">
+            {timeLine.map((item) => (
+              <div className={clsx('float-left px-2', item.width)}>
                 <div className="mb-5 text-2xl font-medium text-japonica-400">
                   {item.year}
                 </div>
                 <div
                   className={clsx(
-                    'ml-0 h-1 bg-white-smoke-200 relative mb-5 -mr-4',
-                    'before:content-none before:left-4 before:w-4 before:h-4 before:absolute before:top-0 before:bottom-0 before:m-auto before:rounded-full before:bg-japonica-400'
+                    'ml-0 h-1 bg-japonica-100 relative mb-5 -mr-4',
+                    'before:left-0 before:w-4 before:h-4 before:absolute before:top-0 before:bottom-0 before:m-auto before:rounded-full before:bg-japonica-400',
+                    item.year === 'Sau 2020'
+                      ? 'after:absolute after:w-0 after:h-0 after:border-t- after:border-b-4 after:border-l-8 after:border-solid after:-right-4 after:top-0 after:bottom-0 after:m-auto after:border-l-japonica-500'
+                      : ''
                   )}
                 ></div>
-                <div className="mb-5 text-lg leading-6 text-dark-moderate-blue-900">
+                <div className="mb-5 text-lg leading-6 text-dark-moderate-blue-700">
                   {item.content}
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
