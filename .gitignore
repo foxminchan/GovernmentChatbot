@@ -11,6 +11,7 @@ apps/api/.env
 node_modules
 
 .env
+.eslintcache
 
 # IDEs and editors
 /.idea
