@@ -1,5 +1,4 @@
 import {
-  Logger,
   Injectable,
   CanActivate,
   ExecutionContext,

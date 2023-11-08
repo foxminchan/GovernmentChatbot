@@ -17,8 +17,20 @@ export function SetupSwagger(app: INestApplication) {
     .setDescription(SWAGGER_DESCRIPTION)
     .setVersion(SWAGGER_VERSION)
     .setLicense(license.NAME, license.URL)
-    .addBearerAuth()
-    .addApiKey({ type: 'apiKey', in: 'header', name: 'X-Api-Key' }, 'apiKey')
+    .addBearerAuth({
+      type: 'http',
+      scheme: 'bearer',
+      description: 'Enter your JWT token to access this endpoint',
+    })
+    .addApiKey(
+      {
+        type: 'apiKey',
+        in: 'header',
+        name: 'X-Api-Key',
+        description: 'Enter your API key to access this endpoint',
+      },
+      'X-Api-Key'
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

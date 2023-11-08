@@ -26,11 +26,15 @@ export class CreateAccountDto {
   )
   password: string;
 
-  @ApiProperty()
+  @ApiProperty({ enum: Roles, default: Roles.CITIZEN })
   @IsEnum(Roles, { each: true, message: 'Vai trò phải là ADMIN hoặc CITIZEN' })
   role: string = Roles.CITIZEN;
 
-  @ApiProperty()
+  @ApiProperty({
+    enum: Claims,
+    isArray: true,
+    default: [Claims.Read, Claims.Create],
+  })
   @IsEnum(Claims, {
     each: true,
     message: 'Quyền phải là manager, create, read, update hoặc delete',

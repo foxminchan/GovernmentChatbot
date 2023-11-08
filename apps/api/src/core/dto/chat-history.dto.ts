@@ -18,7 +18,7 @@ export class CreateChatHistoryDto {
   @ApiProperty()
   topic_id: string;
 
-  @ApiProperty()
+  @ApiProperty({ enum: ChatType, default: ChatType.HUMAN })
   @IsNotEmpty({ message: 'Loại tin nhắn không được để trống' })
   @IsEnum(ChatType, { message: 'Loại tin nhắn phải là 0 hoặc 1' })
   chat_type: number = ChatType.HUMAN;
