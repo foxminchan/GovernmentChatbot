@@ -1,11 +1,12 @@
 import fs from 'fs';
+import { Injectable } from '@nestjs/common';
 import { OpenAI } from 'langchain/llms/openai';
-import { Injectable, Logger } from '@nestjs/common';
 import { from, map, mergeMap, toArray } from 'rxjs';
 import { TokenTextSplitter } from 'langchain/text_splitter';
 import weaviate, { WeaviateClient } from 'weaviate-ts-client';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
+import { DocxLoader } from 'langchain/document_loaders/fs/docx';
 import { WeaviateFilter, WeaviateStore } from 'langchain/vectorstores/weaviate';
 
 @Injectable()
@@ -61,32 +62,35 @@ export class LangChainService {
     );
   }
 
-  // private createRetrieverChain(llm: BaseLanguageModel, retriever: Runnable) {}
-
   documentProcessing() {
     return from(
-      fs.readdirSync('apps/api/src/assets/pdfs').map((document) => {
+      [
+        { file: fs.readdirSync('apps/api/src/assets/pdfs'), type: 'pdf' },
+        { file: fs.readdirSync('apps/api/src/assets/docs'), type: 'doc' },
+      ].map((doc) => {
         return {
-          title: document,
+          title: doc.file,
+          type: doc.type,
         };
       })
     ).pipe(
-      mergeMap((element) =>
-        from(
-          new PDFLoader('apps/api/src/assets/pdfs/' + element.title).load()
-        ).pipe(
-          mergeMap((loadedDocument) =>
-            this.splitter.createDocuments(
-              loadedDocument.map((doc) => doc.pageContent)
-            )
+      mergeMap(async (element) => {
+        const loader = element.type === 'pdf' ? PDFLoader : DocxLoader;
+        const result = await WeaviateStore.fromDocuments(
+          await this.splitter.createDocuments(
+            (
+              await new loader(
+                `apps/api/src/assets/${element.type}s/` + element.title
+              ).load()
+            ).map((doc) => doc.pageContent)
           ),
-          mergeMap((splittedDocument) =>
-            WeaviateStore.fromDocuments(splittedDocument, this.embedder, {
-              ...this.storeConfig,
-            })
-          )
-        )
-      ),
+          this.embedder,
+          {
+            ...this.storeConfig,
+          }
+        );
+        return result;
+      }),
       toArray()
     );
   }

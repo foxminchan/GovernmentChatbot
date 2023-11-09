@@ -13,6 +13,7 @@ import {
   AccountController,
   ChatHistoryController,
   HealthController,
+  RetrievalController,
 } from '../controllers';
 import {
   HttpCacheInterceptor,
@@ -26,7 +27,6 @@ import { SocketGateway } from '../frameworks/socket';
 import { LoggerMiddleware } from '../libs/middlewares';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserModule, TopicModule, AccountModule, ChatHistoryModule } from '.';
-import { RetrievalController } from '../controllers/retrieval.controller';
 
 @Module({
   imports: [
