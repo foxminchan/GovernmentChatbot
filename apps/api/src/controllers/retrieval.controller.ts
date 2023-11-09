@@ -7,7 +7,7 @@ export class RetrievalController {
   constructor(private readonly langChainService: LangChainService) {}
 
   @Get()
-  loadDocuments() {
-    return this.langChainService.loadDocuments();
+  documentProcessing() {
+    return this.langChainService.documentProcessing();
   }
 }

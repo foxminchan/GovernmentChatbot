@@ -1,7 +1,8 @@
 import fs from 'fs';
-import { from, map } from 'rxjs';
-import { Injectable } from '@nestjs/common';
 import { OpenAI } from 'langchain/llms/openai';
+import { Injectable, Logger } from '@nestjs/common';
+import { from, map, mergeMap, toArray } from 'rxjs';
+import { TokenTextSplitter } from 'langchain/text_splitter';
 import weaviate, { WeaviateClient } from 'weaviate-ts-client';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
@@ -10,6 +11,7 @@ import { WeaviateFilter, WeaviateStore } from 'langchain/vectorstores/weaviate';
 @Injectable()
 export class LangChainService {
   private openAI: OpenAI;
+  private splitter: TokenTextSplitter;
   private embedder: OpenAIEmbeddings;
   private client: WeaviateClient = weaviate.client({
     scheme: process.env.WEAVIATE_SCHEME || 'https',
@@ -17,26 +19,33 @@ export class LangChainService {
     apiKey: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY || undefined),
   });
   private metadataKeys: string[] = [
-    'tư pháp',
-    'chính phủ',
-    'pháp luật',
-    'thủ tục hành chính',
+    'law',
+    'administrative',
+    'jurisprudence',
+    'government',
   ];
   private storeConfig = {
+    type: 'document',
     client: this.client,
     indexName: process.env.WEAVIATE_INDEX_NAME,
     metadataKeys: this.metadataKeys,
   };
 
   constructor() {
+    this.openAI = new OpenAI({
+      openAIApiKey: process.env.OPENAI_API_KEY,
+    });
     this.embedder = new OpenAIEmbeddings({
       maxRetries: 3,
       timeout: 10000,
       batchSize: 1024,
       openAIApiKey: process.env.OPENAI_API_KEY,
     });
-    this.openAI = new OpenAI({
-      openAIApiKey: process.env.OPENAI_API_KEY,
+    this.splitter = new TokenTextSplitter({
+      encodingName: 'gpt2',
+      chunkSize: 512,
+      chunkOverlap: 128,
+      keepSeparator: true,
     });
   }
 
@@ -54,30 +63,31 @@ export class LangChainService {
 
   // private createRetrieverChain(llm: BaseLanguageModel, retriever: Runnable) {}
 
-  async loadDocuments() {
-    const documents = fs.readdirSync('apps/api/src/assets/pdfs');
-    const metadata = documents.map((document) => {
-      return {
-        title: document,
-      };
-    });
-
-    const loadedDocuments = [];
-    for (const element of metadata) {
-      const loader = new PDFLoader('apps/api/src/assets/pdfs/' + element.title);
-      const loadedDocument = await loader.load();
-      loadedDocuments.push(loadedDocument);
-    }
-
-    return loadedDocuments;
-  }
-
-  async insertDocument(document: string[], metadata: object[]) {
-    await WeaviateStore.fromTexts(
-      document,
-      metadata,
-      this.embedder,
-      this.storeConfig
+  documentProcessing() {
+    return from(
+      fs.readdirSync('apps/api/src/assets/pdfs').map((document) => {
+        return {
+          title: document,
+        };
+      })
+    ).pipe(
+      mergeMap((element) =>
+        from(
+          new PDFLoader('apps/api/src/assets/pdfs/' + element.title).load()
+        ).pipe(
+          mergeMap((loadedDocument) =>
+            this.splitter.createDocuments(
+              loadedDocument.map((doc) => doc.pageContent)
+            )
+          ),
+          mergeMap((splittedDocument) =>
+            WeaviateStore.fromDocuments(splittedDocument, this.embedder, {
+              ...this.storeConfig,
+            })
+          )
+        )
+      ),
+      toArray()
     );
   }
 
