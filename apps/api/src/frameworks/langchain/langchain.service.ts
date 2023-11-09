@@ -1,7 +1,9 @@
+import fs from 'fs';
 import { from, map } from 'rxjs';
 import { Injectable } from '@nestjs/common';
 import { OpenAI } from 'langchain/llms/openai';
 import weaviate, { WeaviateClient } from 'weaviate-ts-client';
+import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { WeaviateFilter, WeaviateStore } from 'langchain/vectorstores/weaviate';
 
@@ -51,6 +53,24 @@ export class LangChainService {
   }
 
   // private createRetrieverChain(llm: BaseLanguageModel, retriever: Runnable) {}
+
+  async loadDocuments() {
+    const documents = fs.readdirSync('apps/api/src/assets/pdfs');
+    const metadata = documents.map((document) => {
+      return {
+        title: document,
+      };
+    });
+
+    const loadedDocuments = [];
+    for (const element of metadata) {
+      const loader = new PDFLoader('apps/api/src/assets/pdfs/' + element.title);
+      const loadedDocument = await loader.load();
+      loadedDocuments.push(loadedDocument);
+    }
+
+    return loadedDocuments;
+  }
 
   async insertDocument(document: string[], metadata: object[]) {
     await WeaviateStore.fromTexts(
