@@ -80,7 +80,7 @@ export class LangChainService {
           await this.splitter.createDocuments(
             (
               await new loader(
-                `apps/api/src/assets/${element.type}s/` + element.title
+                `apps/api/src/assets/${element.type}s/${element.title}`
               ).load()
             ).map((doc) => doc.pageContent)
           ),

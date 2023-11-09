@@ -21,7 +21,7 @@ export class OpenaiService {
     ).pipe(
       map((chatCompletion) => chatCompletion.choices[0].message.content),
       catchError((error) => {
-        throw new Error('Failed to create chat completion: ' + error.message);
+        throw new Error(`Failed to create chat completion: ${error.message}`);
       })
     );
   }
