@@ -13,37 +13,39 @@ import errorSignUp from '../assets/images/notification/Loi-dang-ky-tk.png';
 import lptb from '../assets/images/notification/lptb.png';
 
 type bannerNotificationType = {
-    DVCBanner: string,
-    DVC: string,
-    UnEmployment: string,
-    ErrorSignUp: string,
-    LPTB: string,
-}
-type IconIntroType= {
-    Share_Icon: string,
-    Evaluate_Icon: string,
-    Suggest_Icon: string,
-    Login_Icon: string,
-    Payment_Icon: string,
-    Perform_Icon: string,
-    Search_Icon: string,
-    Query_Icon: string,
-}
-
-export const IconIntro: IconIntroType ={
-    Share_Icon: share,
-    Evaluate_Icon: evaluate,
-    Suggest_Icon: suggest,
-    Login_Icon: login,
-    Payment_Icon: payment,
-    Perform_Icon: perform,
-    Search_Icon: search,
-    Query_Icon: query,
+  DVCBanner: string;
+  DVC: string;
+  UnEmployment: string;
+  ErrorSignUp: string;
+  LPTB: string;
 };
+
+type IconIntroType = {
+  Share_Icon: string;
+  Evaluate_Icon: string;
+  Suggest_Icon: string;
+  Login_Icon: string;
+  Payment_Icon: string;
+  Perform_Icon: string;
+  Search_Icon: string;
+  Query_Icon: string;
+};
+
+export const IconIntro: IconIntroType = {
+  Share_Icon: share,
+  Evaluate_Icon: evaluate,
+  Suggest_Icon: suggest,
+  Login_Icon: login,
+  Payment_Icon: payment,
+  Perform_Icon: perform,
+  Search_Icon: search,
+  Query_Icon: query,
+};
+
 export const bannerNotification: bannerNotificationType = {
-    DVCBanner: dvc_banner,
-    DVC: dvc,
-    UnEmployment: unemployment,
-    ErrorSignUp: errorSignUp,
-    LPTB: lptb,
+  DVCBanner: dvc_banner,
+  DVC: dvc,
+  UnEmployment: unemployment,
+  ErrorSignUp: errorSignUp,
+  LPTB: lptb,
 };
