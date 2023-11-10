@@ -18,7 +18,7 @@ export default function Timeline() {
                 ? 'after:absolute after:w-0 after:h-0 after:border-t-[10px] after:border-b-[10px] after:border-l-[15px] after:border-solid after:-right-3 after:top-0 after:bottom-0 after:m-auto after:border-l-japonica-100 after:border-t-transparent after:border-b-transparent'
                 : ''
             )}
-          ></div>
+          />
           <div className="mb-5 text-lg leading-6 text-dark-moderate-blue-700">
             {item.content}
           </div>
