@@ -9,7 +9,7 @@ export default function ItemsNotification() {
       columns={{ xs: 4, sm: 8, md: 12 }}
     >
       {notificationData.map((item) => (
-        <Grid item xs={4} sm={4} md={4}>
+        <Grid key={item.id} item xs={4} sm={4} md={4}>
           <div>
             <div className="mb-5">
               <img
