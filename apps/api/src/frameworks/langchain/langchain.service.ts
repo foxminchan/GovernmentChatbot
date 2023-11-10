@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { Injectable } from '@nestjs/common';
-import { OpenAI } from 'langchain/llms/openai';
 import { from, map, mergeMap, toArray } from 'rxjs';
+import { DocumentFileType } from '../../libs/@types/enums';
 import { TokenTextSplitter } from 'langchain/text_splitter';
 import weaviate, { WeaviateClient } from 'weaviate-ts-client';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
@@ -11,7 +11,6 @@ import { WeaviateFilter, WeaviateStore } from 'langchain/vectorstores/weaviate';
 
 @Injectable()
 export class LangChainService {
-  private openAI: OpenAI;
   private splitter: TokenTextSplitter;
   private embedder: OpenAIEmbeddings;
   private client: WeaviateClient = weaviate.client({
@@ -33,9 +32,6 @@ export class LangChainService {
   };
 
   constructor() {
-    this.openAI = new OpenAI({
-      openAIApiKey: process.env.OPENAI_API_KEY,
-    });
     this.embedder = new OpenAIEmbeddings({
       maxRetries: 3,
       timeout: 10000,
@@ -43,7 +39,7 @@ export class LangChainService {
       openAIApiKey: process.env.OPENAI_API_KEY,
     });
     this.splitter = new TokenTextSplitter({
-      encodingName: 'gpt2',
+      encodingName: 'cl100k_base',
       chunkSize: 512,
       chunkOverlap: 128,
       keepSeparator: true,
@@ -51,10 +47,13 @@ export class LangChainService {
   }
 
   private async getWeaviateStore() {
-    return WeaviateStore.fromExistingIndex(this.embedder, this.storeConfig);
+    return await WeaviateStore.fromExistingIndex(
+      this.embedder,
+      this.storeConfig
+    );
   }
 
-  private async getRetriever() {
+  private getRetriever() {
     return from(this.getWeaviateStore()).pipe(
       map((store) => {
         return store.asRetriever({ k: 10 });
@@ -65,8 +64,14 @@ export class LangChainService {
   documentProcessing() {
     return from(
       [
-        { file: fs.readdirSync('apps/api/src/assets/pdfs'), type: 'pdf' },
-        { file: fs.readdirSync('apps/api/src/assets/docs'), type: 'doc' },
+        {
+          file: fs.readdirSync('apps/api/src/assets/pdfs'),
+          type: DocumentFileType.PDF,
+        },
+        {
+          file: fs.readdirSync('apps/api/src/assets/docs'),
+          type: DocumentFileType.DOC,
+        },
       ].map((doc) => {
         return {
           title: doc.file,
@@ -75,12 +80,13 @@ export class LangChainService {
       })
     ).pipe(
       mergeMap(async (element) => {
-        const loader = element.type === 'pdf' ? PDFLoader : DocxLoader;
+        const loader =
+          element.type === DocumentFileType.PDF ? PDFLoader : DocxLoader;
         const result = await WeaviateStore.fromDocuments(
           await this.splitter.createDocuments(
             (
               await new loader(
-                `apps/api/src/assets/${element.type}s/${element.title}`
+                `apps/api/src/assets/${element.type}/${element.title}`
               ).load()
             ).map((doc) => doc.pageContent)
           ),

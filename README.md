@@ -74,7 +74,7 @@ Retrieval Augmented Generation (RAG) represents an innovative paradigm that harn
 		<b><a href="https://www.npmjs.com/" target="_blank">npm</a></b> - npm is the package manager for the Node JavaScript platform.
 	</li>
 	<li align="justify">
-		<b><a href="https://www.python.org/" target="_blank">Python</a></b> - Python is a programming language that lets you work quickly and integrate systems more effectively.
+		<b><a href="https://www.pulumi.com/" target="_blank">Pulumi</a></b> - Pulumi is a manage infrastructure, secrets, and configurations intuitively on any cloud.
 	</li>
 </ul>
 
@@ -89,6 +89,9 @@ Retrieval Augmented Generation (RAG) represents an innovative paradigm that harn
 	</li>
 	<li align="justify">
 		<b><a href="https://weaviate.io/" target="_blank">Weaviate</a></b> - Weaviate is an open-source vector database. It allows you to store data objects and vector embeddings from your favorite ML-models, and scale seamlessly into billions of data objects.
+	</li>
+	<li align="justify">
+		<b><a href="https://llmonitor.com/" target="_blank">LLMonitor</a></b> - LLMonitor is an observability, analytics and tests for AI agents and chatbots.
 	</li>
 </ul>
 
@@ -138,6 +141,15 @@ npx nx serve api
 > Make sure you have setup the environment variables in the `.env` file for API and Website. The sample of the `.env` file is in the `.env.example` file.
 
 </p>
+
+To set up the infrastructure, you can run the following command:
+
+```bash
+npx nx up iac
+```
+
+> **Note**
+> Make sure you have installed the `pulumi` CLI, have `pulumi` account and `AWS` credentials.
 
 # Dependency Graph
 
