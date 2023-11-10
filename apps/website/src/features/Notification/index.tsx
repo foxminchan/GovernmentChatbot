@@ -5,7 +5,6 @@ import { Breadcrumbs, Grid, Typography } from '@mui/material';
 import { FaAngleRight } from 'react-icons/fa';
 import ItemsNotification from './components/ItemsNotification';
 import drums from '../../assets/images/notification/trongdong.png';
-import { Fragment } from 'react';
 
 type Props = {
   title: string;
