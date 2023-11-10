@@ -13,14 +13,7 @@ type Props = {
 export default function SignUp(props: Readonly<Props>) {
   return (
     <Container component="main" maxWidth="xs" className="h-screen">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+      <Box className="flex flex-col items-center mt-16">
         <img
           src={Logo}
           alt="Quốc huy"
@@ -33,7 +26,7 @@ export default function SignUp(props: Readonly<Props>) {
           className="w-auto h-24 ml-1"
           loading="lazy"
         />
-        <Box component="form" noValidate sx={{ mt: 3 }}>
+        <Box component="form" sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField

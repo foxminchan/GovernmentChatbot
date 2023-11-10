@@ -9,6 +9,7 @@ const SignUp = loadable(() => import('./features/SignUp'));
 const SignIn = loadable(() => import('./features/SignIn'));
 const Notification = loadable(() => import('./features/Notification'));
 const NotFound = loadable(() => import('./components/NotFound'));
+const Introduction = loadable(() => import('./features/Intro'));
 
 export default function App() {
   return (
@@ -43,6 +44,14 @@ export default function App() {
           element={
             <Suspense fallback={<CircularProgress />}>
               <Notification title="Thông báo" />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/gioi-thieu"
+          element={
+            <Suspense fallback={<CircularProgress />}>
+              <Introduction title="Giới thiệu" />
             </Suspense>
           }
         />
