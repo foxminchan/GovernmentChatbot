@@ -23,6 +23,7 @@ Government Chatbot is a monorepo project built with <a href="https://nx.dev/">Nx
 
 - [Overview](#overview)
 - [Methodology](#methodology)
+- [Technology Stack](#technology-stack)
 - [Getting Started](#getting-started)
   - [💻 Infrastructure](#-infrastructure)
   - [📦 Services](#-services)
@@ -44,6 +45,16 @@ Retrieval Augmented Generation (RAG) represents an innovative paradigm that harn
 </p>
 
 <img loading="lazy" src="./assets/images/rag.png" alt="Retrieval Augmented Generation" width="100%" height="auto" />
+
+# Technology Stack
+
+- [React](https://reactjs.org/)
+- [NestJS](https://nestjs.com/)
+- [Pulumi](https://www.pulumi.com/)
+- [LangChain](https://www.langchain.com/)
+- [Weaviate](https://weaviate.io/)
+- [SonarCloud](https://sonarcloud.io/)
+- [Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/), [Loki](https://grafana.com/oss/loki/), [Tempo](https://grafana.com/oss/tempo/), [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/)
 
 # Getting Started
 
