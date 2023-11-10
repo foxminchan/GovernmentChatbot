@@ -22,7 +22,7 @@ export default function Notification(props: Readonly<Props>) {
     </Typography>,
   ];
   return (
-    <Fragment>
+    <>
       <div className="pb-8 bg-right-top bg-no-repeat bg-tien-ich-bg min-h-[calc(100vh_-_400px)]">
         <Container>
           <Breadcrumbs
@@ -76,6 +76,6 @@ export default function Notification(props: Readonly<Props>) {
           </Grid>
         </Container>
       </div>
-    </Fragment>
+    </>
   );
 }
