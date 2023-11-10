@@ -132,6 +132,7 @@
     "@prisma/client": "^5.4.2",
     "@pulumi/aws": "^5.0.0",
     "@pulumi/awsx": "^1.0.0",
+    "@pulumi/digitalocean": "^4.23.0",
     "@pulumi/pulumi": "^3.0.0",
     "@swc-node/register": "^1.6.8",
     "@swc/cli": "~0.1.62",

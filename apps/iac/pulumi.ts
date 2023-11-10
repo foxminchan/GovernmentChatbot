@@ -1,5 +1,175 @@
-import * as aws from "@pulumi/aws";
+import * as aws from '@pulumi/aws';
+import * as awsx from '@pulumi/awsx';
+import * as pulumi from '@pulumi/pulumi';
+import * as digitalocean from '@pulumi/digitalocean';
 
+// Get config
+const awsConfig = new pulumi.Config('aws');
+const awsRegion = awsConfig.get('region');
 
-const bucket = new aws.s3.Bucket("my-bucket");
-export const bucketName = bucket.id;
+// Create VPC
+const vpc = new aws.ec2.Vpc('hutech-vpc', {
+  cidrBlock: '10.0.0.0/16',
+  enableDnsHostnames: true,
+  enableDnsSupport: true,
+});
+
+const subnet = new aws.ec2.Subnet('hutech-subnet', {
+  cidrBlock: '10.0.0.0/24',
+  availabilityZone: 'us-east-1a',
+  vpcId: vpc.id,
+  mapPublicIpOnLaunch: true,
+});
+
+// Create IAM role
+const ecsExecutionRole = new aws.iam.Role('ecsExecutionRole', {
+  assumeRolePolicy: JSON.stringify({
+    Version: '2012-10-17',
+    Statement: [
+      {
+        Action: 'sts:AssumeRole',
+        Effect: 'Allow',
+        Principal: {
+          Service: 'ecs-tasks.amazonaws.com',
+        },
+      },
+    ],
+  }),
+});
+
+// Create ECR repository
+const repo = new awsx.ecr.Repository('government-ecr', {
+  forceDelete: true,
+  imageScanningConfiguration: {
+    scanOnPush: true,
+  },
+});
+
+const image = new awsx.ecr.Image('government-img', {
+  repositoryUrl: repo.url,
+  path: '../api',
+});
+
+// Create load balancer
+const lb = new digitalocean.LoadBalancer('lb', {
+  region: digitalocean.Region.NYC1,
+  forwardingRules: [
+    {
+      entryPort: 80,
+      entryProtocol: digitalocean.Protocol.HTTPS,
+      targetPort: 80,
+      targetProtocol: digitalocean.Protocol.HTTPS,
+    },
+  ],
+  healthcheck: {
+    port: 80,
+    protocol: digitalocean.Protocol.HTTPS,
+    path: '/',
+  },
+  dropletTag: new digitalocean.Tag('lb').name,
+});
+
+// Create cloudwatch log group
+const logGroup = new aws.cloudwatch.LogGroup('government-log-group', {
+  name: 'government-log-group',
+});
+
+// Create ECS cluster
+const cluster = new aws.ecs.Cluster('government-cluster', {});
+
+const taskDefinition = new aws.ecs.TaskDefinition('government-api-task', {
+  family: 'government-api-task',
+  requiresCompatibilities: ['FARGATE'],
+  networkMode: 'awsvpc',
+  taskRoleArn: ecsExecutionRole.arn,
+  executionRoleArn: ecsExecutionRole.arn,
+  containerDefinitions: pulumi.jsonStringify([
+    {
+      name: 'government-container',
+      image: image.imageUri,
+      cpu: 256,
+      memory: 256,
+      essential: true,
+      portMappings: [
+        {
+          containerPort: 80,
+          hostPort: 80,
+        },
+      ],
+      logConfiguration: {
+        logDriver: 'awslogs',
+        options: {
+          'awslogs-group': logGroup.name,
+          'awslogs-region': awsRegion,
+          'awslogs-stream-prefixs': logGroup.namePrefix,
+        },
+      },
+    },
+  ]),
+});
+
+const service = new awsx.ecs.FargateService('government-service', {
+  cluster: cluster.arn,
+  assignPublicIp: true,
+  networkConfiguration: {
+    subnets: [subnet.id],
+    securityGroups: [vpc.defaultSecurityGroupId],
+  },
+  taskDefinition: taskDefinition.arn,
+});
+
+// Create Route53 record
+const zone = new aws.route53.Zone('government-zone', {
+  name: 'chatbot.vn',
+});
+
+const lbRecord = new aws.route53.Record('government-lb-record', {
+  name: 'gov',
+  zoneId: zone.zoneId,
+  type: 'A',
+  ttl: 300,
+  records: [lb.ip],
+});
+
+// Create WebACL WAF
+const webAcl = new aws.wafv2.WebAcl('government-web-acl', {
+  defaultAction: {
+    allow: {},
+  },
+  name: 'government-web-acl',
+  description: 'WebACL for government application',
+  rules: [
+    {
+      name: 'block-ip-rule',
+      priority: 1,
+      statement: {
+        managedRuleGroupStatement: {
+          name: 'AWSManagedRulesCommonRuleSet',
+          vendorName: 'AWS',
+        },
+      },
+      action: {
+        block: {},
+      },
+      overrideAction: {
+        none: {},
+      },
+      visibilityConfig: {
+        cloudwatchMetricsEnabled: true,
+        metricName: 'block-ip-rule',
+        sampledRequestsEnabled: true,
+      },
+    },
+  ],
+  scope: 'REGIONAL',
+  visibilityConfig: {
+    cloudwatchMetricsEnabled: true,
+    metricName: 'block-ip-rule',
+    sampledRequestsEnabled: true,
+  },
+});
+
+export const webAclId = webAcl.id;
+export const webAclArn = webAcl.arn;
+export const serviceName = service.service.name;
+export const url = pulumi.interpolate`https://${lbRecord.name}.${zone.name}`;
