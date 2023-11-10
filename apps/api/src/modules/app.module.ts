@@ -13,6 +13,7 @@ import {
   AccountController,
   ChatHistoryController,
   HealthController,
+  RetrievalController,
 } from '../controllers';
 import {
   HttpCacheInterceptor,
@@ -61,6 +62,7 @@ import { UserModule, TopicModule, AccountModule, ChatHistoryModule } from '.';
     TopicController,
     HealthController,
     AccountController,
+    RetrievalController,
     ChatHistoryController,
   ],
   providers: [

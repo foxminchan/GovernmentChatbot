@@ -20,6 +20,14 @@ import tamdung from '../assets/images/icons/enterprise/home/tamdung.svg';
 import thuongmai from '../assets/images/icons/enterprise/home/thuongmai.svg';
 import tlcn from '../assets/images/icons/enterprise/home/tlcn.svg';
 import balanceBusiness from '../assets/images/icons/enterprise/home/balance.svg';
+import share from '../assets/images/icons/intro/chiase.svg';
+import evaluate from '../assets/images/icons/intro/danhgia.svg';
+import suggest from '../assets/images/icons/intro/denghi.svg';
+import login from '../assets/images/icons/intro/login.svg';
+import payment from '../assets/images/icons/intro/payment.svg';
+import perform from '../assets/images/icons/intro/thuchien.svg';
+import search from '../assets/images/icons/intro/timkiem.svg';
+import query from '../assets/images/icons/intro/truyvan.svg';
 
 type IconHomeCitizenType={
     Balance_Icon: string;
@@ -34,6 +42,7 @@ type IconHomeCitizenType={
     Suckhoe_Icon: string;
     Vieclam_Icon: string;
 }; 
+
 type IconHomeBusinessType={
     Balance_Icon: string;
     Khoisukinhdoanh_Icon: string;
@@ -47,6 +56,18 @@ type IconHomeBusinessType={
     Thuongmai_Icon: string;
     Tlcn_Icon: string;
 };
+
+type IconIntroType= {
+    Share_Icon: string,
+    Evaluate_Icon: string,
+    Suggest_Icon: string,
+    Login_Icon: string,
+    Payment_Icon: string,
+    Perform_Icon: string,
+    Search_Icon: string,
+    Query_Icon: string,
+}
+
 export const IconHomeCitizen: IconHomeCitizenType = {
     Balance_Icon: balance,
     Cocon_Icon: cocon,
@@ -60,6 +81,7 @@ export const IconHomeCitizen: IconHomeCitizenType = {
     Suckhoe_Icon: suckhoe,
     Vieclam_Icon: vieclam,
 };
+
 export const IconHomeBusiness: IconHomeBusinessType = {
     Balance_Icon: balanceBusiness,
     Khoisukinhdoanh_Icon: khoisukinhdoanh,
@@ -73,3 +95,14 @@ export const IconHomeBusiness: IconHomeBusinessType = {
     Thuongmai_Icon: thuongmai,
     Tlcn_Icon: tlcn,
 };
+
+export const IconIntro: IconIntroType ={
+    Share_Icon: share,
+    Evaluate_Icon: evaluate,
+    Suggest_Icon: suggest,
+    Login_Icon: login,
+    Payment_Icon: payment,
+    Perform_Icon: perform,
+    Search_Icon: search,
+    Query_Icon: query,
+}

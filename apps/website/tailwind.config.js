@@ -94,7 +94,6 @@ module.exports = withMT({
           950:"#ff2c1e",
         },
       },
-
     },
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
@@ -103,6 +102,7 @@ module.exports = withMT({
     },
     backgroundImage:{
       'hero-banner': "url('././assets/images/banners/banner.jpg')",
+      'slogan-bg':"url('././assets/images/banners/hac.svg')",
     }
   },
   plugins: [tailwindTypo],

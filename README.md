@@ -5,6 +5,9 @@
 		<a href="https://sonarcloud.io/summary/new_code?id=foxminchan_GovermentLLM" target="_blank">
 			<img loading="lazy" src="https://sonarcloud.io/api/project_badges/measure?project=foxminchan_GovermentLLM&metric=alert_status" alt="SonarCloud">
 		</a>
+		<a href="https://app.pulumi.com/new?template=https://github.com/foxminchan/GovernmentChatbot/tree/main/apps/iac" target="_blank">
+			<img loading="lazy" src="https://img.shields.io/badge/Infra-Deploy%20with%20Pulumi-8a3391?logo=Pulumi" alt="Pulumi">
+		</a>
 	  <a href="https://gitpod.io/new/#https://github.com/foxminchan/GovernmentChatbot" target="_blank">
 			<img loading="lazy" src="https://img.shields.io/badge/Gitpod-Ready%20to%20Code-blue?logo=gitpod" alt="Gitpod">
 		</a>
@@ -23,11 +26,12 @@ Government Chatbot is a monorepo project built with <a href="https://nx.dev/">Nx
 
 - [Overview](#overview)
 - [Methodology](#methodology)
+- [Technology Stack](#technology-stack)
 - [Getting Started](#getting-started)
-  - [💻 Infrastructure](#-infrastructure)
-  - [📦 Services](#-services)
-  - [🛠️ Setup](#️-setup)
-  - [🚀 Running the application](#-running-the-application)
+	- [💻 Infrastructure](#-infrastructure)
+	- [📦 Services](#-services)
+	- [🛠️ Setup](#️-setup)
+	- [🚀 Running the application](#-running-the-application)
 - [Dependency Graph](#dependency-graph)
 - [License](#license)
 
@@ -44,6 +48,16 @@ Retrieval Augmented Generation (RAG) represents an innovative paradigm that harn
 </p>
 
 <img loading="lazy" src="./assets/images/rag.png" alt="Retrieval Augmented Generation" width="100%" height="auto" />
+
+# Technology Stack
+
+- [React](https://reactjs.org/)
+- [NestJS](https://nestjs.com/)
+- [Pulumi](https://www.pulumi.com/)
+- [LangChain](https://www.langchain.com/)
+- [Weaviate](https://weaviate.io/)
+- [SonarCloud](https://sonarcloud.io/)
+- [Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/), [Loki](https://grafana.com/oss/loki/), [Tempo](https://grafana.com/oss/tempo/), [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/)
 
 # Getting Started
 
@@ -63,7 +77,7 @@ Retrieval Augmented Generation (RAG) represents an innovative paradigm that harn
 		<b><a href="https://www.npmjs.com/" target="_blank">npm</a></b> - npm is the package manager for the Node JavaScript platform.
 	</li>
 	<li align="justify">
-		<b><a href="https://www.python.org/" target="_blank">Python</a></b> - Python is a programming language that lets you work quickly and integrate systems more effectively.
+		<b><a href="https://www.pulumi.com/" target="_blank">Pulumi</a></b> - Pulumi is a manage infrastructure, secrets, and configurations intuitively on any cloud.
 	</li>
 </ul>
 
@@ -78,6 +92,9 @@ Retrieval Augmented Generation (RAG) represents an innovative paradigm that harn
 	</li>
 	<li align="justify">
 		<b><a href="https://weaviate.io/" target="_blank">Weaviate</a></b> - Weaviate is an open-source vector database. It allows you to store data objects and vector embeddings from your favorite ML-models, and scale seamlessly into billions of data objects.
+	</li>
+	<li align="justify">
+		<b><a href="https://llmonitor.com/" target="_blank">LLMonitor</a></b> - LLMonitor is an observability, analytics and tests for AI agents and chatbots.
 	</li>
 </ul>
 
@@ -115,14 +132,27 @@ For the API , you can run the following command:
 npx nx serve api
 ```
 
-For the crawler, you can run the following command:
+<p align="justify">
+
+> **Warning**
+> If you run the API in the first time, you need to generate the `prisma` client by running the following command:
+>
+> ```bash
+> cd apps/api && npx prisma generate
+> ```
+>
+> Make sure you have setup the environment variables in the `.env` file for API and Website. The sample of the `.env` file is in the `.env.example` file.
+
+</p>
+
+To set up the infrastructure, you can run the following command:
 
 ```bash
-npx nx serve crawler
+npx nx up iac
 ```
 
 > **Note**
-> If you want to run with Nx, make sure you have installed `poetry` globally. Python version must be `>= 3.8 and < 3.11`.
+> Make sure you have installed the `pulumi` CLI, have `pulumi` account and `AWS` credentials.
 
 # Dependency Graph
 
