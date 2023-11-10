@@ -80,13 +80,15 @@ module.exports = {
           950:"#9d9d9d",
         }
       },
-
     },
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
       nunito: ['Nunito', 'sans-serif'],
     },
+    backgroundImage:{
+      'slogan-bg':"url('././assets/images/banners/hac.svg')"
+    }
   },
   plugins: [tailwindTypo],
 };
