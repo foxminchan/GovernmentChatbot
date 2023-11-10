@@ -1,11 +1,10 @@
 import useMetadata from '../../hooks/useMetadata';
 import intro from '../../assets/images/banners/gioi-thieu-slider.png';
 import { Link } from 'react-router-dom';
-import clsx from 'clsx';
-import { Box, Breadcrumbs, Container, Grid, Typography } from '@mui/material';
+import { Breadcrumbs, Container, Typography } from '@mui/material';
 import { FaAngleRight } from 'react-icons/fa';
-import { itemIntroInfo } from './intro.data';
 import Timeline from './components/Timeline';
+import ItemIntro from './components/ItemIntro';
 
 type Props = {
   title: string;
@@ -13,18 +12,6 @@ type Props = {
 
 export default function Intro(props: Readonly<Props>) {
   useMetadata(props.title);
-  const listItemIntro = itemIntroInfo.map((item) => (
-    <div className="p-4 mb-0">
-      <div className="mb-5">
-        <img
-          src={item.icon}
-          alt="icon"
-          className="h-auto max-w-full align-middle border-0"
-        />
-      </div>
-      <span className="mb-5">{item.name}</span>
-    </div>
-  ));
   const breadcrumbs = [
     <Link key="1" color="inherit" to="/">
       Trang chủ
@@ -71,9 +58,7 @@ export default function Intro(props: Readonly<Props>) {
             di động được kết nối internet để hưởng nhiều lợi ích từ Cổng Dịch vụ
             công Quốc gia, như:
           </div>
-          <Grid container xs={4}>
-            {listItemIntro}
-          </Grid>
+          <ItemIntro />
         </div>
         <div className="px-5 py-10 text-xl text-center bg-right-bottom bg-no-repeat bg-[length:250px_auto] rounded bg-japonica-100 mb-7 bg-slogan-bg">
           <div className="max-w-3xl m-auto">

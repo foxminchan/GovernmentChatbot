@@ -1,11 +1,12 @@
 import clsx from 'clsx';
 import { timeLine } from '../intro.data';
+import { Grid } from '@mui/material';
 
 export default function Timeline() {
   return (
-    <div className="pr-5 -ml-3 -mr-3 ">
+    <Grid container marginLeft={'-5px'}>
       {timeLine.map((item) => (
-        <div className={clsx('float-left px-2', item.width)}>
+        <Grid item className={clsx('float-left px-2', item.width)}>
           <div className="mb-5 text-2xl font-medium text-japonica-400 font-nunito">
             {item.year}
           </div>
@@ -21,8 +22,8 @@ export default function Timeline() {
           <div className="mb-5 text-lg leading-6 text-dark-moderate-blue-700">
             {item.content}
           </div>
-        </div>
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 }

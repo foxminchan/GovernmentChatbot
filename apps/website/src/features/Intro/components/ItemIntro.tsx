@@ -10,14 +10,16 @@ export default function ItemIntro() {
     >
       {itemIntroInfo.map((item) => (
         <Grid item xs={2} sm={4} md={4}>
-          <div className="mb-5">
-            <img
-              src={item.icon}
-              alt="icon"
-              className="h-auto max-w-full align-middle border-0"
-            />
+          <div>
+            <div className="mb-5">
+              <img
+                src={item.icon}
+                alt="icon"
+                className="h-auto max-w-full align-middle border-0"
+              />
+            </div>
+            <span className="mb-5">{item.name}</span>
           </div>
-          <span className="mb-5">{item.name}</span>
         </Grid>
       ))}
     </Grid>
