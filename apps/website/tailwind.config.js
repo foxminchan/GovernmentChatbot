@@ -1,9 +1,10 @@
 const { join } = require('path');
 const tailwindTypo = require('@tailwindcss/typography');
+const withMT = require("@material-tailwind/react/utils/withMT");
 const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+module.exports = withMT({
   content: [
     join(
       __dirname,
@@ -78,7 +79,20 @@ module.exports = {
           800:"#b0b0b0",
           900:"#a7a7a7",
           950:"#9d9d9d",
-        }
+        },
+        "light-orange":{
+          50:"#ffe81e",
+          100:"#ffd61e",
+          200:"#ffc31e",
+          300:"#ffb01e",
+          400:"#ff9d1e",
+          500:"#ff8a1e",
+          600:"#ff781e",
+          700:"#ff651e",
+          800:"#ff521e",
+          900:"#ff3f1e",
+          950:"#ff2c1e",
+        },
       },
 
     },
@@ -87,6 +101,9 @@ module.exports = {
       serif: ['Merriweather', 'serif'],
       nunito: ['Nunito', 'sans-serif'],
     },
+    backgroundImage:{
+      'hero-banner': "url('././assets/images/banners/banner.jpg')",
+    }
   },
   plugins: [tailwindTypo],
-};
+});
