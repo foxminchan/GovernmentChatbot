@@ -14,14 +14,7 @@ export default function SignIn(props: Readonly<Props>) {
   useMetadata(props.title);
   return (
     <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+      <Box className="flex flex-col items-center mt-16">
         <img
           src={Logo}
           alt="Quốc huy"
@@ -31,7 +24,7 @@ export default function SignIn(props: Readonly<Props>) {
         <Typography component="h1" variant="h5">
           {props.title}
         </Typography>
-        <Box component="form" noValidate sx={{ mt: 1 }}>
+        <Box component="form" className="mt-2">
           <TextField
             margin="normal"
             required
