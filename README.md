@@ -126,14 +126,18 @@ For the API , you can run the following command:
 npx nx serve api
 ```
 
-For the crawler, you can run the following command:
+<p align="justify">
 
-```bash
-npx nx serve crawler
-```
+> **Warning**
+> If you run the API in the first time, you need to generate the `prisma` client by running the following command:
+>
+> ```bash
+> npx nx prisma generate
+> ```
+>
+> Make sure you have setup the environment variables in the `.env` file for API and Website. The sample of the `.env` file is in the `.env.example` file.
 
-> **Note**
-> If you want to run with Nx, make sure you have installed `poetry` globally. Python version must be `>= 3.8 and < 3.11`.
+</p>
 
 # Dependency Graph
 
