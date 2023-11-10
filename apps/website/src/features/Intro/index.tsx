@@ -47,9 +47,9 @@ export default function Intro(props: Readonly<Props>) {
           </div>
           <div className="mb-5 text-lg leading-6">
             Cá nhân, tổ chức dễ dàng truy cập Cổng Dịch vụ công Quốc gia tại địa
-            chỉ duy nhất
+            chỉ duy nhất{' '}
             <Link
-              to="https://www.dichvucong.gov.vn"
+              to="https://dichvucong.gov.vn/p/home/dvc-trang-chu.html"
               className="text-lg hover:text-saffron-mango-600"
             >
               www.dichvucong.gov.vn
@@ -69,8 +69,12 @@ export default function Intro(props: Readonly<Props>) {
               triển, phục vụ Nhân Dân
             </div>
             <div className="mb-5 leading-7 text-saffron-mango-500">
-              Hãy truy cập
-              <Link to="https://www.dichvucong.gov.vn" className="inline-block">
+              Hãy truy cập{' '}
+              <Link
+                to="https://dichvucong.gov.vn/p/home/dvc-trang-chu.html"
+                className="inline-block"
+                target="_blank"
+              >
                 www.dichvucong.gov.vn !
               </Link>
             </div>

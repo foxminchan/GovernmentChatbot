@@ -1,14 +1,15 @@
 import clsx from 'clsx';
 import { timeLine } from '../intro.data';
 import { Grid } from '@mui/material';
+import DOMPurify from 'dompurify';
 
 export default function Timeline() {
   return (
     <Grid container marginLeft={'-5px'}>
       {timeLine.map((item) => (
         <Grid
-          key={item.id}
           item
+          key={item.id}
           className={clsx('float-left px-2', item.width)}
         >
           <div className="mb-5 text-2xl font-medium text-japonica-400 font-nunito">
@@ -24,7 +25,7 @@ export default function Timeline() {
             )}
           />
           <div className="mb-5 text-lg leading-6 text-dark-moderate-blue-700">
-            {item.content}
+            {DOMPurify.sanitize(item.content)}
           </div>
         </Grid>
       ))}
