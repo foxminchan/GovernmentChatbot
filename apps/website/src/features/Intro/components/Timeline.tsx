@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { timeLine } from '../intro.data';
 import { Grid } from '@mui/material';
-import DOMPurify from 'dompurify';
 
 export default function Timeline() {
   return (
@@ -25,7 +24,7 @@ export default function Timeline() {
             )}
           />
           <div className="mb-5 text-lg leading-6 text-dark-moderate-blue-700">
-            {DOMPurify.sanitize(item.content)}
+            {item.content}
           </div>
         </Grid>
       ))}
