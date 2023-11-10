@@ -9,14 +9,14 @@ const awsRegion = awsConfig.get('region');
 
 // Create VPC
 const vpc = new aws.ec2.Vpc('hutech-vpc', {
-  cidrBlock: '10.0.0.0/16',
+  cidrBlock: process.env.AWS_VPC_IP,
   enableDnsHostnames: true,
   enableDnsSupport: true,
 });
 
 const subnet = new aws.ec2.Subnet('hutech-subnet', {
-  cidrBlock: '10.0.0.0/24',
-  availabilityZone: 'us-east-1a',
+  cidrBlock: process.env.AWS_VPC_SUBNET,
+  availabilityZone: awsRegion,
   vpcId: vpc.id,
   mapPublicIpOnLaunch: true,
 });
@@ -120,11 +120,11 @@ const service = new awsx.ecs.FargateService('government-service', {
 
 // Create Route53 record
 const zone = new aws.route53.Zone('government-zone', {
-  name: 'chatbot.vn',
+  name: process.env.AWS_ROUTE53_DOMAIN,
 });
 
 const lbRecord = new aws.route53.Record('government-lb-record', {
-  name: 'gov',
+  name: process.env.AWS_ROUTE53_SUBDOMAIN,
   zoneId: zone.zoneId,
   type: 'A',
   ttl: 300,
