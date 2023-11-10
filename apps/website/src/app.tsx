@@ -5,11 +5,12 @@ import { Route, Routes } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
 const Home = loadable(() => import('./features/Home'));
+const ChatBot = loadable(() => import('./features/Chat'));
 const SignUp = loadable(() => import('./features/SignUp'));
 const SignIn = loadable(() => import('./features/SignIn'));
-const Notification = loadable(() => import('./features/Notification'));
-const NotFound = loadable(() => import('./components/NotFound'));
 const Introduction = loadable(() => import('./features/Intro'));
+const NotFound = loadable(() => import('./components/NotFound'));
+const Notification = loadable(() => import('./features/Notification'));
 
 export default function App() {
   return (
@@ -52,6 +53,14 @@ export default function App() {
           element={
             <Suspense fallback={<CircularProgress />}>
               <Introduction title="Giới thiệu" />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/chat-bot"
+          element={
+            <Suspense fallback={<CircularProgress />}>
+              <ChatBot title="Chat bot" />
             </Suspense>
           }
         />

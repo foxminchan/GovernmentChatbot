@@ -13,8 +13,9 @@ export default function ItemsNotification() {
           <div>
             <div className="mb-5">
               <img
+                loading="lazy"
                 src={item.banner}
-                alt="icon"
+                alt="banner"
                 className="h-auto max-w-full align-middle border-0"
               />
             </div>

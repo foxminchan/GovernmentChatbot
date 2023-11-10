@@ -12,6 +12,7 @@ type Props = {
 
 export default function Notification(props: Readonly<Props>) {
   useMetadata(props.title);
+
   const breadcrumbs = [
     <Link key="1" color="inherit" to="/">
       Trang chủ
@@ -20,6 +21,7 @@ export default function Notification(props: Readonly<Props>) {
       Giới thiệu
     </Typography>,
   ];
+
   return (
     <>
       <div className="pb-8 bg-right-top bg-no-repeat bg-tien-ich-bg min-h-[calc(100vh_-_400px)]">
@@ -52,7 +54,7 @@ export default function Notification(props: Readonly<Props>) {
               <div className="!float-left">
                 <span className="table w-full cursor-pointer ">
                   <div className="table-cell w-24 align-middle">
-                    <img src={drums} alt="icon" />
+                    <img src={drums} alt="icon" loading="lazy" />
                   </div>
                   <span className="table-cell pl-5 text-lg align-middle text-dark-moderate-blue-800">
                     Câu hỏi thường gặp
@@ -64,7 +66,7 @@ export default function Notification(props: Readonly<Props>) {
               <div className="lg:!float-right md:!float-left">
                 <span className="table w-full cursor-pointer ">
                   <div className="table-cell w-24 align-middle">
-                    <img src={drums} alt="icon" />
+                    <img src={drums} alt="icon" loading="lazy" />
                   </div>
                   <span className="table-cell pl-5 text-lg align-middle text-dark-moderate-blue-800">
                     Hưỡng dẫn sử dụng
