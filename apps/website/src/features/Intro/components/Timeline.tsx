@@ -6,7 +6,11 @@ export default function Timeline() {
   return (
     <Grid container marginLeft={'-5px'}>
       {timeLine.map((item) => (
-        <Grid item className={clsx('float-left px-2', item.width)}>
+        <Grid
+          key={item.id}
+          item
+          className={clsx('float-left px-2', item.width)}
+        >
           <div className="mb-5 text-2xl font-medium text-japonica-400 font-nunito">
             {item.year}
           </div>

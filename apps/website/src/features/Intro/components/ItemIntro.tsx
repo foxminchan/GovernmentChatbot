@@ -9,7 +9,7 @@ export default function ItemIntro() {
       columns={{ xs: 4, sm: 8, md: 12 }}
     >
       {itemIntroInfo.map((item) => (
-        <Grid item xs={2} sm={4} md={4}>
+        <Grid key={item.id} item xs={2} sm={4} md={4}>
           <div>
             <div className="mb-5">
               <img
