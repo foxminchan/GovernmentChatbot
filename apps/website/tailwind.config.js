@@ -1,6 +1,7 @@
 const { join } = require('path');
 const tailwindTypo = require('@tailwindcss/typography');
 const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
+const lineClamp = require('@tailwindcss/line-clamp');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -88,5 +89,5 @@ module.exports = {
       nunito: ['Nunito', 'sans-serif'],
     },
   },
-  plugins: [tailwindTypo],
+  plugins: [tailwindTypo,lineClamp],
 };

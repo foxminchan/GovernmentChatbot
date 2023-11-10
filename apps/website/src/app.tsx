@@ -7,6 +7,7 @@ import { CircularProgress } from '@mui/material';
 const Home = loadable(() => import('./features/Home'));
 const SignUp = loadable(() => import('./features/SignUp'));
 const SignIn = loadable(() => import('./features/SignIn'));
+const Notification = loadable(() => import('./features/Notification'));
 const NotFound = loadable(() => import('./components/NotFound'));
 
 export default function App() {
@@ -34,6 +35,14 @@ export default function App() {
           element={
             <Suspense fallback={<CircularProgress />}>
               <SignUp title="Đăng ký" />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/thong-bao"
+          element={
+            <Suspense fallback={<CircularProgress />}>
+              <Notification title="Thông báo" />
             </Suspense>
           }
         />
