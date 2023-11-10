@@ -25,10 +25,10 @@ Government Chatbot is a monorepo project built with <a href="https://nx.dev/">Nx
 - [Methodology](#methodology)
 - [Technology Stack](#technology-stack)
 - [Getting Started](#getting-started)
-  - [💻 Infrastructure](#-infrastructure)
-  - [📦 Services](#-services)
-  - [🛠️ Setup](#️-setup)
-  - [🚀 Running the application](#-running-the-application)
+	- [💻 Infrastructure](#-infrastructure)
+	- [📦 Services](#-services)
+	- [🛠️ Setup](#️-setup)
+	- [🚀 Running the application](#-running-the-application)
 - [Dependency Graph](#dependency-graph)
 - [License](#license)
 
@@ -132,7 +132,7 @@ npx nx serve api
 > If you run the API in the first time, you need to generate the `prisma` client by running the following command:
 >
 > ```bash
-> npx nx prisma generate
+> cd apps/api && npx prisma generate
 > ```
 >
 > Make sure you have setup the environment variables in the `.env` file for API and Website. The sample of the `.env` file is in the `.env.example` file.
