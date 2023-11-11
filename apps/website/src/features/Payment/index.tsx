@@ -1,9 +1,13 @@
-import { IconPayment } from "../../@types/image"
+import {
+  itemBreadcrumbs,
+  itemCitizenCatalog,
+  itemEnterpriseCatalog,
+} from './payment.data';
 import useMetadata from '../../hooks/useMetadata';
+import crane from '../../assets/images/banners/bg.svg';
+import PaymentSection from './components/PaymentSection';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Container, Grid, Breadcrumbs, Typography } from '@mui/material';
-import { CustomTextCitizen, CustomTextEnterprise, BreadcrumbsText } from './payment.data';
-import PaymentSection from './payment.section';
 
 type Props = {
   title: string;
@@ -11,20 +15,47 @@ type Props = {
 
 export default function PaymentOnline(props: Readonly<Props>) {
   useMetadata(props.title);
+
   return (
-    <Container style={{backgroundImage: `url(${IconPayment.Bg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right top'}}>
-      <Breadcrumbs separator={<NavigateNextIcon fontSize="small"/>} aria-label="breadcrumb" className="py-7 mb-5">
-        {BreadcrumbsText.map((item) => (
-          <Typography key={item.name} variant="subtitle1" component="a" href={item.link}>{item.name}</Typography>
+    <Container
+      className="bg-right-top bg-no-repeat"
+      style={{
+        backgroundImage: crane,
+      }}
+    >
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+        className="mb-5 py-7"
+      >
+        {itemBreadcrumbs.map((item) => (
+          <Typography
+            key={item.id}
+            variant="subtitle1"
+            component="a"
+            href={item.link}
+          >
+            {item.name}
+          </Typography>
         ))}
       </Breadcrumbs>
       <Grid container spacing={2}>
-        <Grid container className="box-extend-new mt-16 mb-5">
+        <Grid container className="mt-16 mb-5 box-extend-new">
           <Grid item xs={12} sm={6}>
-            <PaymentSection title="CÔNG DÂN" color="text-gray-500" border="border-gray-500" data={CustomTextCitizen} />
+            <PaymentSection
+              title="CÔNG DÂN"
+              color="text-tradewind-500 bg-tradewind-50"
+              border="border-tradewind-500"
+              data={itemCitizenCatalog}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <PaymentSection title="DOANH NGHIỆP" color="text-orange-500" border="border-orange-500" data={CustomTextEnterprise} />
+            <PaymentSection
+              title="DOANH NGHIỆP"
+              color="text-japonica-500 bg-japonica-50"
+              border="border-japonica-500"
+              data={itemEnterpriseCatalog}
+            />
           </Grid>
         </Grid>
       </Grid>
