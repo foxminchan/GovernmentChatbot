@@ -3,11 +3,11 @@ import {
   itemCitizenCatalog,
   itemEnterpriseCatalog,
 } from './payment.data';
+import clsx from 'clsx';
 import useMetadata from '../../hooks/useMetadata';
 import PaymentSection from './components/PaymentSection';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Container, Grid, Breadcrumbs, Typography } from '@mui/material';
-import clsx from 'clsx';
 
 type Props = {
   title: string;

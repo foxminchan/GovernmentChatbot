@@ -71,7 +71,7 @@ export default function Notification(props: Readonly<Props>) {
                     <img src={drums} alt="icon" loading="lazy" />
                   </div>
                   <span className="table-cell pl-5 text-lg align-middle text-dark-moderate-blue-800">
-                    Hưỡng dẫn sử dụng
+                    Hướng dẫn sử dụng
                   </span>
                 </span>
               </div>
