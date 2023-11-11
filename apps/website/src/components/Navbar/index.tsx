@@ -56,6 +56,7 @@ export default function Navbar() {
   const [subMenuVisibility, setSubMenuVisibility] = useState<
     Record<string, boolean>
   >({});
+
   const [menuVisible, setMenuVisible] = useState(false);
 
   const showSubMenu = (itemName: string) => {
@@ -81,7 +82,10 @@ export default function Navbar() {
       {menuVisible && (
         <Container
           className="absolute top-0 left-0 w-full h-full bg-[#00000033] lg:hidden"
-          onClick={toggleMenu}
+          onClick={() => {
+            toggleMenu();
+            hideSubMenu('Hỗ trợ');
+          }}
         ></Container>
       )}
       <div className="relative left-0 flex justify-center w-auto h-full lg:left-44 lg:justify-start">
