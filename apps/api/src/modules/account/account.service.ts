@@ -4,12 +4,13 @@ import { DataService } from '../../frameworks';
 import { CryptoUtils } from '../../libs/utils';
 
 @Injectable()
-export class AccontService {
+export class AccountService {
   constructor(private readonly dataService: DataService) {}
 
   findUser(username: string) {
     return this.dataService.account.findUnique({
       where: { username },
+      include: { user: true },
     });
   }
 

@@ -10,8 +10,3 @@ export class CreateTopicDto {
 }
 
 export class UpdateTopicDto extends PartialType(CreateTopicDto) {}
-
-export class ResponseTopicDto extends PartialType(CreateTopicDto) {
-  @ApiProperty()
-  id: string;
-}

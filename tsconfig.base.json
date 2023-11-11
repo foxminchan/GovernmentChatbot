@@ -11,7 +11,7 @@
     "target": "ES6",
     "module": "esnext",
     "lib": ["es2020", "dom"],
-    "types": ["reflect-metadata"],
+    "types": ["node", "reflect-metadata"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",

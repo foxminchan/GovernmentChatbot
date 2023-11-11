@@ -1,4 +1,6 @@
+export * from './key.decorator';
 export * from './auth.decorator';
+export * from './user.decorator';
 export * from './cache.decorator';
 export * from './public.decorator';
 export * from './paging.decorator';

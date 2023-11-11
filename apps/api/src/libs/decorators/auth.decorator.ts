@@ -1,5 +1,5 @@
+import { JwtAuthGuard } from '../guards';
 import type { CanActivate, Type } from '@nestjs/common';
-import { JwtAuthGuard, PoliciesGuard } from '../guards';
 import { UseGuards, applyDecorators } from '@nestjs/common';
 import { ApiBearerAuth, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
@@ -10,8 +10,8 @@ interface AuthGuard {
 
 export function Auth(_options?: AuthGuard) {
   const options = {
-    guards: [JwtAuthGuard, PoliciesGuard],
-    unauthorizedResponse: "You don't have permission to access this resource",
+    guards: [JwtAuthGuard],
+    unauthorizedResponse: 'Bạn không có quyền truy cập vào tài nguyên này',
     ..._options,
   } satisfies AuthGuard;
 

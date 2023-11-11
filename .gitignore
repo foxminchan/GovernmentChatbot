@@ -11,6 +11,7 @@ apps/api/.env
 node_modules
 
 .env
+.eslintcache
 
 # IDEs and editors
 /.idea
@@ -346,5 +347,8 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
+
+#eslintcache
+.eslintcache
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,jupyternotebooks

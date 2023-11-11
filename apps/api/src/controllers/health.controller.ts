@@ -5,7 +5,7 @@ import {
   MemoryHealthIndicator,
 } from '@nestjs/terminus';
 import { Get } from '@nestjs/common';
-import { ApiController } from '../libs/decorators';
+import { ApiController, Key, SwaggerResponse } from '../libs/decorators';
 
 @ApiController('health')
 export class HealthController {
@@ -16,12 +16,19 @@ export class HealthController {
   ) {}
 
   @Get()
+  @SwaggerResponse({
+    operation: 'Test health check',
+  })
   healthCheck() {
     return 'Http working fine';
   }
 
+  @Key()
   @Get('status')
   @HealthCheck()
+  @SwaggerResponse({
+    operation: 'Poolifier health check',
+  })
   check() {
     return this.health.check([
       async () => this.memory.checkHeap('memory_heap', 200 * 1024 * 1024),
