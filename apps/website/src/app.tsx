@@ -3,6 +3,7 @@ import loadable from '@loadable/component';
 import BasicLayout from './layouts/BasicLayout';
 import { Route, Routes } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
+import AuthLayout from './layouts/AuthLayout';
 
 const Home = loadable(() => import('./features/Home'));
 const ChatBot = loadable(() => import('./features/Chat'));
@@ -15,6 +16,9 @@ const Notification = loadable(() => import('./features/Notification'));
 export default function App() {
   return (
     <Routes>
+      <Route element={<AuthLayout />}>
+        <Route path="/chat-bot" element={<ChatBot title="Chat bot" />} />
+      </Route>
       <Route path="/" element={<BasicLayout />}>
         <Route
           index
