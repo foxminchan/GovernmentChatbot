@@ -1,6 +1,12 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import { Container } from '@mui/material';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Container,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { NavLink } from 'react-router-dom';
 import { FaBars, FaHome } from 'react-icons/fa';
 
@@ -174,13 +180,48 @@ export default function Navbar() {
                     : 'bg-white-smoke-100'
                 )}
               >
-                <NavLink
-                  to={item.link}
-                  onClick={toggleMenu}
-                  className="flex items-center w-full h-full px-3"
-                >
-                  <span className="text-xl font-medium">{item.name}</span>
-                </NavLink>
+                {' '}
+                {!item.subMenu && (
+                  <NavLink
+                    to={item.link}
+                    onClick={toggleMenu}
+                    className="flex items-center w-full h-full px-3"
+                  >
+                    {' '}
+                    <span className="text-xl font-medium">{item.name}</span>
+                  </NavLink>
+                )}
+                {item.subMenu && (
+                  <Accordion className="flex flex-col w-full">
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                      className="w-full"
+                    >
+                      <span className="text-xl font-medium">{item.name}</span>
+                    </AccordionSummary>
+                    <AccordionDetails className="flex flex-col">
+                      {navSupport.map((subItem) => (
+                        <NavLink
+                          key={subItem.name}
+                          to={subItem.link}
+                          onClick={toggleMenu}
+                          className={clsx(
+                            'w-full h-12 text-center hover:bg-japonica-500 hover:text-white',
+                            window.location.pathname === subItem.link
+                              ? 'bg-japonica-500 text-white'
+                              : 'bg-white-smoke-100'
+                          )}
+                        >
+                          <span className="text-xl font-medium">
+                            {subItem.name}
+                          </span>
+                        </NavLink>
+                      ))}
+                    </AccordionDetails>
+                  </Accordion>
+                )}
               </li>
             ))}
           </ul>

@@ -7,6 +7,7 @@ import useMetadata from '../../hooks/useMetadata';
 import PaymentSection from './components/PaymentSection';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Container, Grid, Breadcrumbs, Typography } from '@mui/material';
+import clsx from 'clsx';
 
 type Props = {
   title: string;
@@ -27,7 +28,12 @@ export default function PaymentOnline(props: Readonly<Props>) {
             key={item.id}
             variant="subtitle1"
             component="a"
-            href={item.link}
+            href={item.isActive ? undefined : item.link}
+            className={clsx(
+              item.isActive
+                ? 'text-dark-moderate-blue-800 font-bold'
+                : 'font-normal'
+            )}
           >
             {item.name}
           </Typography>

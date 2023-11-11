@@ -19,7 +19,7 @@ const navSupport = [
 
 export default function SubNavbar() {
   return (
-    <div className="flex flex-col bg-japonica-500 h-11 left-44 lg:flex-row">
+    <div className="hidden bg-japonica-500 h-11 left-44 sm:flex">
       {navSupport.map((subItem) => (
         <NavLink
           key={subItem.id}

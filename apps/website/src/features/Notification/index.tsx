@@ -1,8 +1,9 @@
 import { Container } from '@mui/system';
-import useMetadata from '../../hooks/useMetadata';
 import { Link } from 'react-router-dom';
-import { Breadcrumbs, Grid, Typography } from '@mui/material';
 import { FaAngleRight } from 'react-icons/fa';
+import useMetadata from '../../hooks/useMetadata';
+import SubNavbar from '../../components/SubNavbar';
+import { Breadcrumbs, Grid, Typography } from '@mui/material';
 import ItemsNotification from './components/ItemsNotification';
 import drums from '../../assets/images/notification/trongdong.png';
 
@@ -24,6 +25,7 @@ export default function Notification(props: Readonly<Props>) {
 
   return (
     <>
+      <SubNavbar />
       <div className="pb-8 bg-right-top bg-no-repeat bg-tien-ich-bg min-h-[calc(100vh_-_400px)]">
         <Container>
           <Breadcrumbs

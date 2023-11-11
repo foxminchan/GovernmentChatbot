@@ -76,10 +76,12 @@ export const itemBreadcrumbs = [
     id: 1,
     name: 'Cổng Dịch vụ công quốc gia',
     link: '/',
+    isActive: false,
   },
   {
     id: 2,
     name: 'Thanh toán trực tuyến',
     link: '/thanh-toan-truc-tuyen',
+    isActive: true,
   },
 ];
