@@ -19,17 +19,17 @@ const navSupport = [
 
 export default function SubNavbar() {
   return (
-    <div className="hidden bg-japonica-500 h-11 left-44 sm:flex">
+    <div className="hidden bg-japonica-500 h-11 sm:flex pl-44">
       {navSupport.map((subItem) => (
         <NavLink
           key={subItem.id}
           to={subItem.link}
           className={clsx(
             'w-auto h-11 flex items-center px-3 text-white',
-            'hover:bg-japonica-400 hover:text-white',
+            'hover:bg-japonica-600 hover:text-white',
             window.location.pathname === subItem.link
-              ? 'bg-japonica-400'
-              : 'bg-japonica-500'
+              ? 'bg-japonica-600'
+              : 'bg-japonica-400'
           )}
         >
           <span className="text-xl font-medium">{subItem.name}</span>

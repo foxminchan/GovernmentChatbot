@@ -1,14 +1,14 @@
 export const itemTopic = [
   {
-    id: 1,
+    id: 't1',
     name: 'Hỏi đáp',
   },
   {
-    id: 2,
+    id: 't2',
     name: 'Tra cứu',
   },
   {
-    id: 3,
+    id: 't3',
     name: 'Tài liệu',
   },
 ];

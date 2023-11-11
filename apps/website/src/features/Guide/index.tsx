@@ -1,14 +1,15 @@
 import {
-  Container,
   Grid,
-  Breadcrumbs,
-  Typography,
   Divider,
+  Container,
+  Typography,
+  Breadcrumbs,
 } from '@mui/material';
+import clsx from 'clsx';
+import SubNavbar from '../../components/SubNavbar';
 import { itemBreadcrumbs } from '../../mocks/guide.data';
 import useMetadata from '../../common/hooks/useMetadata';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import SubNavbar from '../../components/SubNavbar';
 
 type Props = {
   title: string;
@@ -24,14 +25,19 @@ export default function GenneralGuide(props: Readonly<Props>) {
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
-          className="pt-3 mb-5 pb-7"
+          className="py-5"
         >
           {itemBreadcrumbs.map((item) => (
             <Typography
               key={item.id}
               variant="subtitle1"
               component="a"
-              href={item.link}
+              href={item.isActive ? undefined : item.link}
+              className={clsx(
+                item.isActive
+                  ? 'text-dark-moderate-blue-800 font-bold'
+                  : 'font-normal'
+              )}
             >
               {item.name}
             </Typography>
@@ -44,10 +50,7 @@ export default function GenneralGuide(props: Readonly<Props>) {
             </div>
           </Grid>
         </Grid>
-        <Divider
-          className="h-px bg-gray-300 "
-          style={{ marginTop: '10px', marginBottom: '10px' }}
-        />
+        <Divider className="h-px bg-gray-300 !my-[10px]" />
       </Container>
     </div>
   );

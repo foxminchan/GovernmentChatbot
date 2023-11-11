@@ -72,10 +72,12 @@ export const itemBreadcrumbs = [
     id: 1,
     name: 'Trang chủ',
     link: '/',
+    isActive: false,
   },
   {
     id: 2,
     name: 'Điều khoản sử dụng',
     link: '/dieu-khoan-su-dung',
+    isActive: true,
   },
 ];

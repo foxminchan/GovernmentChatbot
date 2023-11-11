@@ -4,9 +4,10 @@ import {
   behaviourSection,
   responsibilitySection,
 } from '../../mocks/policy.data';
-import useMetadata from '../../common/hooks/useMetadata';
+import clsx from 'clsx';
 import SubNavbar from '../../components/SubNavbar';
 import ContentSection from './components/ContentSection';
+import useMetadata from '../../common/hooks/useMetadata';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Container, Divider, Breadcrumbs, Typography } from '@mui/material';
 
@@ -24,14 +25,19 @@ export default function SupportPolicy(props: Readonly<Props>) {
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
-          className="pt-3 mb-5 pb-7"
+          className="py-5"
         >
           {itemBreadcrumbs.map((item) => (
             <Typography
               key={item.id}
               variant="subtitle1"
               component="a"
-              href={item.link}
+              href={item.isActive ? undefined : item.link}
+              className={clsx(
+                item.isActive
+                  ? 'text-dark-moderate-blue-800 font-bold'
+                  : 'font-normal'
+              )}
             >
               {item.name}
             </Typography>

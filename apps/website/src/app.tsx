@@ -12,6 +12,7 @@ const SignUp = loadable(() => import('./features/SignUp'));
 const SignIn = loadable(() => import('./features/SignIn'));
 const Policy = loadable(() => import('./features/Policy'));
 const Payment = loadable(() => import('./features/Payment'));
+const SignOut = loadable(() => import('./features/SignOut'));
 const Introduction = loadable(() => import('./features/Intro'));
 const NotFound = loadable(() => import('./components/NotFound'));
 const Notification = loadable(() => import('./features/Notification'));
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <Routes>
       <Route element={<AuthLayout />}>
+        <Route path="/dang-xuat" element={<SignOut />} />
         <Route path="/chat-bot" element={<ChatBot title="Chat bot" />} />
       </Route>
       <Route path="/" element={<BasicLayout />}>

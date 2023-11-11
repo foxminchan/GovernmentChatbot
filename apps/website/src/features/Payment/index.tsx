@@ -21,7 +21,7 @@ export default function PaymentOnline(props: Readonly<Props>) {
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
-        className="mb-5 py-7"
+        className="py-5"
       >
         {itemBreadcrumbs.map((item) => (
           <Typography

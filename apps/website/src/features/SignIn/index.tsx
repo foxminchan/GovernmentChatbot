@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import useMetadata from '../../common/hooks/useMetadata';
+import Typography from '@mui/material/Typography';
 import Logo from '../../assets/images/quoc_huy.svg';
+import useMetadata from '../../common/hooks/useMetadata';
 
 type Props = {
   title: string;

@@ -1,8 +1,8 @@
 import { SweetAlertOptions } from 'sweetalert2';
 
 export const confirmSwalOption: SweetAlertOptions = {
-  title: 'Are you sure to delete this content?',
-  text: 'Please confirm this delete!',
+  title: 'Bạn có chắc chắn muốn xóa?',
+  text: 'Vui lòng kiểm tra kỹ trước khi xóa!',
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#007dc3',
@@ -11,8 +11,8 @@ export const confirmSwalOption: SweetAlertOptions = {
 };
 
 export const successSwalOption: SweetAlertOptions = {
-  title: 'Successfully!',
-  text: 'Your data has been deleted.',
+  title: 'Hoàn tất!',
+  text: 'Dữ liệu đã xoá thành công!',
   icon: 'success',
   confirmButtonColor: '#007dc3',
   confirmButtonText: 'OK',

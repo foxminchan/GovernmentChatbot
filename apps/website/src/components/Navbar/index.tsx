@@ -1,31 +1,29 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { Container } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { NavLink } from 'react-router-dom';
-import { FaBars, FaHome } from 'react-icons/fa';
+import HomeIcon from '@mui/icons-material/Home';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 
 const navItems = [
   {
     id: 1,
     name: 'Giới thiệu',
     link: '/gioi-thieu',
-    current: false,
     width: 'w-28',
   },
   {
     id: 2,
     name: 'Thanh toán trực tuyến',
     link: '/thanh-toan-truc-tuyen',
-    current: false,
     width: 'w-60',
   },
-  { id: 3, name: 'Chatbot', link: '/chat-bot', current: false, width: 'w-28' },
+  { id: 3, name: 'Chatbot', link: '/chat-bot', width: 'w-28' },
   {
     id: 4,
     name: 'Hỗ trợ',
     link: '/dieu-khoan-su-dung',
-    current: false,
     subMenu: true,
     width: 'w-24',
   },
@@ -36,20 +34,19 @@ const navSupport = [
     id: 1,
     name: 'Điều khoản sử dụng',
     link: '/dieu-khoan-su-dung',
-    current: false,
   },
   {
     id: 2,
     name: 'Hướng dẫn sử dụng',
     link: '/huong-dan-su-dung',
-    current: false,
   },
-  { id: 3, name: 'Thông báo', link: '/thong-bao', current: false },
+  { id: 3, name: 'Thông báo', link: '/thong-bao' },
 ];
 
 const navToggleMenu = [
-  { id: 1, name: 'Đăng nhập', link: '/dang-nhap', current: false },
-  { id: 2, name: 'Đăng ký', link: '/dang-ky', current: false },
+  { id: 1, name: 'Đăng nhập', link: '/dang-nhap', isLogin: false },
+  { id: 2, name: 'Đăng ký', link: '/dang-ky', isLogin: false },
+  { id: 3, name: 'Đăng xuất', link: '/dang-xuat', isLogin: true },
 ];
 
 export default function Navbar() {
@@ -101,7 +98,7 @@ export default function Navbar() {
             to="/"
             className="flex items-center justify-center w-full h-full"
           >
-            <FaHome
+            <HomeIcon
               className={clsx(
                 'w-5 h-5',
                 window.location.pathname === '/'
@@ -172,7 +169,7 @@ export default function Navbar() {
         </div>
         <div className="lg:hidden bg-japonica-500">
           <button onClick={toggleMenu} className="flex items-center px-3 py-2">
-            <FaBars className="w-6 h-6" color="white" />
+            <DensityMediumIcon className="w-6 h-6" />
           </button>
         </div>
       </div>
@@ -254,20 +251,22 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          {navToggleMenu.map((item) => (
-            <NavLink
-              to={item.link}
-              key={item.id}
-              className={clsx(
-                'flex items-center justify-center w-full h-12 my-2 border rounded border-japonica-500 hover:bg-japonica-500 hover:text-white relative',
-                window.location.pathname === item.link
-                  ? 'bg-japonica-500 text-white'
-                  : 'bg-white-smoke-100'
-              )}
-            >
-              <span className="text-xl font-medium">{item.name}</span>
-            </NavLink>
-          ))}
+          {navToggleMenu.map((item) => {
+            return (
+              <NavLink
+                to={item.link}
+                key={item.id}
+                className={clsx(
+                  'flex items-center justify-center w-full h-12 my-2 border rounded border-japonica-500 hover:bg-japonica-500 hover:text-white relative',
+                  window.location.pathname === item.link
+                    ? 'bg-japonica-500 text-white'
+                    : 'bg-white-smoke-100'
+                )}
+              >
+                <span className="text-xl font-medium">{item.name}</span>
+              </NavLink>
+            );
+          })}
         </div>
       )}
     </nav>

@@ -1,10 +1,10 @@
-import useMetadata from '../../common/hooks/useMetadata';
-import intro from '../../assets/images/banners/gioi-thieu-slider.png';
 import { Link } from 'react-router-dom';
-import { Breadcrumbs, Container, Typography } from '@mui/material';
-import { FaAngleRight } from 'react-icons/fa';
 import Timeline from './components/Timeline';
 import ItemIntro from './components/ItemIntro';
+import useMetadata from '../../common/hooks/useMetadata';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Breadcrumbs, Container, Typography } from '@mui/material';
+import intro from '../../assets/images/banners/gioi-thieu-slider.png';
 
 type Props = {
   title: string;
@@ -26,7 +26,7 @@ export default function Intro(props: Readonly<Props>) {
     <main className="pb-8 bg-right-top bg-no-repeat bg-tien-ich-bg min-h-[calc(100vh_-_400px)]">
       <Container>
         <Breadcrumbs
-          separator={<FaAngleRight fontSize="small" />}
+          separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
           className="py-5"
         >

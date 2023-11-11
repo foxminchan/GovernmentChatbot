@@ -1,10 +1,10 @@
 import { Container } from '@mui/system';
 import { Link } from 'react-router-dom';
-import { FaAngleRight } from 'react-icons/fa';
-import useMetadata from '../../common/hooks/useMetadata';
 import SubNavbar from '../../components/SubNavbar';
+import useMetadata from '../../common/hooks/useMetadata';
 import { Breadcrumbs, Grid, Typography } from '@mui/material';
 import ItemsNotification from './components/ItemsNotification';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import drums from '../../assets/images/notification/trongdong.png';
 
 type Props = {
@@ -18,7 +18,7 @@ export default function Notification(props: Readonly<Props>) {
     <Link key="1" color="inherit" to="/">
       Trang chủ
     </Link>,
-    <Typography key="2" color="text.primary">
+    <Typography variant="subtitle1" key="2" color="text.primary">
       Giới thiệu
     </Typography>,
   ];
@@ -29,7 +29,7 @@ export default function Notification(props: Readonly<Props>) {
       <div className="pb-8 bg-right-top bg-no-repeat bg-tien-ich-bg min-h-[calc(100vh_-_400px)]">
         <Container>
           <Breadcrumbs
-            separator={<FaAngleRight fontSize="small" />}
+            separator={<NavigateNextIcon fontSize="small" />}
             aria-label="breadcrumb"
             className="py-5"
           >
