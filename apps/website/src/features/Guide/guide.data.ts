@@ -1,4 +1,4 @@
-export const BreadcrumbsText = [
+export const itemBreadcrumbs = [
   {
     id: 1,
     name: 'Trang chủ',

@@ -1,19 +1,19 @@
 import { Suspense } from 'react';
 import loadable from '@loadable/component';
+import AuthLayout from './layouts/AuthLayout';
 import BasicLayout from './layouts/BasicLayout';
 import { Route, Routes } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
-import AuthLayout from './layouts/AuthLayout';
 
 const Home = loadable(() => import('./features/Home'));
+const Guide = loadable(() => import('./features/Guide'));
 const ChatBot = loadable(() => import('./features/Chat'));
 const SignUp = loadable(() => import('./features/SignUp'));
 const SignIn = loadable(() => import('./features/SignIn'));
+const Policy = loadable(() => import('./features/Policy'));
+const Payment = loadable(() => import('./features/Payment'));
 const Introduction = loadable(() => import('./features/Intro'));
 const NotFound = loadable(() => import('./components/NotFound'));
-const Payment = loadable(() => import('./features/Payment'));
-const Policy = loadable(() => import('./features/Policy'));
-const Guide = loadable(() => import('./features/Guide'));
 const Notification = loadable(() => import('./features/Notification'));
 
 export default function App() {
@@ -36,6 +36,22 @@ export default function App() {
           element={
             <Suspense fallback={<CircularProgress />}>
               <SignIn title="Đăng nhập" />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/gioi-thieu"
+          element={
+            <Suspense fallback={<CircularProgress />}>
+              <Introduction title="Giới thiệu" />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/thong-bao"
+          element={
+            <Suspense fallback={<CircularProgress />}>
+              <Notification title="Thông báo" />
             </Suspense>
           }
         />

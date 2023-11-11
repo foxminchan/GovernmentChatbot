@@ -4,7 +4,6 @@ import {
   itemEnterpriseCatalog,
 } from './payment.data';
 import useMetadata from '../../hooks/useMetadata';
-import crane from '../../assets/images/banners/bg.svg';
 import PaymentSection from './components/PaymentSection';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Container, Grid, Breadcrumbs, Typography } from '@mui/material';
@@ -17,12 +16,7 @@ export default function PaymentOnline(props: Readonly<Props>) {
   useMetadata(props.title);
 
   return (
-    <Container
-      className="bg-right-top bg-no-repeat"
-      style={{
-        backgroundImage: crane,
-      }}
-    >
+    <Container className="bg-right-top bg-no-repeat bg-crane-bg">
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"

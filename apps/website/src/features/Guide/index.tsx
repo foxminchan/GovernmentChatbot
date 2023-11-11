@@ -5,7 +5,7 @@ import {
   Typography,
   Divider,
 } from '@mui/material';
-import { BreadcrumbsText } from './guide.data';
+import { itemBreadcrumbs } from './guide.data';
 import useMetadata from '../../hooks/useMetadata';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import SubNavbar from '../../components/SubNavbar';
@@ -26,7 +26,7 @@ export default function GenneralGuide(props: Readonly<Props>) {
           aria-label="breadcrumb"
           className="pt-3 mb-5 pb-7"
         >
-          {BreadcrumbsText.map((item) => (
+          {itemBreadcrumbs.map((item) => (
             <Typography
               key={item.id}
               variant="subtitle1"
