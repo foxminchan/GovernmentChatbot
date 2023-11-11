@@ -5,7 +5,7 @@ import {
   Typography,
   Divider,
 } from '@mui/material';
-import { itemBreadcrumbs } from './guide.data';
+import { itemBreadcrumbs } from '../../mocks/guide.data';
 import useMetadata from '../../common/hooks/useMetadata';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import SubNavbar from '../../components/SubNavbar';

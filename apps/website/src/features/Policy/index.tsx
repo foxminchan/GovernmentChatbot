@@ -3,7 +3,7 @@ import {
   itemBreadcrumbs,
   behaviourSection,
   responsibilitySection,
-} from './policy.data';
+} from '../../mocks/policy.data';
 import useMetadata from '../../common/hooks/useMetadata';
 import SubNavbar from '../../components/SubNavbar';
 import ContentSection from './components/ContentSection';

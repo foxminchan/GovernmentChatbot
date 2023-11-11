@@ -2,7 +2,7 @@ import {
   itemBreadcrumbs,
   itemCitizenCatalog,
   itemEnterpriseCatalog,
-} from './payment.data';
+} from '../../mocks/payment.data';
 import clsx from 'clsx';
 import useMetadata from '../../common/hooks/useMetadata';
 import PaymentSection from './components/PaymentSection';

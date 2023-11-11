@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { timeLine } from '../intro.data';
+import { timeLine } from '../../../mocks/intro.data';
 import { Grid } from '@mui/material';
 
 export default function Timeline() {

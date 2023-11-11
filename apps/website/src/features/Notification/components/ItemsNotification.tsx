@@ -1,5 +1,5 @@
 import { Grid, Typography } from '@mui/material';
-import { notificationData } from '../notification.data';
+import { notificationData } from '../../../mocks/notification.data';
 
 export default function ItemsNotification() {
   return (

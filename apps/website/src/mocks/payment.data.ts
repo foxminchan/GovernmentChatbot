@@ -1,7 +1,7 @@
 import {
   IconPaymentCitizen,
   IconPaymentEnterprise,
-} from '../../common/utils/image';
+} from '../common/utils/image';
 
 export const itemCitizenCatalog = [
   {
