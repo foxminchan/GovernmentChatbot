@@ -4,7 +4,7 @@ import {
   behaviourSection,
   responsibilitySection,
 } from './policy.data';
-import useMetadata from '../../hooks/useMetadata';
+import useMetadata from '../../common/hooks/useMetadata';
 import SubNavbar from '../../components/SubNavbar';
 import ContentSection from './components/ContentSection';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';

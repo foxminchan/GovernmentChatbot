@@ -1,4 +1,4 @@
-import { bannerNotification } from '../../@types/images';
+import { bannerNotification } from '../../common/utils/image';
 
 export const notificationData = [
   {

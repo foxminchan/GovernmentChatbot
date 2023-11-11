@@ -1,7 +1,7 @@
 import { Container } from '@mui/system';
 import { Link } from 'react-router-dom';
 import { FaAngleRight } from 'react-icons/fa';
-import useMetadata from '../../hooks/useMetadata';
+import useMetadata from '../../common/hooks/useMetadata';
 import SubNavbar from '../../components/SubNavbar';
 import { Breadcrumbs, Grid, Typography } from '@mui/material';
 import ItemsNotification from './components/ItemsNotification';

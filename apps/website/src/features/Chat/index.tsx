@@ -1,4 +1,4 @@
-import useMetadata from '../../hooks/useMetadata';
+import useMetadata from '../../common/hooks/useMetadata';
 
 type Props = {
   title: string;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import useMetadata from '../../hooks/useMetadata';
+import useMetadata from '../../common/hooks/useMetadata';
 import Logo from '../../assets/images/quoc_huy.svg';
 
 type Props = {

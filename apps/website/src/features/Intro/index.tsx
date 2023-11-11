@@ -1,4 +1,4 @@
-import useMetadata from '../../hooks/useMetadata';
+import useMetadata from '../../common/hooks/useMetadata';
 import intro from '../../assets/images/banners/gioi-thieu-slider.png';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs, Container, Typography } from '@mui/material';
