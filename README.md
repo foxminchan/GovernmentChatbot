@@ -1,4 +1,4 @@
-<img loading="lazy" src="./assets/images/banner.png" alt="banner" width="100%" height="auto" />
+<img loading="lazy" src="./assets/images/repo-preview.png" alt="banner" width="100%" height="auto" />
 
 <div align="center">
 	<p>
@@ -28,10 +28,10 @@ Government Chatbot is a monorepo project built with <a href="https://nx.dev/">Nx
 - [Methodology](#methodology)
 - [Technology Stack](#technology-stack)
 - [Getting Started](#getting-started)
-	- [💻 Infrastructure](#-infrastructure)
-	- [📦 Services](#-services)
-	- [🛠️ Setup](#️-setup)
-	- [🚀 Running the application](#-running-the-application)
+  - [💻 Infrastructure](#-infrastructure)
+  - [📦 Services](#-services)
+  - [🛠️ Setup](#️-setup)
+  - [🚀 Running the application](#-running-the-application)
 - [Dependency Graph](#dependency-graph)
 - [License](#license)
 
