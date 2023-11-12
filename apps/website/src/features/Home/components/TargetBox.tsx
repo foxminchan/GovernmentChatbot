@@ -7,21 +7,29 @@ import { Container, Grid } from '@mui/material';
 
 export default function TargetBox() {
   const allCitizenItems = targetGroupCitizen.map((item) => (
-    <span className="relative block px-5 py-3 mb-2 text-lg font-medium rounded-lg cursor-pointer bg-white-smoke-100 pl-14 text-dark-moderate-blue-400 hover:text-japonica-400">
+    <span
+      className="relative block px-5 py-3 mb-2 text-lg font-medium rounded-lg cursor-pointer bg-white-smoke-100 pl-14 text-dark-moderate-blue-400 hover:text-japonica-400"
+      key={item.id}
+    >
       <span className="absolute inline-block w-8 top-2 left-4">
         <img src={item.icon} alt="icon" loading="lazy" className="h-6" />
       </span>
       <span className="inline">{item.name}</span>
     </span>
   ));
+
   const allBusinessItems = targetGroupBusiness.map((item) => (
-    <span className="relative block px-5 py-3 mb-2 text-lg font-medium rounded-lg cursor-pointer bg-white-smoke-100 pl-14 text-dark-moderate-blue-400 hover:text-japonica-400">
+    <span
+      className="relative block px-5 py-3 mb-2 text-lg font-medium rounded-lg cursor-pointer bg-white-smoke-100 pl-14 text-dark-moderate-blue-400 hover:text-japonica-400"
+      key={item.id}
+    >
       <span className="absolute inline-block w-8 top-2 left-4">
         <img src={item.icon} alt="cocon" loading="lazy" className="h-6" />
       </span>
       <span className="inline">{item.name}</span>
     </span>
   ));
+
   return (
     <Container>
       <Grid
