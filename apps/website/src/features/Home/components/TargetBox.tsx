@@ -24,9 +24,14 @@ export const TargetBox = () => {
   ));
   return (
     <Container>
-      <Grid container className="items-center mb-3 ">
+      <Grid
+        container
+        spacing={{ xs: 4, md: 4 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        className="items-center mb-3 "
+      >
         {targetGroupOrganization.map((item) => (
-          <Grid item xs={6}>
+          <Grid item xs={4} md={6}>
             <Grid container className="justify-center">
               <Grid item xs={10} className="items-center">
                 <div className="relative items-center pb-4 mb-4 text-base text-center rounded-l rounded-r cursor-pointer text-japonica-400">
