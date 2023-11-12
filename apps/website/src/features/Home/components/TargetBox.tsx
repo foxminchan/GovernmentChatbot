@@ -1,11 +1,11 @@
-import { Container, Grid } from '@mui/material';
 import {
   targetGroupBusiness,
   targetGroupCitizen,
   targetGroupOrganization,
 } from '../../../mocks/home.data';
+import { Container, Grid } from '@mui/material';
 
-export const TargetBox = () => {
+export default function TargetBox() {
   const allCitizenItems = targetGroupCitizen.map((item) => (
     <span className="relative block px-5 py-3 mb-2 text-lg font-medium rounded-lg cursor-pointer bg-white-smoke-100 pl-14 text-dark-moderate-blue-400 hover:text-japonica-400">
       <span className="absolute inline-block w-8 top-2 left-4">
@@ -26,7 +26,7 @@ export const TargetBox = () => {
     <Container>
       <Grid container className="items-center mb-3 ">
         {targetGroupOrganization.map((item) => (
-          <Grid item xs={6}>
+          <Grid item xs={6} key={item.id}>
             <Grid container className="justify-center">
               <Grid item xs={10} className="items-center">
                 <div className="relative items-center pb-4 mb-4 text-base text-center rounded-l rounded-r cursor-pointer text-japonica-400">
@@ -46,4 +46,4 @@ export const TargetBox = () => {
       </Grid>
     </Container>
   );
-};
+}

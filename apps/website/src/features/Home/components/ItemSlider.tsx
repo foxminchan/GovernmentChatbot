@@ -1,18 +1,20 @@
-import { hostNewsData } from '../../../mocks/home.data';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { LegacyRef, useState } from 'react';
+import 'slick-carousel/slick/slick-theme.css';
+import { hostNewsData } from '../../../mocks/home.data';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-export const ItemSlider: React.FC = () => {
+export default function ItemSlider() {
   const [sliderRef, setSliderRef] = useState<LegacyRef<Slider> | null>(null);
+
   const updateSliderRef = (slider: Slider | null) => {
     if (slider) {
       setSliderRef(() => slider);
     }
   };
+
   const settings = {
     dots: true,
     infinite: true,
@@ -81,4 +83,4 @@ export const ItemSlider: React.FC = () => {
       </button>
     </div>
   );
-};
+}
