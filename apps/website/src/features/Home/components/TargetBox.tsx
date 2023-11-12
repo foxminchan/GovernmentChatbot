@@ -3,7 +3,7 @@ import {
   targetGroupBusiness,
   targetGroupCitizen,
   targetGroupOrganization,
-} from '../home.data';
+} from '../../../mocks/home.data';
 
 export const TargetBox = () => {
   const allCitizenItems = targetGroupCitizen.map((item) => (

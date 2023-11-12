@@ -24,6 +24,28 @@ import balanceEnterprise from '../../../src/assets/images/icons/enterprise/payme
 import failureEnterprise from '../../../src/assets/images/icons/enterprise/payment/failure.svg';
 import familyInsuranceCitizen from '../../../src/assets/images/icons/citizen/payment/family-insurance.svg';
 import lifeInsuranceEnterprise from '../../../src/assets/images/icons/enterprise/payment/life-insurance.svg';
+import balance from '../../../src/assets/images/icons/citizen/home/balance.svg';
+import haveChildren from '../../../src/assets/images/icons/citizen/home/cocon.svg';
+import reside from '../../../src/assets/images/icons/citizen/home/cutru.svg';
+import education from '../../../src/assets/images/icons/citizen/home/giaoduc.svg';
+import marriage from '../../../src/assets/images/icons/citizen/home/honnhan.svg';
+import retirement from '../../../src/assets/images/icons/citizen/home/huutri.svg';
+import house from '../../../src/assets/images/icons/citizen/home/nhao.svg';
+import media from '../../../src/assets/images/icons/citizen/home/phuongtien.svg';
+import death from '../../../src/assets/images/icons/citizen/home/quadoi.svg';
+import healthy from '../../../src/assets/images/icons/citizen/home/suckhoe.svg';
+import job from '../../../src/assets/images/icons/citizen/home/vieclam.svg';
+import startBusiness from '../../../src/assets/images/icons/enterprise/home/khoisukinhdoanh.svg';
+import land from '../../../src/assets/images/icons/enterprise/home/datdai.svg';
+import bidding from '../../../src/assets/images/icons/enterprise/home/dauthau.svg';
+import labor from '../../../src/assets/images/icons/enterprise/home/laodong.svg';
+import intellectualProperty from '../../../src/assets/images/icons/enterprise/home/sohuutritue.svg';
+import reconstruct from '../../../src/assets/images/icons/enterprise/home/taicautrucdn.svg';
+import finance from '../../../src/assets/images/icons/enterprise/home/taichinhdn.svg';
+import pause from '../../../src/assets/images/icons/enterprise/home/tamdung.svg';
+import commerce from '../../../src/assets/images/icons/enterprise/home/thuongmai.svg';
+import tlcn from '../../../src/assets/images/icons/enterprise/home/tlcn.svg';
+import balanceBusiness from '../../../src/assets/images/icons/enterprise/home/balance.svg';
 
 export const IconPaymentCitizen: IconPaymentCitizenType = {
   Stamp_Icon: stampCitizen,
@@ -61,4 +83,32 @@ export const bannerNotification: bannerNotificationType = {
   UnEmployment: unemployment,
   ErrorSignUp: errorSignUp,
   LPTB: lptb,
+};
+
+export const IconHomeCitizen: IconHomeCitizenType = {
+  Balance_Icon: balance,
+  HaveChildren_Icon: haveChildren,
+  Reside_Icon: reside,
+  Education_Icon: education,
+  Marriage_Icon: marriage,
+  Retirement_Icon: retirement,
+  House_Icon: house,
+  Media_Icon: media,
+  Death_Icon: death,
+  Healthy_Icon: healthy,
+  Job_Icon: job,
+};
+
+export const IconHomeBusiness: IconHomeBusinessType = {
+  Balance_Icon: balanceBusiness,
+  StartBusiness_Icon: startBusiness,
+  Land_Icon: land,
+  Bidding_Icon: bidding,
+  Labor_Icon: labor,
+  IntellectualProperty_Icon: intellectualProperty,
+  Reconstruct_Icon: reconstruct,
+  Finance_Icon: finance,
+  Pause_Icon: pause,
+  Commerce_Icon: commerce,
+  Tlcn_Icon: tlcn,
 };

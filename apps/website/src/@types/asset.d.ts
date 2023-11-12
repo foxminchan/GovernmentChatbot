@@ -35,3 +35,30 @@ type IconPaymentEnterpriseType = {
   Tower_Icon: string;
   Stamp_Icon: string;
 };
+type IconHomeCitizenType={
+  Balance_Icon: string;
+  HaveChildren_Icon: string;
+  Reside_Icon: string;
+  Education_Icon: string;
+  Marriage_Icon: string;
+  Retirement_Icon: string;
+  House_Icon: string;
+  Media_Icon: string;
+  Death_Icon: string;
+  Healthy_Icon: string;
+  Job_Icon: string;
+}; 
+
+type IconHomeBusinessType={
+  Balance_Icon: string;
+  StartBusiness_Icon: string;
+  Land_Icon: string;
+  Bidding_Icon: string;
+  Labor_Icon: string;
+  IntellectualProperty_Icon: string;
+  Reconstruct_Icon: string;
+  Finance_Icon: string;
+  Pause_Icon: string;
+  Commerce_Icon: string;
+  Tlcn_Icon: string;
+};

@@ -1,9 +1,10 @@
-import { FaSearch } from 'react-icons/fa';
+import SearchIcon from '@mui/icons-material/Search';
 import useMetadata from '../../common/hooks/useMetadata';
 import clsx from 'clsx';
-import { button } from './home.data';
-import { Container, Grid } from '@mui/material';
+import { button } from '../../mocks/home.data';
+import { Button, Container, Grid } from '@mui/material';
 import { TargetBox } from './components/TargetBox';
+import { Carousels } from './components/ItemSlider';
 
 type Props = {
   title: string;
@@ -34,12 +35,12 @@ export default function Home(props: Readonly<Props>) {
                 </div>
                 <button
                   className={clsx(
-                    'absolute top-0 right-0 min-w-0 lg:py-3 lg:px-6 items-center lg:w-16 h-10 bg-white-smoke-100 rounded-br-md rounded-tr-md hover:bg-japonica-700 hover:text-white text-dark-moderate-blue-400',
+                    'absolute top-0 right-0 min-w-0 lg:py-2 lg:px-6 items-center lg:w-16 h-10 bg-white-smoke-100 rounded-br-md rounded-tr-md hover:bg-japonica-700 hover:text-white text-dark-moderate-blue-400',
                     'xs:w-10  xs:pl-3'
                   )}
                   type="button"
                 >
-                  <FaSearch />
+                  <SearchIcon />
                 </button>
               </Grid>
               <Grid item xs={12} md={12}>
@@ -50,9 +51,12 @@ export default function Home(props: Readonly<Props>) {
                 >
                   {button.map((item) => (
                     <Grid item xs={7} md={4}>
-                      <button className="w-full h-full py-2 text-lg font-medium border border-transparent rounded bg-light-orange-300 hover:bg-light-orange-400">
+                      <Button
+                        variant="outlined"
+                        className="w-full h-full py-2 !text-dark-moderate-blue-800 text-lg !font-medium border !border-transparent rounded !bg-light-orange-300 hover:!bg-light-orange-400"
+                      >
                         {item.name}
-                      </button>
+                      </Button>
                     </Grid>
                   ))}
                 </Grid>
@@ -63,7 +67,9 @@ export default function Home(props: Readonly<Props>) {
       </div>
       {/* hotnews  */}
       <div className="w-full h-32 bg-center bg-cover bg-white-smoke-100 bg-hotnews-top">
-        <Container maxWidth="md"></Container>
+        <Container maxWidth="md">
+          <Carousels />
+        </Container>
       </div>
       <div className="py-10">
         <Container>
