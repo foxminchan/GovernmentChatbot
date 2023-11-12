@@ -2,6 +2,9 @@
 
 <div align="center">
 	<p>
+		<a href="https://github.com/foxminchan/GovernmentChatbot/actions/workflows/ci.yml" target="_blank">
+			<img loading="lazy" src="https://github.com/foxminchan/GovernmentChatbot/actions/workflows/ci.yml/badge.svg?branch=main" alt="GitHub Workflow Status">
+		</a>
 		<a href="https://sonarcloud.io/summary/new_code?id=foxminchan_GovermentLLM" target="_blank">
 			<img loading="lazy" src="https://sonarcloud.io/api/project_badges/measure?project=foxminchan_GovermentLLM&metric=alert_status" alt="SonarCloud">
 		</a>

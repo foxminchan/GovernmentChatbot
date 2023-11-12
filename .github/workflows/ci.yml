@@ -18,7 +18,6 @@ jobs:
           cache: 'npm'
       - run: npm ci -f
       - uses: nrwl/nx-set-shas@v3
-      - run: git branch --track main origin/main
 
       - run: npx nx format:check
       - run: npx nx affected -t lint,test,build --parallel=3
