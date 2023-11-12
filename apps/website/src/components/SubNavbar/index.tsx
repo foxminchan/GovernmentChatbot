@@ -6,15 +6,15 @@ const navSupport = [
     id: 1,
     name: 'Điều khoản sử dụng',
     link: '/dieu-khoan-su-dung',
-    currrent: false,
+    current: false,
   },
   {
     id: 2,
     name: 'Hướng dẫn sử dụng',
     link: '/huong-dan-su-dung',
-    currrent: false,
+    current: false,
   },
-  { id: 3, name: 'Thông báo', link: '/thong-bao', currrent: false },
+  { id: 3, name: 'Thông báo', link: '/thong-bao', current: false },
 ];
 
 export default function SubNavbar() {

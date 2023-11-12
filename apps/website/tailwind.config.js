@@ -80,6 +80,19 @@ module.exports = {
           900: '#a7a7a7',
           950: '#9d9d9d',
         },
+        "light-orange":{
+          50:"#ffe81e",
+          100:"#ffd61e",
+          200:"#ffc31e",
+          300:"#ffb01e",
+          400:"#ff9d1e",
+          500:"#ff8a1e",
+          600:"#ff781e",
+          700:"#ff651e",
+          800:"#ff521e",
+          900:"#ff3f1e",
+          950:"#ff2c1e",
+        },
       },
     },
     fontFamily: {
@@ -87,9 +100,11 @@ module.exports = {
       serif: ['Merriweather', 'serif'],
       nunito: ['Nunito', 'sans-serif'],
     },
-    backgroundImage: {
-      'slogan-bg': "url('./assets/images/banners/hac.svg')",
+    backgroundImage:{
+      'hero-banner': "url('././assets/images/banners/banner.jpg')",
+      'slogan-bg':"url('././assets/images/banners/hac.svg')",
       'crane-bg': "url('./assets/images/banners/bg.svg')",
+      'hotnews-bg': "url('./assets/images/banners/bg-news.jpg')"
     },
   },
   plugins: [tailwindTypo, lineClamp],
