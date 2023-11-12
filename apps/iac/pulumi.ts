@@ -75,7 +75,25 @@ const logGroup = new aws.cloudwatch.LogGroup('government-log-group', {
 });
 
 // Create ECS cluster
-const cluster = new aws.ecs.Cluster('government-cluster', {});
+const cluster = new aws.ecs.Cluster('government-cluster', {
+  name: 'government-cluster',
+  capacityProviders: ['FARGATE'],
+  defaultCapacityProviderStrategies: [
+    {
+      capacityProvider: 'FARGATE',
+      weight: 1,
+    },
+  ],
+  settings: [
+    {
+      name: 'containerInsights',
+      value: 'enabled',
+    },
+  ],
+  tags: {
+    Name: 'government-cluster',
+  },
+});
 
 const taskDefinition = new aws.ecs.TaskDefinition('government-api-task', {
   family: 'government-api-task',

@@ -1,10 +1,10 @@
-import useMetadata from '../../hooks/useMetadata';
-import intro from '../../assets/images/banners/gioi-thieu-slider.png';
 import { Link } from 'react-router-dom';
-import { Breadcrumbs, Container, Typography } from '@mui/material';
-import { FaAngleRight } from 'react-icons/fa';
 import Timeline from './components/Timeline';
 import ItemIntro from './components/ItemIntro';
+import useMetadata from '../../common/hooks/useMetadata';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Breadcrumbs, Container, Typography } from '@mui/material';
+import intro from '../../assets/images/banners/gioi-thieu-slider.png';
 
 type Props = {
   title: string;
@@ -12,6 +12,7 @@ type Props = {
 
 export default function Intro(props: Readonly<Props>) {
   useMetadata(props.title);
+
   const breadcrumbs = [
     <Link key="1" color="inherit" to="/">
       Trang chủ
@@ -20,11 +21,12 @@ export default function Intro(props: Readonly<Props>) {
       Giới thiệu
     </Typography>,
   ];
+
   return (
-    <div className="pb-8 bg-right-top bg-no-repeat bg-tien-ich-bg min-h-[calc(100vh_-_400px)]">
+    <main className="pb-8 bg-right-top bg-no-repeat bg-tien-ich-bg min-h-[calc(100vh_-_400px)]">
       <Container>
         <Breadcrumbs
-          separator={<FaAngleRight fontSize="small" />}
+          separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
           className="py-5"
         >
@@ -48,12 +50,9 @@ export default function Intro(props: Readonly<Props>) {
           <div className="mb-5 text-lg leading-6">
             Cá nhân, tổ chức dễ dàng truy cập Cổng Dịch vụ công Quốc gia tại địa
             chỉ duy nhất{' '}
-            <Link
-              to="https://dichvucong.gov.vn/p/home/dvc-trang-chu.html"
-              className="text-lg hover:text-saffron-mango-600"
-            >
+            <Link to="/" className="text-lg hover:text-saffron-mango-600">
               www.dichvucong.gov.vn
-            </Link>
+            </Link>{' '}
             theo nhu cầu người dùng từ máy tính, máy tính bảng hoặc điện thoại
             di động được kết nối internet để hưởng nhiều lợi ích từ Cổng Dịch vụ
             công Quốc gia, như:
@@ -70,11 +69,7 @@ export default function Intro(props: Readonly<Props>) {
             </div>
             <div className="mb-5 leading-7 text-saffron-mango-500">
               Hãy truy cập{' '}
-              <Link
-                to="https://dichvucong.gov.vn/p/home/dvc-trang-chu.html"
-                className="inline-block"
-                target="_blank"
-              >
+              <Link to="/" className="inline-block">
                 www.dichvucong.gov.vn !
               </Link>
             </div>
@@ -87,6 +82,6 @@ export default function Intro(props: Readonly<Props>) {
           <Timeline />
         </div>
       </Container>
-    </div>
+    </main>
   );
 }

@@ -2,41 +2,58 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { Container } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { FaBars, FaHome } from 'react-icons/fa';
+import HomeIcon from '@mui/icons-material/Home';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 
 const navItems = [
-  { name: 'Giới thiệu', link: '/gioi-thieu', currrent: false, width: 'w-28' },
   {
+    id: 1,
+    name: 'Giới thiệu',
+    link: '/gioi-thieu',
+    width: 'w-28',
+  },
+  {
+    id: 2,
     name: 'Thanh toán trực tuyến',
     link: '/thanh-toan-truc-tuyen',
-    currrent: false,
     width: 'w-60',
   },
-  { name: 'Chatbot', link: '/chat-bot', currrent: false, width: 'w-28' },
+  { id: 3, name: 'Chatbot', link: '/chat-bot', width: 'w-28' },
   {
+    id: 4,
     name: 'Hỗ trợ',
     link: '/dieu-khoan-su-dung',
-    currrent: false,
     subMenu: true,
     width: 'w-24',
   },
 ];
 
 const navSupport = [
-  { name: 'Điều khoản sử dụng', link: '/dieu-khoan-su-dung', currrent: false },
-  { name: 'Hướng dẫn sử dụng', link: '/huong-dan-su-dung', currrent: false },
-  { name: 'Thông báo', link: '/thong-bao', currrent: false },
+  {
+    id: 1,
+    name: 'Điều khoản sử dụng',
+    link: '/dieu-khoan-su-dung',
+  },
+  {
+    id: 2,
+    name: 'Hướng dẫn sử dụng',
+    link: '/huong-dan-su-dung',
+  },
+  { id: 3, name: 'Thông báo', link: '/thong-bao' },
 ];
 
 const navToggleMenu = [
-  { name: 'Đăng nhập', link: '/dang-nhap', currrent: false },
-  { name: 'Đăng ký', link: '/dang-ky', currrent: false },
+  { id: 1, name: 'Đăng nhập', link: '/dang-nhap', isLogin: false },
+  { id: 2, name: 'Đăng ký', link: '/dang-ky', isLogin: false },
+  { id: 3, name: 'Đăng xuất', link: '/dang-xuat', isLogin: true },
 ];
 
 export default function Navbar() {
   const [subMenuVisibility, setSubMenuVisibility] = useState<
     Record<string, boolean>
   >({});
+
   const [menuVisible, setMenuVisible] = useState(false);
 
   const showSubMenu = (itemName: string) => {
@@ -62,7 +79,10 @@ export default function Navbar() {
       {menuVisible && (
         <Container
           className="absolute top-0 left-0 w-full h-full bg-[#00000033] lg:hidden"
-          onClick={toggleMenu}
+          onClick={() => {
+            toggleMenu();
+            hideSubMenu('Hỗ trợ');
+          }}
         ></Container>
       )}
       <div className="relative left-0 flex justify-center w-auto h-full lg:left-44 lg:justify-start">
@@ -78,7 +98,7 @@ export default function Navbar() {
             to="/"
             className="flex items-center justify-center w-full h-full"
           >
-            <FaHome
+            <HomeIcon
               className={clsx(
                 'w-5 h-5',
                 window.location.pathname === '/'
@@ -92,20 +112,23 @@ export default function Navbar() {
           <ul className="flex h-full">
             {navItems.map((item) => (
               <li
-                key={item.name}
-                onMouseEnter={() => showSubMenu(item.name)}
+                key={item.id}
                 onMouseLeave={() => hideSubMenu(item.name)}
+                onMouseEnter={() =>
+                  !navSupport.some((subItem) =>
+                    window.location.pathname.includes(subItem.link)
+                  ) && showSubMenu(item.name)
+                }
                 className={clsx(
                   'h-full',
                   'hover:bg-japonica-500',
                   'hover:text-white',
                   'text-dark-moderate-blue-800',
                   item.width,
-                  window.location.pathname === item.link ||
-                    (item.subMenu &&
-                      navSupport.some((subItem) =>
-                        window.location.pathname.includes(subItem.link)
-                      ))
+                  item.subMenu &&
+                    navSupport.some((subItem) =>
+                      window.location.pathname.includes(subItem.link)
+                    )
                     ? 'bg-japonica-500 text-white'
                     : 'bg-white-smoke-100'
                 )}
@@ -120,7 +143,7 @@ export default function Navbar() {
                   <ul>
                     {navSupport.map((subItem) => (
                       <li
-                        key={subItem.name}
+                        key={subItem.id}
                         className={clsx(
                           'w-56 h-12 text-white hover:bg-japonica-500 hover:text-white',
                           window.location.pathname === subItem.link
@@ -146,7 +169,7 @@ export default function Navbar() {
         </div>
         <div className="lg:hidden bg-japonica-500">
           <button onClick={toggleMenu} className="flex items-center px-3 py-2">
-            <FaBars className="w-6 h-6" color="white" />
+            <DensityMediumIcon className="w-6 h-6" />
           </button>
         </div>
       </div>
@@ -162,7 +185,7 @@ export default function Navbar() {
           <ul className="flex flex-col items-center">
             {navItems.map((item) => (
               <li
-                key={item.name}
+                key={item.id}
                 className={clsx(
                   'w-full h-12 text-center hover:bg-japonica-500 hover:text-white',
                   window.location.pathname === item.link ||
@@ -174,30 +197,76 @@ export default function Navbar() {
                     : 'bg-white-smoke-100'
                 )}
               >
-                <NavLink
-                  to={item.link}
-                  onClick={toggleMenu}
-                  className="flex items-center w-full h-full px-3"
-                >
-                  <span className="text-xl font-medium">{item.name}</span>
-                </NavLink>
+                {' '}
+                {!item.subMenu && (
+                  <NavLink
+                    to={item.link}
+                    onClick={toggleMenu}
+                    className="flex items-center w-full h-full px-3"
+                  >
+                    {' '}
+                    <span className="text-xl font-medium">{item.name}</span>
+                  </NavLink>
+                )}
+                {item.subMenu && (
+                  <div className="relative w-full h-full">
+                    <button
+                      onClick={() =>
+                        subMenuVisibility[item.name]
+                          ? hideSubMenu(item.name)
+                          : showSubMenu(item.name)
+                      }
+                      className="flex items-center w-full h-full px-3"
+                    >
+                      <span className="text-xl font-medium">{item.name}</span>
+                      <ExpandMoreIcon
+                        className={clsx(
+                          'w-6 h-6 right-0 absolute transition-all duration-[0.3s]',
+                          subMenuVisibility[item.name] && 'transform rotate-180'
+                        )}
+                      />
+                    </button>
+                    {subMenuVisibility[item.name] && (
+                      <ul>
+                        {navSupport.map((subItem) => (
+                          <li
+                            key={subItem.id}
+                            className="relative z-10 w-full h-12 text-center shadow-md hover:bg-japonica-500 hover:text-white bg-japonica-300"
+                          >
+                            <NavLink
+                              to={subItem.link}
+                              onClick={toggleMenu}
+                              className="flex items-center w-full h-full px-3"
+                            >
+                              <span className="text-xl font-medium">
+                                {subItem.name}
+                              </span>
+                            </NavLink>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )}
               </li>
             ))}
           </ul>
-          {navToggleMenu.map((item) => (
-            <NavLink
-              to={item.link}
-              key={item.name}
-              className={clsx(
-                'flex items-center justify-center w-full h-12 my-2 border rounded border-japonica-500 hover:bg-japonica-500 hover:text-white',
-                window.location.pathname === item.link
-                  ? 'bg-japonica-500 text-white'
-                  : 'bg-white-smoke-100'
-              )}
-            >
-              <span className="text-xl font-medium">{item.name}</span>
-            </NavLink>
-          ))}
+          {navToggleMenu.map((item) => {
+            return (
+              <NavLink
+                to={item.link}
+                key={item.id}
+                className={clsx(
+                  'flex items-center justify-center w-full h-12 my-2 border rounded border-japonica-500 hover:bg-japonica-500 hover:text-white relative',
+                  window.location.pathname === item.link
+                    ? 'bg-japonica-500 text-white'
+                    : 'bg-white-smoke-100'
+                )}
+              >
+                <span className="text-xl font-medium">{item.name}</span>
+              </NavLink>
+            );
+          })}
         </div>
       )}
     </nav>

@@ -7,9 +7,9 @@ import axios, {
 import Cookies from 'js-cookie';
 import _omitBy from 'lodash/omitBy';
 import { injectable } from 'inversify';
-import { axiosConfig } from '../utils/api';
-import { StorageKeys } from '../@types/keys';
-import { IHttpService } from '../@types/interfaces';
+import { axiosConfig } from '../configs/api.config';
+import { StorageKeys } from '../constants/keys';
+import { IHttpService } from '../interfaces/interfaces';
 
 @injectable()
 export default class HttpService implements IHttpService {

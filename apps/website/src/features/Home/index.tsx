@@ -1,9 +1,10 @@
 import { FaSearch } from 'react-icons/fa';
-import useMetadata from '../../hooks/useMetadata';
+import useMetadata from '../../common/hooks/useMetadata';
 import clsx from 'clsx';
 import { button } from './home.data';
 import { Container, Grid } from '@mui/material';
 import { TargetBox } from './components/TargetBox';
+
 type Props = {
   title: string;
 };

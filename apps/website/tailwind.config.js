@@ -1,6 +1,7 @@
 const { join } = require('path');
 const tailwindTypo = require('@tailwindcss/typography');
 const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
+const lineClamp = require('@tailwindcss/line-clamp');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -53,18 +54,31 @@ module.exports = {
           900: '#243d3a',
           950: '#102322',
         },
-        "dark-moderate-blue":{
-          50:"#507adc",
-          100:"#4a739f",
-          200:"#446a91",
-          300:"#3d6084",
-          400:"#375676",
-          500:"#314c69",
-          600:"#2b435c",
-          700:"#24394e",
-          800:"#1e2f41",
-          900:"#182534",
-          950:"#121c26",
+        'dark-moderate-blue': {
+          50: '#507adc',
+          100: '#4a739f',
+          200: '#446a91',
+          300: '#3d6084',
+          400: '#375676',
+          500: '#314c69',
+          600: '#2b435c',
+          700: '#24394e',
+          800: '#1e2f41',
+          900: '#182534',
+          950: '#121c26',
+        },
+        'white-smoke': {
+          50: '#ffffff',
+          100: '#f5f5f5',
+          200: '#ebebeb',
+          300: '#e1e1e1',
+          400: '#d8d8d8',
+          500: '#cecece',
+          600: '#c4c4c4',
+          700: '#bababa',
+          800: '#b0b0b0',
+          900: '#a7a7a7',
+          950: '#9d9d9d',
         },
         "white-smoke":{
           50:"#ffffff",
@@ -102,7 +116,8 @@ module.exports = {
     backgroundImage:{
       'hero-banner': "url('././assets/images/banners/banner.jpg')",
       'slogan-bg':"url('././assets/images/banners/hac.svg')",
-    }
+      'crane-bg': "url('./assets/images/banners/bg.svg')",
+    },
   },
-  plugins: [tailwindTypo],
+  plugins: [tailwindTypo, lineClamp],
 };
