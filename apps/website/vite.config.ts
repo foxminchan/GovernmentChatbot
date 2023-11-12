@@ -1,6 +1,7 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa';
+import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 const manifestForPlugIn: Partial<VitePWAOptions> = {
@@ -63,6 +64,13 @@ export default defineConfig({
     port: 4200,
     host: 'localhost',
     open: true,
+    fs: {
+      allow: [
+        searchForWorkspaceRoot(process.cwd()),
+        '..',
+        'node_modules/slick-carousel/slick/fonts',
+      ],
+    },
   },
 
   preview: {
@@ -70,7 +78,17 @@ export default defineConfig({
     host: 'localhost',
   },
 
-  plugins: [react(), nxViteTsPaths(), VitePWA(manifestForPlugIn)],
+  plugins: [visualizer(), react(), nxViteTsPaths(), VitePWA(manifestForPlugIn)],
+
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+        },
+      },
+    },
+  },
 
   test: {
     globals: true,
