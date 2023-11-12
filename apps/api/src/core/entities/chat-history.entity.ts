@@ -7,7 +7,10 @@ export class ChatHistory {
   id: string;
 
   @ApiProperty()
-  message: string;
+  question: string;
+
+  @ApiProperty()
+  answer: string;
 
   @ApiProperty()
   date: Date;
@@ -23,7 +26,4 @@ export class ChatHistory {
 
   @ApiProperty()
   topics: Topic;
-
-  @ApiProperty()
-  chat_type: number;
 }

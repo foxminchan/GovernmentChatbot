@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { Injectable, Logger } from '@nestjs/common';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
+import { DocumentFileType } from '../../libs/@types/enums';
 import { TokenTextSplitter } from 'langchain/text_splitter';
 import weaviate, { WeaviateClient } from 'weaviate-ts-client';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
@@ -71,8 +72,8 @@ export class LangChainService {
 
   documentProcessing() {
     const dataSource = [
-      { path: 'apps/api/src/assets/pdfs', type: 'pdf' },
-      { path: 'apps/api/src/assets/docs', type: 'docx' },
+      { path: 'apps/api/src/assets/pdfs', type: DocumentFileType.PDF },
+      { path: 'apps/api/src/assets/docs', type: DocumentFileType.DOC },
     ];
 
     return from(fs.readdirSync(dataSource[0].path))
