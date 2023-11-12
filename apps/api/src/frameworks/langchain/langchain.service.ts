@@ -1,12 +1,12 @@
 import fs from 'fs';
-import { Injectable } from '@nestjs/common';
-import { from, map, mergeMap, toArray } from 'rxjs';
-import { DocumentFileType } from '../../libs/@types/enums';
+import { Injectable, Logger } from '@nestjs/common';
+import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { TokenTextSplitter } from 'langchain/text_splitter';
 import weaviate, { WeaviateClient } from 'weaviate-ts-client';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { DocxLoader } from 'langchain/document_loaders/fs/docx';
+import { LLMonitorHandler } from 'langchain/callbacks/handlers/llmonitor';
+import { catchError, concatMap, finalize, from, map, of, tap } from 'rxjs';
 import { WeaviateFilter, WeaviateStore } from 'langchain/vectorstores/weaviate';
 
 @Injectable()
@@ -18,6 +18,8 @@ export class LangChainService {
     host: process.env.WEAVIATE_HOST || 'localhost',
     apiKey: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY || undefined),
   });
+  private logger = new Logger(LangChainService.name);
+  private chatModel: ChatOpenAI;
   private metadataKeys: string[] = [
     'law',
     'administrative',
@@ -44,6 +46,12 @@ export class LangChainService {
       chunkOverlap: 128,
       keepSeparator: true,
     });
+    this.chatModel = new ChatOpenAI({
+      openAIApiKey: process.env.OPENAI_API_KEY,
+      callbacks: [new LLMonitorHandler()],
+      modelName: process.env.OPENAI_MODEL || 'gpt-3.5-turbo-instruct',
+      temperature: 0,
+    });
   }
 
   private async getWeaviateStore() {
@@ -62,43 +70,45 @@ export class LangChainService {
   }
 
   documentProcessing() {
-    return from(
-      [
-        {
-          file: fs.readdirSync('apps/api/src/assets/pdfs'),
-          type: DocumentFileType.PDF,
-        },
-        {
-          file: fs.readdirSync('apps/api/src/assets/docs'),
-          type: DocumentFileType.DOC,
-        },
-      ].map((doc) => {
-        return {
-          title: doc.file,
-          type: doc.type,
-        };
-      })
-    ).pipe(
-      mergeMap(async (element) => {
-        const loader =
-          element.type === DocumentFileType.PDF ? PDFLoader : DocxLoader;
-        const result = await WeaviateStore.fromDocuments(
-          await this.splitter.createDocuments(
-            (
-              await new loader(
-                `apps/api/src/assets/${element.type}/${element.title}`
-              ).load()
-            ).map((doc) => doc.pageContent)
-          ),
-          this.embedder,
-          {
-            ...this.storeConfig,
-          }
-        );
-        return result;
-      }),
-      toArray()
-    );
+    const dataSource = [
+      { path: 'apps/api/src/assets/pdfs', type: 'pdf' },
+      { path: 'apps/api/src/assets/docs', type: 'docx' },
+    ];
+
+    return from(fs.readdirSync(dataSource[0].path))
+      .pipe(
+        concatMap((document) => {
+          return from(
+            new PDFLoader(`${dataSource[0].path}/${document}`).load()
+          ).pipe(
+            concatMap((loadedDocument) => {
+              const pageContents = loadedDocument.map((doc) => doc.pageContent);
+              return from(this.splitter.createDocuments(pageContents)).pipe(
+                concatMap((splittedDocument) => {
+                  return from(
+                    WeaviateStore.fromDocuments(
+                      splittedDocument,
+                      this.embedder,
+                      {
+                        ...this.storeConfig,
+                      }
+                    )
+                  );
+                })
+              );
+            }),
+            tap(() =>
+              this.logger.log(`Document processed successfully: ${document}`)
+            ),
+            catchError((error) => {
+              this.logger.error('Error processing document:', document, error);
+              return of(null);
+            })
+          );
+        }),
+        finalize(() => this.logger.log('All documents processed successfully.'))
+      )
+      .subscribe();
   }
 
   async queryDocument(query: string) {
