@@ -1,6 +1,6 @@
 import App from './app';
-import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(

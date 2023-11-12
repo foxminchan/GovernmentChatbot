@@ -1,14 +1,14 @@
 import axios, {
   AxiosInstance,
-  AxiosRequestConfig,
   AxiosResponse,
   HttpStatusCode,
+  AxiosRequestConfig,
 } from 'axios';
 import Cookies from 'js-cookie';
 import _omitBy from 'lodash/omitBy';
 import { injectable } from 'inversify';
-import { axiosConfig } from '../configs/api.config';
 import { StorageKeys } from '../constants/keys';
+import { axiosConfig } from '../configs/api.config';
 import { IHttpService } from '../interfaces/interfaces';
 
 @injectable()

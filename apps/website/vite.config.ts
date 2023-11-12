@@ -81,6 +81,9 @@ export default defineConfig({
   plugins: [visualizer(), react(), nxViteTsPaths(), VitePWA(manifestForPlugIn)],
 
   build: {
+    minify: true,
+    modulePreload: false,
+    polyfillModulePreload: false,
     rollupOptions: {
       output: {
         manualChunks: {
