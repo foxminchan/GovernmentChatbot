@@ -104,6 +104,7 @@ module.exports = {
       'hero-banner': "url('././assets/images/banners/banner.jpg')",
       'slogan-bg':"url('././assets/images/banners/hac.svg')",
       'crane-bg': "url('./assets/images/banners/bg.svg')",
+      'hotnews-bg': "url('./assets/images/banners/bg-news.jpg')"
     },
   },
   plugins: [tailwindTypo, lineClamp],

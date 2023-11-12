@@ -4,44 +4,22 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { LegacyRef, useState } from 'react';
 
-interface SampleArrowProps {
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-const SampleNextArrow: React.FC<SampleArrowProps> = (props) => {
-  const { onClick } = props;
-  return (
-    <button
-      onClick={onClick}
-      className="absolute top-0 bottom-0 right-0 m-auto text-center border-0 w-7 h-7"
-    >
-      <ChevronRightIcon className="w-5 h-5 text-dark-moderate-blue-500" />
-    </button>
-  );
-};
-
-const SamplePrevArrow: React.FC<SampleArrowProps> = (props) => {
-  const { onClick } = props;
-  return (
-    <button
-      onClick={onClick}
-      className="absolute top-0 bottom-0 left-0 m-auto text-center border-0 w-7 h-7"
-    >
-      <ChevronLeftIcon className="w-5 h-5 text-dark-moderate-blue-500" />
-    </button>
-  );
-};
-
-export const Carousels = () => {
+export const ItemSlider: React.FC = () => {
+  const [sliderRef, setSliderRef] = useState<LegacyRef<Slider> | null>(null);
+  const updateSliderRef = (slider: Slider | null) => {
+    if (slider) {
+      setSliderRef(() => slider);
+    }
+  };
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    arrows: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -69,19 +47,23 @@ export const Carousels = () => {
       },
     ],
   };
+
   return (
     <div className="box-border relative block h-full py-5 px-7">
-      {/* <button
-        onClick={() => slider?.current?.slickPrev()}
-        className="absolute top-0 bottom-0 left-0 m-auto text-center border-0 w-7 h-7"
+      <button
+        onClick={() => (sliderRef as unknown as Slider)?.slickPrev()}
+        className="absolute top-0 bottom-0 left-0 w-10 h-10 m-auto text-center border-0"
       >
-        <ChevronLeftIcon className="w-5 h-5 text-dark-moderate-blue-500" />
-      </button> */}
+        <ChevronLeftIcon className="w-5 h-5 text-dark-moderate-blue-500 hover:text-japonica-500" />
+      </button>
       <div className="relative block p-0 m-0 overflow-hidden">
-        <Slider {...settings}>
+        <Slider ref={updateSliderRef} {...settings}>
           {hostNewsData.map((card) => (
-            <div className="border-transparent border-l-white-smoke-300 ">
-              <span className="text-[14px] font-semibold text-dark-moderate-blue-800 line-clamp-2">
+            <div
+              key={card.id}
+              className="px-4 py-0 border-r-[1px] border-solid border-white-smoke-300"
+            >
+              <span className="text-[14px] font-semibold text-dark-moderate-blue-800 line-clamp-2 mb-3">
                 {card.content}
               </span>
               <p className="text-[14px] font-normal text-white-smoke-900">
@@ -91,12 +73,12 @@ export const Carousels = () => {
           ))}
         </Slider>
       </div>
-      {/* <button
-        onClick={() => slider?.current?.slickNext()}
+      <button
+        onClick={() => (sliderRef as unknown as Slider)?.slickNext()}
         className="absolute top-0 bottom-0 right-0 m-auto text-center border-0 w-7 h-7"
       >
-        <ChevronRightIcon className="w-5 h-5 text-dark-moderate-blue-500" />
-      </button> */}
+        <ChevronRightIcon className="w-5 h-5 text-dark-moderate-blue-500 hover:text-japonica-500" />
+      </button>
     </div>
   );
 };

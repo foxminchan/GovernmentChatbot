@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { button } from '../../mocks/home.data';
 import { Button, Container, Grid } from '@mui/material';
 import { TargetBox } from './components/TargetBox';
-import { Carousels } from './components/ItemSlider';
+import { ItemSlider } from './components/ItemSlider';
 
 type Props = {
   title: string;
@@ -66,9 +66,9 @@ export default function Home(props: Readonly<Props>) {
         </Container>
       </div>
       {/* hotnews  */}
-      <div className="w-full h-32 bg-center bg-cover bg-white-smoke-100 bg-hotnews-top">
+      <div className="w-full h-32 bg-right-top bg-cover bg-white-smoke-100 bg-hotnews-bg">
         <Container maxWidth="md">
-          <Carousels />
+          <ItemSlider />
         </Container>
       </div>
       <div className="py-10">
