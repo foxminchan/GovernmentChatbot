@@ -1,10 +1,9 @@
 const { join } = require('path');
 const tailwindTypo = require('@tailwindcss/typography');
-const withMT = require("@material-tailwind/react/utils/withMT");
 const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
 
 /** @type {import('tailwindcss').Config} */
-module.exports = withMT({
+module.exports = {
   content: [
     join(
       __dirname,
@@ -106,4 +105,4 @@ module.exports = withMT({
     }
   },
   plugins: [tailwindTypo],
-});
+};

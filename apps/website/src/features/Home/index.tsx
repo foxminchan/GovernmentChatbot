@@ -1,18 +1,15 @@
 import { FaSearch } from 'react-icons/fa';
 import useMetadata from '../../hooks/useMetadata';
 import clsx from 'clsx';
-import { button, hostNewsData } from './home.data';
-import { Card, CardContent, Container, Grid, Typography } from '@mui/material';
+import { button } from './home.data';
+import { Container, Grid } from '@mui/material';
 import { TargetBox } from './components/TargetBox';
-import { Carousels } from './components/Carousels';
-import { Carousel } from '@material-tailwind/react';
 type Props = {
   title: string;
 };
 
 export default function Home(props: Readonly<Props>) {
   useMetadata(props.title);
-  const slides = [{}];
   return (
     <div>
       <div className="relative items-center justify-center w-full py-10 bg-center bg-cover lg:h-60 xs:h-96 bg-hero-banner">
@@ -65,22 +62,7 @@ export default function Home(props: Readonly<Props>) {
       </div>
       {/* hotnews  */}
       <div className="w-full h-32 bg-center bg-cover bg-white-smoke-100 bg-hotnews-top">
-        <Container maxWidth="md">
-          <Carousel>
-            {hostNewsData.map((item) => (
-              <Grid item xs={6} rowSpacing={4}>
-                <Card className=" w-72">
-                  <CardContent>
-                    <Typography sx={{ fontSize: 14 }} gutterBottom>
-                      sds
-                    </Typography>
-                    <Typography variant="body2">sds</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Carousel>
-        </Container>
+        <Container maxWidth="md"></Container>
       </div>
       <div className="py-10">
         <Container>
