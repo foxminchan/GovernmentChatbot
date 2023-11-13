@@ -2,11 +2,17 @@ type ApiResponse<T = unknown> = {
   data: T;
 };
 
+type Exception = {
+  message?: string;
+  error?: string;
+  statusCode: number;
+};
+
 type PagingOptions = {
   Page: number;
   PageLimit: number;
-  Sort: SortType;
-  OrderBy: string;
+  Sort?: SortType;
+  OrderBy?: string;
 };
 
 enum SortType {

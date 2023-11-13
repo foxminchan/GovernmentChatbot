@@ -12,7 +12,7 @@ export class OpenaiService {
     });
   }
 
-  async createChatCompletion(userContent: string) {
+  createChatCompletion(userContent: string) {
     return from(
       this.openai.chat.completions.create({
         messages: [{ role: 'user', content: userContent }],

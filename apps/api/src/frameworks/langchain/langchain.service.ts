@@ -6,6 +6,7 @@ import { TokenTextSplitter } from 'langchain/text_splitter';
 import weaviate, { WeaviateClient } from 'weaviate-ts-client';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
+import { DocxLoader } from 'langchain/document_loaders/fs/docx';
 import { LLMonitorHandler } from 'langchain/callbacks/handlers/llmonitor';
 import { catchError, concatMap, finalize, from, map, of, tap } from 'rxjs';
 import { WeaviateFilter, WeaviateStore } from 'langchain/vectorstores/weaviate';
@@ -70,17 +71,30 @@ export class LangChainService {
     );
   }
 
-  documentProcessing() {
-    const dataSource = [
-      { path: 'apps/api/src/assets/pdfs', type: DocumentFileType.PDF },
-      { path: 'apps/api/src/assets/docs', type: DocumentFileType.DOC },
-    ];
+  documentProcessing(documentType: string | number) {
+    const dataSource = {
+      [DocumentFileType.PDF]: {
+        path: 'apps/api/src/assets/pdfs',
+        loader: PDFLoader,
+      },
+      [DocumentFileType.DOC]: {
+        path: 'apps/api/src/assets/docs',
+        loader: DocxLoader,
+      },
+    };
 
-    return from(fs.readdirSync(dataSource[0].path))
+    const currentSource = dataSource[documentType];
+
+    if (!currentSource) {
+      this.logger.error(`Invalid document type: ${documentType}`);
+      return;
+    }
+
+    return from(fs.readdirSync(currentSource.path))
       .pipe(
         concatMap((document) => {
           return from(
-            new PDFLoader(`${dataSource[0].path}/${document}`).load()
+            new currentSource.loader(`${currentSource.path}/${document}`).load()
           ).pipe(
             concatMap((loadedDocument) => {
               const pageContents = loadedDocument.map((doc) => doc.pageContent);

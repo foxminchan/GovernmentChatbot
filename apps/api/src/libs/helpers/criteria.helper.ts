@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { SortBy } from '../@types/enums';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNumber, IsPositive, IsString, Max } from 'class-validator';
 
 export class Criteria {

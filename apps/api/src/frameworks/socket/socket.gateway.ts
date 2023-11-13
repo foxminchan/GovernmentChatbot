@@ -12,7 +12,6 @@ import { OpenaiService } from '../openai';
 import { ChatBody } from '../../libs/helpers';
 import { Namespace, Socket } from 'socket.io';
 import { LangChainService } from '../langchain';
-import { ChatType } from '../../libs/@types/enums';
 import { ChatHistoryService } from '../../modules';
 import { WsValidationPipe } from '../../libs/pipes';
 
@@ -52,38 +51,30 @@ export class SocketGateway
 
   @SubscribeMessage('withOpenAI')
   async handleEvent(@MessageBody() data: string) {
-    const response = await this.openaiService.createChatCompletion(data);
     setTimeout(() => {
-      this.server.emit('response', response);
+      this.server.emit(
+        'response',
+        this.openaiService.createChatCompletion(data)
+      );
     }, 1000);
   }
 
   @SubscribeMessage('withLangChain')
   async handleChain(@MessageBody() chatBody: ChatBody) {
-    (await this.openaiService.createChatCompletion(chatBody.message)).subscribe(
-      (response: string) => {
+    this.openaiService
+      .createChatCompletion(chatBody.message)
+      .subscribe((response: string) => {
         setTimeout(() => {
           this.server.emit('receive', response);
         }, 1000);
 
-        const chatData = {
-          message: chatBody.message,
+        this.chatHistoryService.addChatHistory({
+          question: chatBody.message,
+          answer: response,
           date: new Date(),
           user_id: chatBody.user_id,
           topic_id: chatBody.topic_id,
-        };
-
-        this.chatHistoryService.addChatHistory({
-          ...chatData,
-          chat_type: ChatType.HUMAN,
         });
-
-        this.chatHistoryService.addChatHistory({
-          ...chatData,
-          message: response,
-          chat_type: ChatType.BOT,
-        });
-      }
-    );
+      });
   }
 }
