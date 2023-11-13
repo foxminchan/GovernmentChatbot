@@ -1,15 +1,14 @@
 import clsx from 'clsx';
 import { Button, Container } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
 import SendIcon from '@mui/icons-material/Send';
 import StartScreen from './components/StartScreen';
 import ChatSidebar from './components/ChatSidebar';
 import logo from '../../assets/images/caption.svg';
 import TopicButton from './components/TopicButton';
 import { useEffect, useRef, useState } from 'react';
-import ScienceIcon from '@mui/icons-material/Science';
 import useMetadata from '../../common/hooks/useMetadata';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+import FooterSidebar from './components/FooterSidebar';
 
 type Props = {
   title: string;
@@ -52,7 +51,9 @@ export default function Chat(props: Readonly<Props>) {
             }}
           ></Container>
         )}
-        <ChatSidebar />
+        <div className="hidden lg:flex flex-col md:w-[352px]  bg-white border border-japonica-400 rounded-tr-xl rounded-br-xl">
+          <ChatSidebar />
+        </div>
         <div className="flex flex-col items-center w-full bg-white">
           <div className="absolute top-0 left-0 flex justify-center w-10 h-10 lg:hidden ">
             <button
@@ -87,24 +88,7 @@ export default function Chat(props: Readonly<Props>) {
               : 'w-0 transition-all duration-[0.3s]'
           )}
         >
-          <div className="lg:h-[85%] md:h[80%] h-[75%]  justify-center align-middle border-japonica-400 border-solid border-b-[1px] mt-10 mb-5">
-            <div className="flex justify-center w-full h-10 mb-10">
-              <img src={logo} alt="logo" className="w-[90%] h-full" />
-            </div>
-            <TopicButton />
-          </div>
-          <div className="mt-5 ">
-            <div className="block px-5 py-0 text-dark-moderate-blue-700">
-              <div className="flex mb-5 bg-transparent hover:text-japonica-400">
-                <HomeIcon className="mr-5" />
-                <span className="text-lg font-medium ">Trang chủ</span>
-              </div>
-              <div className="flex mb-5 bg-transparent hover:text-japonica-400">
-                <ScienceIcon className="mr-5" />
-                <span className="text-lg font-medium ">Thử nghiệm</span>
-              </div>
-            </div>
-          </div>
+          <ChatSidebar />
         </div>
       )}
     </>
