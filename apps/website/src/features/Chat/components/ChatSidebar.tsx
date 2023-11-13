@@ -1,7 +1,7 @@
+import TopicButton from './TopicButton';
 import HomeIcon from '@mui/icons-material/Home';
 import ScienceIcon from '@mui/icons-material/Science';
 import logo from '../../../assets/images/caption.svg';
-import TopicButton from './TopicButton';
 
 export default function ChatSidebar() {
   return (

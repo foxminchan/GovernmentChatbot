@@ -88,13 +88,11 @@ export default function Chat(props: Readonly<Props>) {
           )}
         >
           <div className="lg:h-[85%] md:h[80%] h-[75%]  justify-center align-middle border-japonica-400 border-solid border-b-[1px] mt-10 mb-5">
-            {/* logo */}
             <div className="flex justify-center w-full h-10 mb-10">
               <img src={logo} alt="logo" className="w-[90%] h-full" />
             </div>
             <TopicButton />
           </div>
-
           <div className="mt-5 ">
             <div className="block px-5 py-0 text-dark-moderate-blue-700">
               <div className="flex mb-5 bg-transparent hover:text-japonica-400">
