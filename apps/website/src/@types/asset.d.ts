@@ -62,3 +62,17 @@ type IconHomeBusinessType={
   Commerce_Icon: string;
   Tlcn_Icon: string;
 };
+
+type VideoGuideType={
+  Video1: string;
+  Video2: string;
+  Video3: string;
+  Video4: string;
+}
+
+type ImagePreviewGuideType={
+  Preview1: string;
+  Preview2: string;
+  Preview3: string;
+  Preview4: string;
+}

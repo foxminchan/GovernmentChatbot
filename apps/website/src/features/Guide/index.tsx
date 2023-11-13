@@ -1,4 +1,5 @@
 import {
+  Box,
   Grid,
   Divider,
   Container,
@@ -7,9 +8,10 @@ import {
 } from '@mui/material';
 import clsx from 'clsx';
 import SubNavbar from '../../components/SubNavbar';
-import { itemBreadcrumbs } from '../../mocks/guide.data';
+import { itemBreadcrumbs, itemGuide } from '../../mocks/guide.data';
 import useMetadata from '../../common/hooks/useMetadata';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import GuideVideo from './components/GuideVideo';
 
 type Props = {
   title: string;
@@ -17,7 +19,6 @@ type Props = {
 
 export default function GenneralGuide(props: Readonly<Props>) {
   useMetadata(props.title);
-
   return (
     <div>
       <SubNavbar />
@@ -45,12 +46,38 @@ export default function GenneralGuide(props: Readonly<Props>) {
         </Breadcrumbs>
         <Grid container>
           <Grid item xs={12} sm={12}>
-            <div className="text-xl font-bold text-center main-title">
+            <div className="mb-5 text-3xl font-bold text-center main-title">
               HƯỚNG DẪN SỬ DỤNG
+            </div>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              className="text-lg text-center"
+            >
+              {itemGuide.map((item) => (
+                <Grid
+                  key={item.id}
+                  className="relative px-3 py-3 item"
+                  xs={3}
+                  sm={12}
+                >
+                  <div className="flex flex-col items-center">
+                    <div className="w-20 h-20 pt-6 mb-5 text-2xl text-center text-white rounded-full bg-japonica-600">
+                      {item.number}
+                    </div>
+                    <div className="text-lg">{item.name}</div>
+                  </div>
+                </Grid>
+              ))}
+            </Box>
+            <div className="text-lg italic text-center text-japonica-400">
+              Khuyến nghị: Hệ thống chạy tốt nhất trên trình duyệt Chrome &
+              Firefox
             </div>
           </Grid>
         </Grid>
-        <Divider className="h-px bg-gray-300 !my-[10px]" />
+        <Divider className="h-px bg-gray-300 !my-[20px]" />
+        <GuideVideo />
       </Container>
     </div>
   );

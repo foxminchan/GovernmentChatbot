@@ -1,3 +1,7 @@
+import preview1 from '../../assets/images/preview/1.png';
+import preview2 from '../../assets/images/preview/2.png';
+import preview3 from '../../assets/images/preview/3.png';
+import preview4 from '../../assets/images/preview/4.png';
 import dvc from '../../assets/images/notification/dvc.png';
 import lptb from '../../assets/images/notification/lptb.png';
 import login from '../../assets/images/icons/intro/login.svg';
@@ -111,4 +115,11 @@ export const IconHomeBusiness: IconHomeBusinessType = {
   Pause_Icon: pause,
   Commerce_Icon: commerce,
   Tlcn_Icon: tlcn,
+};
+
+export const ImagePreviewGuide: ImagePreviewGuideType = {
+  Preview1: preview1,
+  Preview2: preview2,
+  Preview3: preview3,
+  Preview4: preview4,
 };
