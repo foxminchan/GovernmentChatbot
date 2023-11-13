@@ -15,8 +15,8 @@ export default function GuideVideo() {
                   </div>
                   <div className="text-xl font-bold">{item.name}</div>
                 </div>
-                {item.content.split('\n').map((line, index) => (
-                  <React.Fragment key={index}>
+                {item.content.split('\n').map((line) => (
+                  <React.Fragment key={item.id}>
                     <div className="text-xl">
                       {line}
                       <br />
@@ -60,8 +60,8 @@ export default function GuideVideo() {
                   </div>
                   <div className="text-xl font-bold">{item.name}</div>
                 </div>
-                {item.content.split('\n').map((line, index) => (
-                  <React.Fragment key={index}>
+                {item.content.split('\n').map((line) => (
+                  <React.Fragment key={item.id}>
                     <div className="text-xl">
                       {line}
                       <br />
