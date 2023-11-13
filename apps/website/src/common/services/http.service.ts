@@ -4,6 +4,7 @@ import axios, {
   HttpStatusCode,
   AxiosRequestConfig,
 } from 'axios';
+import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import _omitBy from 'lodash/omitBy';
 import { injectable } from 'inversify';
@@ -59,7 +60,11 @@ export default class HttpService implements IHttpService {
             break;
           }
           case HttpStatusCode.TooManyRequests: {
-            alert('Bạn đã gửi quá nhiều yêu cầu, vui lòng thử lại sau');
+            Swal.fire({
+              icon: 'error',
+              title: 'Lỗi!',
+              text: 'Bạn đã gửi quá nhiều yêu cầu, vui lòng thử lại sau',
+            });
             break;
           }
         }
