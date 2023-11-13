@@ -36,8 +36,9 @@ async function bootstrap() {
 
   app.register(fastifyCsrfProtection);
   app.register(cors, {
-    credentials: true,
     origin: true,
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'HEAD', 'OPTIONS'],
+    credentials: true,
   });
   app.register(compression, { encodings: ['gzip', 'deflate'] });
   app.register(helmet, {

@@ -1,25 +1,26 @@
 import {
   MessageBody,
-  OnGatewayConnection,
-  OnGatewayDisconnect,
   OnGatewayInit,
+  WebSocketServer,
   SubscribeMessage,
   WebSocketGateway,
-  WebSocketServer,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
 } from '@nestjs/websockets';
-import { UsePipes, Logger } from '@nestjs/common';
 import { OpenaiService } from '../openai';
 import { ChatBody } from '../../libs/helpers';
 import { Namespace, Socket } from 'socket.io';
 import { LangChainService } from '../langchain';
+import { UsePipes, Logger } from '@nestjs/common';
 import { ChatHistoryService } from '../../modules';
 import { WsValidationPipe } from '../../libs/pipes';
 
 @WebSocketGateway({
-  namespace: 'chat',
   cors: {
     origin: '*',
   },
+  namespace: 'chat',
+  transports: ['websocket'],
 })
 @UsePipes(WsValidationPipe)
 export class SocketGateway
@@ -60,7 +61,7 @@ export class SocketGateway
   }
 
   @SubscribeMessage('withLangChain')
-  async handleChain(@MessageBody() chatBody: ChatBody) {
+  handleChain(@MessageBody() chatBody: ChatBody) {
     this.openaiService
       .createChatCompletion(chatBody.message)
       .subscribe((response: string) => {
