@@ -3,12 +3,9 @@ import { Button, Container } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import StartScreen from './components/StartScreen';
 import ChatSidebar from './components/ChatSidebar';
-import logo from '../../assets/images/caption.svg';
-import TopicButton from './components/TopicButton';
 import { useEffect, useRef, useState } from 'react';
 import useMetadata from '../../common/hooks/useMetadata';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
-import FooterSidebar from './components/FooterSidebar';
 
 type Props = {
   title: string;
