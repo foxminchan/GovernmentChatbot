@@ -22,7 +22,7 @@ export default function App() {
     <Routes>
       <Route element={<AuthLayout />}>
         <Route path="/dang-xuat" element={<SignOut />} />
-        {/* <Route path="/chat-bot" element={<ChatBot title="Chat bot" />} /> */}
+        <Route path="/chat-bot" element={<ChatBot title="Chat bot" />} />
       </Route>
       <Route path="/" element={<BasicLayout />}>
         <Route
@@ -86,14 +86,6 @@ export default function App() {
           element={
             <Suspense fallback={<CircularProgress />}>
               <Guide title="Hướng dẫn sử dụng" />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/chat-bot"
-          element={
-            <Suspense fallback={<CircularProgress />}>
-              <ChatBot title="Chat bot" />
             </Suspense>
           }
         />
