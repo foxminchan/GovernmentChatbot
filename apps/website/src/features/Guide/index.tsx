@@ -8,19 +8,19 @@ import {
 } from '@mui/material';
 import clsx from 'clsx';
 import SubNavbar from '../../components/SubNavbar';
-import { itemBreadcrumbs, itemGuide } from '../../mocks/guide.data';
 import useMetadata from '../../common/hooks/useMetadata';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { itemBreadcrumbs, itemGuide } from '../../mocks/guide.data';
 import GuideHelpStepsContent from './components/GuideHelpStepsContent';
 
 type Props = {
   title: string;
 };
 
-export default function GenneralGuide(props: Readonly<Props>) {
+export default function Guide(props: Readonly<Props>) {
   useMetadata(props.title);
   return (
-    <div>
+    <>
       <SubNavbar />
       <Container>
         <Breadcrumbs
@@ -62,7 +62,7 @@ export default function GenneralGuide(props: Readonly<Props>) {
                   sm={12}
                 >
                   <div className="flex flex-col items-center">
-                    <div className="w-20 h-20 pt-6 mb-5 text-2xl text-center text-white rounded-full bg-japonica-600">
+                    <div className="w-20 h-20 pt-6 mb-5 text-2xl text-center text-white rounded-full bg-lime-700">
                       {item.number}
                     </div>
                     <div className="text-lg">{item.name}</div>
@@ -79,6 +79,6 @@ export default function GenneralGuide(props: Readonly<Props>) {
         <Divider className="h-px bg-gray-300 !my-[20px]" />
         <GuideHelpStepsContent />
       </Container>
-    </div>
+    </>
   );
 }

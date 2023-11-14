@@ -1,14 +1,13 @@
-import { Grid, useMediaQuery } from '@mui/material';
 import GuideVideo from './GuideVideo';
 import GuideContent from './GuideContent';
+import { Box, Grid, useMediaQuery } from '@mui/material';
 import { itemGuide } from '../../../mocks/guide.data';
 
 export default function GuideHelpStepsContent() {
   const isSmallScreen = useMediaQuery('(max-width:600px)');
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
+    <Box>
       {isSmallScreen
         ? itemGuide.map((item) => (
             <Grid container spacing={2} className="mb-10" key={item.id}>
@@ -44,6 +43,6 @@ export default function GuideHelpStepsContent() {
               </Grid>
             )
           )}
-    </>
+    </Box>
   );
 }
