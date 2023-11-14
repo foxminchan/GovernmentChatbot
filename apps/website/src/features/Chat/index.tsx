@@ -21,16 +21,17 @@ export default function Chat(props: Readonly<Props>) {
   };
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target as Node) &&
+      !(event.target as Element)?.closest('.toggle-menu-button')
+    ) {
+      setMenuVisible(false);
+    }
+  };
+
   useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node) &&
-        !(event.target as Element)?.closest('.toggle-menu-button')
-      ) {
-        setMenuVisible(false);
-      }
-    };
     document.addEventListener('click', handleOutsideClick);
     return () => {
       document.removeEventListener('click', handleOutsideClick);
