@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   const lookup = await prisma.topic.create({
     data: {
-      name: 'Tra cứu thông tin',
+      name: 'Tra cứu',
     },
   });
 

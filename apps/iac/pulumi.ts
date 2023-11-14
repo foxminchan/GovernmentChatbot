@@ -187,7 +187,13 @@ const webAcl = new aws.wafv2.WebAcl('government-web-acl', {
   },
 });
 
+const waf = new aws.wafv2.WebAclAssociation('government-wacl-assoc', {
+  resourceArn: lb.urn,
+  webAclArn: webAcl.arn,
+});
+
 export const webAclId = webAcl.id;
 export const webAclArn = webAcl.arn;
+export const WebAclAssociation = waf.id;
 export const serviceName = service.service.name;
 export const url = pulumi.interpolate`https://${lbRecord.name}.${zone.name}`;
