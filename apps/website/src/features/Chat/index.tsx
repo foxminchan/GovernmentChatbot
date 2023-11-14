@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { Button, Container } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
+import { Button, Container } from '@mui/material';
 import StartScreen from './components/StartScreen';
 import ChatSidebar from './components/ChatSidebar';
 import { useEffect, useRef, useState } from 'react';
@@ -49,7 +49,7 @@ export default function Chat(props: Readonly<Props>) {
             }}
           ></Container>
         )}
-        <div className="hidden lg:flex flex-col md:w-[352px]  bg-white border border-japonica-400 rounded-tr-xl rounded-br-xl">
+        <div className="hidden lg:flex flex-col md:w-[352px] bg-white border-r border-japonica-400">
           <ChatSidebar />
         </div>
         <div className="flex flex-col items-center w-full bg-white">
