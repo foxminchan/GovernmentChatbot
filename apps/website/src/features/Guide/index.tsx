@@ -11,7 +11,7 @@ import SubNavbar from '../../components/SubNavbar';
 import { itemBreadcrumbs, itemGuide } from '../../mocks/guide.data';
 import useMetadata from '../../common/hooks/useMetadata';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import GuideVideo from './components/GuideVideo';
+import GuideHelpStepsContent from './components/GuideHelpStepsContent';
 
 type Props = {
   title: string;
@@ -77,7 +77,7 @@ export default function GenneralGuide(props: Readonly<Props>) {
           </Grid>
         </Grid>
         <Divider className="h-px bg-gray-300 !my-[20px]" />
-        <GuideVideo />
+        <GuideHelpStepsContent />
       </Container>
     </div>
   );
