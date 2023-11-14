@@ -35,7 +35,8 @@ type IconPaymentEnterpriseType = {
   Tower_Icon: string;
   Stamp_Icon: string;
 };
-type IconHomeCitizenType={
+
+type IconHomeCitizenType = {
   Balance_Icon: string;
   HaveChildren_Icon: string;
   Reside_Icon: string;
@@ -47,9 +48,9 @@ type IconHomeCitizenType={
   Death_Icon: string;
   Healthy_Icon: string;
   Job_Icon: string;
-}; 
+};
 
-type IconHomeBusinessType={
+type IconHomeBusinessType = {
   Balance_Icon: string;
   StartBusiness_Icon: string;
   Land_Icon: string;
@@ -61,4 +62,18 @@ type IconHomeBusinessType={
   Pause_Icon: string;
   Commerce_Icon: string;
   Tlcn_Icon: string;
+};
+
+type VideoGuideType = {
+  Video1: string;
+  Video2: string;
+  Video3: string;
+  Video4: string;
+};
+
+type ImagePreviewGuideType = {
+  Preview1: string;
+  Preview2: string;
+  Preview3: string;
+  Preview4: string;
 };
