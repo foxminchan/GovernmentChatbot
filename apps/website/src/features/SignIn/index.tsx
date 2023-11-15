@@ -1,15 +1,15 @@
 import Box from '@mui/material/Box';
-import { useDispatch } from 'react-redux';
+import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Login } from './types/login.type';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Logo from '../../assets/images/quoc_huy.svg';
-import useMetadata from '../../common/hooks/useMetadata';
-import { Button } from '@mui/material';
-import { loginApi } from '../../common/redux/UserReducer/UserReducer';
 import { AppDispatch } from '../../common/redux/store';
+import useMetadata from '../../common/hooks/useMetadata';
+import { loginApi } from '../../common/redux/userReducer/userReducer';
 
 type Props = {
   title: string;
@@ -35,11 +35,12 @@ export default function SignIn(props: Readonly<Props>) {
           onSubmit={async (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             const data = new FormData(event.currentTarget);
-            const value: Login = {
-              username: data.get('username') as string,
-              password: data.get('password') as string,
-            };
-            await dispath(loginApi(value));
+            await dispath(
+              loginApi({
+                username: data.get('username') as string,
+                password: data.get('password') as string,
+              } as Login)
+            );
           }}
           component="form"
           className="mt-2"

@@ -16,6 +16,7 @@ const initialState: userState = {
   loading: false,
   isLoggedIn: false,
 };
+
 const userReducer = createSlice({
   name: 'userReducer',
   initialState,
@@ -36,7 +37,7 @@ export const { loginAction, setLoading, setLoggedIn } = userReducer.actions;
 
 export default userReducer.reducer;
 
-export const loginApi = (userLogin: Login) => {
+export function loginApi(userLogin: Login) {
   return async (dispatch: AppDispatch) => {
     await axiosService
       .post<LoginResponse>('/auth/login', userLogin)
@@ -54,4 +55,4 @@ export const loginApi = (userLogin: Login) => {
         console.log(err);
       });
   };
-};
+}

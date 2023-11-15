@@ -1,13 +1,11 @@
-import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import userReducer  from './UserReducer/UserReducer';
+import userReducer from './userReducer/userReducer';
 
 const store = configureStore({
   reducer: {
     userReducer,
   },
-  middleware: [thunk],
   devTools: true,
 });
 
