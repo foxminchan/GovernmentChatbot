@@ -83,7 +83,6 @@ export default defineConfig({
   build: {
     minify: true,
     modulePreload: false,
-    polyfillModulePreload: false,
     rollupOptions: {
       output: {
         manualChunks: {

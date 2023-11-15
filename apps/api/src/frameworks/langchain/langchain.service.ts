@@ -90,15 +90,20 @@ export class LangChainService {
       return;
     }
 
-    return from(fs.readdirSync(currentSource.path))
+    return from(fs.readdirSync(currentSource.path, 'utf-8'))
       .pipe(
         concatMap((document) => {
           return from(
             new currentSource.loader(`${currentSource.path}/${document}`).load()
           ).pipe(
             concatMap((loadedDocument) => {
-              const pageContents = loadedDocument.map((doc) => doc.pageContent);
-              return from(this.splitter.createDocuments(pageContents)).pipe(
+              return from(
+                this.splitter.createDocuments(
+                  loadedDocument.map(
+                    (doc: { pageContent: unknown }) => doc.pageContent
+                  )
+                )
+              ).pipe(
                 concatMap((splittedDocument) => {
                   return from(
                     WeaviateStore.fromDocuments(
