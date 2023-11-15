@@ -1,16 +1,16 @@
 import {
   ApiController,
-  PagingSwaggerResponse,
   SwaggerResponse,
+  PagingSwaggerResponse,
 } from '../libs/decorators';
 import {
-  Body,
-  Delete,
   Get,
-  Param,
-  Post,
   Put,
+  Post,
+  Body,
   Query,
+  Param,
+  Delete,
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from '../modules';

@@ -1,6 +1,6 @@
 import {
-  CreateChatHistoryDto,
   ChatHistory,
+  CreateChatHistoryDto,
   UpdateChatHistoryDto,
 } from '../core';
 import {

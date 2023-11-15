@@ -27,7 +27,7 @@ declare const module: NodeModule & {
   };
 };
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   otelSDK.start();
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,

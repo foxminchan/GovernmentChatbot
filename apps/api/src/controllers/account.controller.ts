@@ -1,7 +1,7 @@
 import {
+  Auth,
   ApiController,
   ApplyNoneCache,
-  Auth,
   SwaggerResponse,
 } from '../libs/decorators';
 import { AccountService } from '../modules';
@@ -13,8 +13,8 @@ import { Body, Get, Param, Post } from '@nestjs/common';
 @ApiController('auth')
 export class AccountController {
   constructor(
-    private readonly accountService: AccountService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly accountService: AccountService
   ) {}
 
   @Auth()

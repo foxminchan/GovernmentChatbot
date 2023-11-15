@@ -36,8 +36,6 @@ export class Cluster {
     if (!isUndefined(process.env.WORKERS_COUNT))
       return Number.parseInt(process.env.WORKERS_COUNT, 10);
 
-    if (process.env.NODE_ENV.startsWith('prod')) return os.cpus().length;
-
-    return 2;
+    return process.env.NODE_ENV.startsWith('prod') ? os.cpus().length : 2;
   }
 }

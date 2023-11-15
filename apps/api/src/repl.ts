@@ -6,7 +6,7 @@ import { AppModule } from './modules/app.module';
 
 const logger = new Logger('Repl');
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   const replServer = await repl(AppModule);
 
   const cacheDir = `${process.cwd()}/node_modules/.cache`;
