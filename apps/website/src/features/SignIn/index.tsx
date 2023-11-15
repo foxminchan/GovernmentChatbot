@@ -17,19 +17,7 @@ type Props = {
 
 export default function SignIn(props: Readonly<Props>) {
   useMetadata(props.title);
-
   const dispath: AppDispatch = useDispatch();
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const value: Login = {
-      username: data.get('username') as string,
-      password: data.get('password') as string,
-    };
-    const actionAsync = loginApi(value);
-    // await dispath(actionAsync);
-  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -43,7 +31,19 @@ export default function SignIn(props: Readonly<Props>) {
         <Typography component="h1" variant="h5">
           {props.title}
         </Typography>
-        <Box onSubmit={handleSubmit} component="form" className="mt-2">
+        <Box
+          onSubmit={async (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            const data = new FormData(event.currentTarget);
+            const value: Login = {
+              username: data.get('username') as string,
+              password: data.get('password') as string,
+            };
+            await dispath(loginApi(value));
+          }}
+          component="form"
+          className="mt-2"
+        >
           <TextField
             margin="normal"
             required

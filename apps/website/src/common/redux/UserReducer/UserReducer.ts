@@ -1,52 +1,57 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { userState } from "../../../@types/global";
-import Cookies from "js-cookie";
-import { StorageKeys } from "../../constants/keys";
-import { Login } from "../../../features/SignIn/types/login.type";
-import { AppDispatch } from "../store";
-import { axiosService } from "../../utils/inversify";
+import {
+  Login,
+  LoginResponse,
+} from '../../../features/SignIn/types/login.type';
+import Cookies from 'js-cookie';
+import { AppDispatch } from '../store';
+import { userState } from '../../../@types/global';
+import { StorageKeys } from '../../constants/keys';
+import { axiosService } from '../../utils/inversify';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: userState = {
-    userLogin: Cookies.get(StorageKeys.ACCESS_TOKEN) ? Cookies.get(StorageKeys.ACCESS_TOKEN) : undefined,
-    loading: false,
-    isLoggedIn: false,
-  };
-  const userReducer = createSlice({
-    name: "userReducer",
-    initialState,
-    reducers: {
-      loginAction: (state: userState, action: PayloadAction<string>) => {
-        state.userLogin = action.payload;
-      },
-      setLoading: (state: userState, action: PayloadAction<boolean>) => {
-        state.loading = action.payload;
-      },
-      setLoggedIn: (state: userState, action: PayloadAction<boolean>) => {
-        state.isLoggedIn = action.payload;
-      },
+  userLogin: Cookies.get(StorageKeys.ACCESS_TOKEN)
+    ? Cookies.get(StorageKeys.ACCESS_TOKEN)
+    : undefined,
+  loading: false,
+  isLoggedIn: false,
+};
+const userReducer = createSlice({
+  name: 'userReducer',
+  initialState,
+  reducers: {
+    loginAction: (state: userState, action: PayloadAction<string>) => {
+      state.userLogin = action.payload;
     },
-  });
-  
-  export const {
-    loginAction,
-    setLoading,
-    setLoggedIn,
-  } = userReducer.actions;
-  
-  export default userReducer.reducer;
+    setLoading: (state: userState, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    },
+    setLoggedIn: (state: userState, action: PayloadAction<boolean>) => {
+      state.isLoggedIn = action.payload;
+    },
+  },
+});
 
-  export const loginApi = (userLogin: Login) => {
-    return async (dispatch: AppDispatch) => {
-      await axiosService.post<Login>("/auth/login", userLogin).then((res) => {
-        // let action : PayloadAction<Login> = loginAction({res.data.username, res.data.password});
-       
-   
-        // const action: PayloadAction<string> = loginAction(res.data);
-        // if (res.data) {
-        //   dispatch(loginAction(res.data));
-        //   dispatch(setLoggedIn(true));
-        //   Cookies.set(StorageKeys.ACCESS_TOKEN, res.data, { expires: 1 });
-        // }
+export const { loginAction, setLoading, setLoggedIn } = userReducer.actions;
+
+export default userReducer.reducer;
+
+export const loginApi = (userLogin: Login) => {
+  return async (dispatch: AppDispatch) => {
+    await axiosService
+      .post<LoginResponse>('/auth/login', userLogin)
+      .then((res) => {
+        const action: PayloadAction<string> = loginAction(
+          res.data.access_token
+        );
+        dispatch(action);
+        Cookies.set(StorageKeys.ACCESS_TOKEN, res.data.access_token, {
+          expires: 1,
+        });
+        window.location.href = '/';
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    };
   };
+};
