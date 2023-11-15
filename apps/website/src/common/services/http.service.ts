@@ -9,22 +9,18 @@ import Cookies from 'js-cookie';
 import _omitBy from 'lodash/omitBy';
 import { injectable } from 'inversify';
 import { StorageKeys } from '../constants/keys';
-import { axiosConfig } from '../configs/api.config';
 import { IHttpService } from '../interfaces/interfaces';
+import { axiosConfig } from '../configs/api.config';
 
 @injectable()
 export default class HttpService implements IHttpService {
   private instance: AxiosInstance;
 
-  constructor(config = axiosConfig) {
-    const axiosConfigs = config;
-
-    const instance = axios.create({
-      ...axiosConfigs,
+  constructor() {
+    this.instance = axios.create({
+      ...axiosConfig,
     });
-
-    Object.assign(instance, this.setupInterceptorsTo(instance));
-    this.instance = instance;
+    this.instance = this.setupInterceptorsTo(this.instance);
   }
 
   private setupInterceptorsTo(axiosInstance: AxiosInstance): AxiosInstance {
