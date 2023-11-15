@@ -1,78 +1,83 @@
 import fs from 'fs';
+import weaviate from 'weaviate-ts-client';
+import { input } from '@inquirer/prompts';
+import { BufferMemory } from 'langchain/memory';
 import { Injectable, Logger } from '@nestjs/common';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { DocumentFileType } from '../../libs/@types/enums';
-import { TokenTextSplitter } from 'langchain/text_splitter';
-import weaviate, { WeaviateClient } from 'weaviate-ts-client';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
+import {
+  of,
+  tap,
+  map,
+  from,
+  finalize,
+  concatMap,
+  takeWhile,
+  Observable,
+  catchError,
+} from 'rxjs';
 import { DocxLoader } from 'langchain/document_loaders/fs/docx';
+import { WeaviateStore } from 'langchain/vectorstores/weaviate';
+import { REPHRASE_TEMPLATE } from '../../libs/@types/constants';
+import { ConversationalRetrievalQAChain } from 'langchain/chains';
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { LLMonitorHandler } from 'langchain/callbacks/handlers/llmonitor';
-import { catchError, concatMap, finalize, from, map, of, tap } from 'rxjs';
-import { WeaviateFilter, WeaviateStore } from 'langchain/vectorstores/weaviate';
 
 @Injectable()
 export class LangChainService {
-  private splitter: TokenTextSplitter;
-  private embedder: OpenAIEmbeddings;
-  private client: WeaviateClient = weaviate.client({
-    scheme: process.env.WEAVIATE_SCHEME || 'https',
-    host: process.env.WEAVIATE_HOST || 'localhost',
-    apiKey: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY || undefined),
-  });
-  private logger = new Logger(LangChainService.name);
   private chatModel: ChatOpenAI;
-  private metadataKeys: string[] = [
-    'law',
-    'administrative',
-    'jurisprudence',
-    'government',
-  ];
+  private splitter: RecursiveCharacterTextSplitter;
+  private logger = new Logger(LangChainService.name);
   private storeConfig = {
-    type: 'document',
-    client: this.client,
+    client: weaviate.client({
+      scheme: process.env.WEAVIATE_SCHEME,
+      host: process.env.WEAVIATE_HOST,
+      apiKey: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY || undefined),
+    }),
+    textKey: 'text',
     indexName: process.env.WEAVIATE_INDEX_NAME,
-    metadataKeys: this.metadataKeys,
+    metadataKeys: ['law', 'administrative', 'jurisprudence', 'government'],
   };
 
   constructor() {
-    this.embedder = new OpenAIEmbeddings({
-      maxRetries: 3,
-      timeout: 10000,
-      batchSize: 1024,
-      openAIApiKey: process.env.OPENAI_API_KEY,
-    });
-    this.splitter = new TokenTextSplitter({
-      encodingName: 'cl100k_base',
-      chunkSize: 512,
-      chunkOverlap: 128,
-      keepSeparator: true,
+    this.splitter = new RecursiveCharacterTextSplitter({
+      chunkSize: 1000,
+      chunkOverlap: 0,
     });
     this.chatModel = new ChatOpenAI({
-      openAIApiKey: process.env.OPENAI_API_KEY,
       callbacks: [new LLMonitorHandler()],
-      modelName: process.env.OPENAI_MODEL || 'gpt-3.5-turbo-instruct',
-      temperature: 0,
+      modelName: process.env.OPENAI_MODEL,
+      openAIApiKey: process.env.OPENAI_API_KEY,
     });
   }
 
-  private async getWeaviateStore() {
-    return await WeaviateStore.fromExistingIndex(
-      this.embedder,
-      this.storeConfig
-    );
-  }
-
-  private getRetriever() {
-    return from(this.getWeaviateStore()).pipe(
-      map((store) => {
-        return store.asRetriever({ k: 10 });
-      })
+  private async getChain() {
+    return ConversationalRetrievalQAChain.fromLLM(
+      this.chatModel,
+      (
+        await WeaviateStore.fromExistingIndex(new OpenAIEmbeddings(), {
+          ...this.storeConfig,
+        })
+      ).asRetriever({ k: 10 }),
+      {
+        returnSourceDocuments: true,
+        questionGeneratorChainOptions: {
+          template: REPHRASE_TEMPLATE,
+          llm: this.chatModel,
+        },
+        memory: new BufferMemory({
+          memoryKey: 'chat_history',
+          inputKey: 'question',
+          outputKey: 'text',
+        }),
+      }
     );
   }
 
   documentProcessing(documentType: string | number) {
-    const dataSource = {
+    const source = {
       [DocumentFileType.PDF]: {
         path: 'apps/api/src/assets/pdfs',
         loader: PDFLoader,
@@ -81,34 +86,30 @@ export class LangChainService {
         path: 'apps/api/src/assets/docs',
         loader: DocxLoader,
       },
-    };
+    }[documentType];
 
-    const currentSource = dataSource[documentType];
-
-    if (!currentSource) {
+    if (!source) {
       this.logger.error(`Invalid document type: ${documentType}`);
       return;
     }
 
-    return from(fs.readdirSync(currentSource.path, 'utf-8'))
+    return from(fs.readdirSync(source.path, 'utf-8'))
       .pipe(
         concatMap((document) => {
           return from(
-            new currentSource.loader(`${currentSource.path}/${document}`).load()
+            new source.loader(`${source.path}/${document}`).load()
           ).pipe(
             concatMap((loadedDocument) => {
               return from(
                 this.splitter.createDocuments(
-                  loadedDocument.map(
-                    (doc: { pageContent: unknown }) => doc.pageContent
-                  )
+                  loadedDocument.flat().map((doc) => doc.pageContent)
                 )
               ).pipe(
                 concatMap((splittedDocument) => {
                   return from(
                     WeaviateStore.fromDocuments(
                       splittedDocument,
-                      this.embedder,
+                      new OpenAIEmbeddings(),
                       {
                         ...this.storeConfig,
                       }
@@ -131,17 +132,38 @@ export class LangChainService {
       .subscribe();
   }
 
-  async queryDocument(query: string) {
-    const store = await this.getWeaviateStore();
-    return from(store.similaritySearch(query)).pipe(
-      map((results) => {
-        return results;
+  createChainCompletion(userContent: string): Observable<string> {
+    return from(input({ message: 'Hỏi:' })).pipe(
+      takeWhile(
+        (question) =>
+          ![
+            'exit',
+            'quit',
+            'stop',
+            'huỷ',
+            'dừng',
+            'thoát',
+            'cút',
+            'bye',
+            'biến',
+            'tạm biệt',
+          ].includes(question)
+      ),
+      concatMap((question) =>
+        from(this.getChain()).pipe(
+          concatMap((chain) => chain.call({ question, userContent }))
+        )
+      ),
+      map((chain) => {
+        const sources = [
+          ...new Set(
+            chain.sourceDocuments.map(
+              (doc: { metadata: { source: unknown } }) => doc.metadata.source
+            )
+          ),
+        ];
+        return `Câu trả lời: ${chain.answer}\n\nNguồn: ${sources.join(', ')}`;
       })
     );
-  }
-
-  async deleteDocument(filter: WeaviateFilter) {
-    const store = await this.getWeaviateStore();
-    await store.delete({ filter });
   }
 }
