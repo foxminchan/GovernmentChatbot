@@ -2,6 +2,7 @@ import {
   ApiController,
   SwaggerResponse,
   PagingSwaggerResponse,
+  Auth,
 } from '../libs/decorators';
 import {
   Get,
@@ -23,6 +24,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @UseGuards(JwtAuthGuard)
+  @Auth()
   @Get()
   @SwaggerResponse({
     operation: 'User fetch',
@@ -33,6 +35,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Auth()
   @Get('filter')
   @PagingSwaggerResponse({
     operation: 'User fetch with pagination',
@@ -43,6 +46,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Auth()
   @Get(':id')
   @SwaggerResponse({
     operation: 'User fetch by id',
@@ -54,6 +58,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Auth()
   @Post()
   @SwaggerResponse({
     operation: 'Create user',
@@ -64,6 +69,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Auth()
   @Put(':id')
   @SwaggerResponse({
     operation: 'Update user',
@@ -75,6 +81,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Auth()
   @Delete(':id')
   @SwaggerResponse({
     operation: 'Delete user',
