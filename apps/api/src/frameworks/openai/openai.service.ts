@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 import { Injectable } from '@nestjs/common';
-import { catchError, from, map } from 'rxjs';
+import { Observable, catchError, from, map } from 'rxjs';
 
 @Injectable()
 export class OpenaiService {
@@ -12,7 +12,7 @@ export class OpenaiService {
     });
   }
 
-  createChatCompletion(userContent: string) {
+  createChatCompletion(userContent: string): Observable<string> {
     return from(
       this.openai.chat.completions.create({
         messages: [{ role: 'user', content: userContent }],

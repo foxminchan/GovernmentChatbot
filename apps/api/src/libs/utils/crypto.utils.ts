@@ -1,4 +1,4 @@
-import { from } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { argon2id, hash, verify } from 'argon2';
 import type { Options as ArgonOptions } from 'argon2';
 
@@ -14,7 +14,10 @@ export const CryptoUtils = {
     return await hash(userPassword, argon2Options);
   },
 
-  verifyHash(userPassword: string, passwordToCompare: string) {
+  verifyHash(
+    userPassword: string,
+    passwordToCompare: string
+  ): Observable<boolean> {
     return from(verify(userPassword, passwordToCompare, argon2Options));
   },
 };

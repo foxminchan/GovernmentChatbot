@@ -7,7 +7,11 @@ import type { NextFunction, Request, Response } from 'express';
 export class ClearCacheMiddleware implements NestMiddleware {
   constructor(private readonly cacheService: CacheService) {}
 
-  async use(request: Request, _response: Response, next: NextFunction) {
+  async use(
+    request: Request,
+    _response: Response,
+    next: NextFunction
+  ): Promise<void> {
     request.query?.clearCache === 'true' &&
       (await this.cacheService.resetCache());
     next();

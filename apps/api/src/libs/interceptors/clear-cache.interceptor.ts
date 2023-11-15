@@ -3,8 +3,8 @@ import type {
   ExecutionContext,
   NestInterceptor,
 } from '@nestjs/common';
-import { from, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
 import { Injectable } from '@nestjs/common';
 import { CacheService } from '../../frameworks';
 
@@ -12,7 +12,7 @@ import { CacheService } from '../../frameworks';
 export class ClearCacheInterceptor implements NestInterceptor {
   constructor(private readonly cacheService: CacheService) {}
 
-  intercept(context: ExecutionContext, next: CallHandler) {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     return next.handle().pipe(
       tap(() => {
         const response = context.switchToHttp().getResponse();

@@ -8,11 +8,18 @@ export class ApiKeyStrategy extends PassportStrategy(
   'api-key'
 ) {
   constructor() {
-    super({ header: 'X-Api-Key', prefix: '' }, true, async (apikey, done) => {
-      const isValid = apikey === process.env.API_KEY;
-      return !isValid
-        ? done(new UnauthorizedException(), false)
-        : done(null, true);
-    });
+    super(
+      { header: 'X-Api-Key', prefix: '' },
+      true,
+      async (
+        apikey: string,
+        done: (arg0: UnauthorizedException, arg1: boolean) => unknown
+      ) => {
+        const isValid = apikey === process.env.API_KEY;
+        return !isValid
+          ? done(new UnauthorizedException(), false)
+          : done(null, true);
+      }
+    );
   }
 }

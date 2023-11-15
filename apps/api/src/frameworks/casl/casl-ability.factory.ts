@@ -19,7 +19,7 @@ export type AppAbility = MongoAbility<[Claims, Subjects]>;
 
 @Injectable()
 export class CaslAbilityFactory {
-  createForUser(account: Account) {
+  createForUser(account: Account): AppAbility {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(
       createMongoAbility
     );

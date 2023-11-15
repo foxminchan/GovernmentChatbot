@@ -8,6 +8,7 @@ import {
   takeWhile,
   Observable,
   catchError,
+  Subscription,
 } from 'rxjs';
 import fs from 'fs';
 import weaviate from 'weaviate-ts-client';
@@ -53,7 +54,7 @@ export class LangChainService {
     });
   }
 
-  private async getChain() {
+  private async getChain(): Promise<ConversationalRetrievalQAChain> {
     return ConversationalRetrievalQAChain.fromLLM(
       this.chatModel,
       (
@@ -76,7 +77,7 @@ export class LangChainService {
     );
   }
 
-  documentProcessing(documentType: string | number) {
+  documentProcessing(documentType: string | number): Subscription {
     const source = {
       [DocumentFileType.PDF]: {
         path: 'apps/api/src/assets/pdfs',

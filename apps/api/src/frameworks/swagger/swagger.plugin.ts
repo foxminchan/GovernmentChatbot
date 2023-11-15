@@ -1,4 +1,19 @@
-function CaseInsensitiveFilterPlugin() {
+function CaseInsensitiveFilterPlugin(): {
+  fn: {
+    opsFilter: (
+      taggedOps: {
+        filter: (
+          argument: (_tagObject: unknown, tag: string) => boolean
+        ) => unknown;
+      },
+      phrase: string
+    ) => {
+      filter: (
+        argument: (_tagObject: unknown, tag: string) => boolean
+      ) => unknown;
+    };
+  };
+} {
   return {
     fn: {
       opsFilter: (

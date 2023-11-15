@@ -8,7 +8,7 @@ export class CaslPolicyHandler implements IPolicyHandler {
     private readonly action: Claims = Claims.Read
   ) {}
 
-  handle(ability: AppAbility) {
+  handle(ability: AppAbility): boolean {
     return ability.can(this.action, this.ClassType);
   }
 }

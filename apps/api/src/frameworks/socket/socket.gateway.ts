@@ -34,16 +34,16 @@ export class SocketGateway
     private readonly chatHistoryService: ChatHistoryService
   ) {}
 
-  handleDisconnect(client: Socket) {
+  handleDisconnect(client: Socket): void {
     this.logger.debug(`Client disconnected: ${client.id}`);
     client.disconnect();
   }
 
-  handleConnection(client: Socket) {
+  handleConnection(client: Socket): void {
     this.logger.debug(`Client connected: ${client.id}`);
   }
 
-  afterInit(server: Socket) {
+  afterInit(server: Socket): void {
     this.logger.log(`💬 Websocket Gateway initialized ${server.id} `);
   }
 
@@ -51,7 +51,7 @@ export class SocketGateway
   server: Namespace;
 
   @SubscribeMessage('withOpenAI')
-  async handleEvent(@MessageBody() data: string) {
+  handleEvent(@MessageBody() data: string): void {
     setTimeout(() => {
       this.server.emit(
         'response',
@@ -61,7 +61,7 @@ export class SocketGateway
   }
 
   @SubscribeMessage('withLangChain')
-  handleChain(@MessageBody() chatBody: ChatBody) {
+  handleChain(@MessageBody() chatBody: ChatBody): void {
     this.openaiService
       .createChatCompletion(chatBody.message)
       .subscribe((response: string) => {

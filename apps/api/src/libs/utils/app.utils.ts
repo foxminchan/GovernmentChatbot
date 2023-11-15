@@ -2,7 +2,7 @@ import otelSDK from '../../instrumentation';
 import { INestApplication, Logger } from '@nestjs/common';
 
 export const AppUtils = {
-  gracefulShutdown(app: INestApplication, code: string) {
+  gracefulShutdown(app: INestApplication, code: string): void {
     setTimeout(() => process.exit(1), 5000);
     Logger.verbose(`Signal received with code ${code} ⚡.`);
     Logger.log('❗Closing http server with grace.');
@@ -18,7 +18,7 @@ export const AppUtils = {
       });
   },
 
-  processAppWithGrace(app: INestApplication) {
+  processAppWithGrace(app: INestApplication): void {
     process.on('SIGINT', () => {
       AppUtils.gracefulShutdown(app, 'SIGINT');
     });

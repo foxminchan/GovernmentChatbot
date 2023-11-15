@@ -7,7 +7,7 @@ export class LoggerMiddleware implements NestMiddleware {
     _req: FastifyRequest['raw'],
     _res: FastifyReply['raw'],
     next: () => void
-  ) {
+  ): void {
     Logger.log('Request...');
     next();
   }
