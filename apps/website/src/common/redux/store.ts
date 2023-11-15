@@ -1,9 +1,12 @@
 import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import userReducer  from './UserReducer/UserReducer';
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    userReducer,
+  },
   middleware: [thunk],
   devTools: true,
 });

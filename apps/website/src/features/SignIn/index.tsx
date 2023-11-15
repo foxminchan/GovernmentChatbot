@@ -1,10 +1,15 @@
 import Box from '@mui/material/Box';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Login } from './types/login.type';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Logo from '../../assets/images/quoc_huy.svg';
 import useMetadata from '../../common/hooks/useMetadata';
+import { Button } from '@mui/material';
+import { loginApi } from '../../common/redux/UserReducer/UserReducer';
+import { AppDispatch } from '../../common/redux/store';
 
 type Props = {
   title: string;
@@ -12,6 +17,20 @@ type Props = {
 
 export default function SignIn(props: Readonly<Props>) {
   useMetadata(props.title);
+
+  const dispath: AppDispatch = useDispatch();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const value: Login = {
+      username: data.get('username') as string,
+      password: data.get('password') as string,
+    };
+    const actionAsync = loginApi(value);
+    // await dispath(actionAsync);
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Box className="flex flex-col items-center mt-16">
@@ -24,15 +43,15 @@ export default function SignIn(props: Readonly<Props>) {
         <Typography component="h1" variant="h5">
           {props.title}
         </Typography>
-        <Box component="form" className="mt-2">
+        <Box onSubmit={handleSubmit} component="form" className="mt-2">
           <TextField
             margin="normal"
             required
             fullWidth
-            id="email"
+            id="username"
             label="Tên đăng nhập"
-            name="email"
-            autoComplete="email"
+            name="username"
+            autoComplete="username"
             autoFocus
           />
           <TextField
@@ -44,12 +63,12 @@ export default function SignIn(props: Readonly<Props>) {
             type="password"
             id="password"
           />
-          <button
+          <Button
             type="submit"
-            className="w-full px-6 py-2 font-bold text-white rounded bg-japonica-400 hover:bg-japonica-500"
+            className="w-full !px-6 !py-2 font-bold !text-white rounded !bg-japonica-400 hover:!bg-japonica-500"
           >
             {props.title}
-          </button>
+          </Button>
         </Box>
         <div className="flex items-center justify-center mt-4">
           <span className="mr-2">Bạn chưa có tài khoản?</span>
