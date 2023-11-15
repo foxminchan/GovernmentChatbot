@@ -50,7 +50,7 @@ This repository hosts an innovative chatbot solution that intelligently manages 
 Retrieval Augmented Generation (RAG) represents an innovative paradigm that harnesses the combined strengths of the ChatGPT API, LangChain, and Weaviate. This sophisticated integration facilitates a seamless amalgamation of information retrieval and content generation, resulting in outputs that are not only accurate and coherent but also infused with creativity and depth. By capitalizing on the individual capabilities of each component, RAG effectively bridges the gap between data-driven precision and the art of nuanced communication, catering to a diverse spectrum of user requirements and preferences.
 </p>
 
-<img loading="lazy" src="./assets/images/rag.png" alt="Retrieval Augmented Generation" width="100%" height="auto" />
+<img loading="lazy" src="./assets/images/architecture.png" alt="Retrieval Augmented Generation" width="100%" height="auto" />
 
 # Technology Stack
 

@@ -1,12 +1,3 @@
-import fs from 'fs';
-import weaviate from 'weaviate-ts-client';
-import { input } from '@inquirer/prompts';
-import { BufferMemory } from 'langchain/memory';
-import { Injectable, Logger } from '@nestjs/common';
-import { ChatOpenAI } from 'langchain/chat_models/openai';
-import { DocumentFileType } from '../../libs/@types/enums';
-import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import {
   of,
   tap,
@@ -18,6 +9,15 @@ import {
   Observable,
   catchError,
 } from 'rxjs';
+import fs from 'fs';
+import weaviate from 'weaviate-ts-client';
+import { input } from '@inquirer/prompts';
+import { BufferMemory } from 'langchain/memory';
+import { Injectable, Logger } from '@nestjs/common';
+import { ChatOpenAI } from 'langchain/chat_models/openai';
+import { DocumentFileType } from '../../libs/@types/enums';
+import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { DocxLoader } from 'langchain/document_loaders/fs/docx';
 import { WeaviateStore } from 'langchain/vectorstores/weaviate';
 import { REPHRASE_TEMPLATE } from '../../libs/@types/constants';
