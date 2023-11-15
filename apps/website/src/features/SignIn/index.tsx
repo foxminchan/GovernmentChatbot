@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { LoginPayload } from './types/login.type';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import { LoginPayload } from './types/login.type';
 import Logo from '../../assets/images/quoc_huy.svg';
+import { LoginSchema } from './schemas/login.schema';
 import { AppDispatch } from '../../common/redux/store';
 import useMetadata from '../../common/hooks/useMetadata';
 import { loginApi } from '../../common/redux/userReducer/userReducer';
@@ -17,7 +19,35 @@ type Props = {
 
 export default function SignIn(props: Readonly<Props>) {
   useMetadata(props.title);
-  const dispath: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
+  const [validationError, setValidationError] = useState<string | null>(null);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const result = LoginSchema.safeParse({
+      username: data.get('username'),
+      password: data.get('password'),
+    });
+
+    if (!result.success) {
+      const errors = result.error.issues[0].message;
+      setValidationError(errors);
+      return;
+    }
+
+    try {
+      await dispatch(
+        loginApi({
+          username: result.data.username,
+          password: result.data.password,
+        } as LoginPayload)
+      );
+      setValidationError(null);
+    } catch (error) {
+      setValidationError('Đăng nhập không thành công do lỗi máy chủ');
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -32,18 +62,10 @@ export default function SignIn(props: Readonly<Props>) {
           {props.title}
         </Typography>
         <Box
-          onSubmit={async (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const data = new FormData(event.currentTarget);
-            await dispath(
-              loginApi({
-                username: data.get('username') as string,
-                password: data.get('password') as string,
-              } as LoginPayload)
-            );
-          }}
+          noValidate
           component="form"
           className="mt-2"
+          onSubmit={handleSubmit}
         >
           <TextField
             margin="normal"
@@ -64,6 +86,11 @@ export default function SignIn(props: Readonly<Props>) {
             type="password"
             id="password"
           />
+          {validationError && (
+            <Typography className="py-2 mt-2 text-center text-japonica-700">
+              {validationError}
+            </Typography>
+          )}
           <Button
             type="submit"
             className="w-full !px-6 !py-2 font-bold !text-white rounded !bg-japonica-400 hover:!bg-japonica-500"
