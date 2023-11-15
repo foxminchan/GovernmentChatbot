@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Login } from './types/login.type';
+import { LoginPayload } from './types/login.type';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -39,7 +39,7 @@ export default function SignIn(props: Readonly<Props>) {
               loginApi({
                 username: data.get('username') as string,
                 password: data.get('password') as string,
-              } as Login)
+              } as LoginPayload)
             );
           }}
           component="form"
