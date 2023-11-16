@@ -11,7 +11,7 @@ import Logo from '../../assets/images/quoc_huy.svg';
 import { LoginSchema } from './schemas/login.schema';
 import { AppDispatch } from '../../common/redux/store';
 import useMetadata from '../../common/hooks/useMetadata';
-import { loginThunk } from '../../common/redux/userReducer/userReducer';
+import { loginThunk } from '../../common/redux/UserReducer/UserReducer';
 
 type Props = {
   title: string;

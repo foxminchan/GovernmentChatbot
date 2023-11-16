@@ -3,60 +3,53 @@ import {
   LoginResponse,
 } from '../../../features/SignIn/types/login.type';
 import Cookies from 'js-cookie';
-import history from 'history/browser';
-import { AppDispatch } from '../store';
 import { userState } from '../../../@types/global';
 import { StorageKeys } from '../../constants/keys';
 import { axiosService } from '../../utils/inversify';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState: userState = {
-  userLogin: Cookies.get(StorageKeys.ACCESS_TOKEN)
-    ? Cookies.get(StorageKeys.ACCESS_TOKEN)
-    : undefined,
+  userLogin: Cookies.get(StorageKeys.ACCESS_TOKEN) ?? undefined,
   loading: false,
   isLoggedIn: false,
   error: null,
 };
 
-const userReducer = createSlice({
-  name: 'userReducer',
+export const loginThunk = createAsyncThunk(
+  'user/login',
+  async (userLogin: LoginPayload, thunkAPI) => {
+    await axiosService
+      .post<LoginResponse>('/auth/login', userLogin)
+      .then((res) => {
+        const accessToken = res.data.access_token;
+        Cookies.set(StorageKeys.ACCESS_TOKEN, accessToken, { expires: 1 });
+        window.location.href = '/';
+      })
+      .catch((err) => {
+        return thunkAPI.rejectWithValue(err.response.data.message);
+      });
+  }
+);
+
+const userSlice = createSlice({
+  name: 'user',
   initialState,
-  reducers: {
-    loginAction: (state: userState, action: PayloadAction<string>) => {
+  reducers: {},
+  extraReducers: {
+    [loginThunk.pending.type]: (state: userState) => {
+      state.loading = true;
+    },
+    [loginThunk.fulfilled.type]: (state: userState, action) => {
+      state.loading = false;
+      state.isLoggedIn = true;
       state.userLogin = action.payload;
     },
-    setLoading: (state: userState, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
-    },
-    setLoggedIn: (state: userState, action: PayloadAction<boolean>) => {
-      state.isLoggedIn = action.payload;
+    [loginThunk.rejected.type]: (state: userState, action) => {
+      state.loading = false;
+      state.isLoggedIn = false;
+      state.error = action.error;
     },
   },
 });
 
-export const { loginAction, setLoading, setLoggedIn } = userReducer.actions;
-
-export default userReducer.reducer;
-
-export function loginApi(userLogin: LoginPayload) {
-  return async (dispatch: AppDispatch) => {
-    await axiosService
-      .post<LoginResponse>('/auth/login', userLogin)
-      .then((res) => {
-        const action: PayloadAction<string> = loginAction(
-          res.data.access_token
-        );
-        if (action.payload) {
-          dispatch(action);
-          Cookies.set(StorageKeys.ACCESS_TOKEN, res.data.access_token, {
-            expires: 1,
-          });
-          history.push('/');
-        }
-      })
-      .catch((err) => {
-        alert(err.response.data.message);
-      });
-  };
-}
+export default userSlice.reducer;
