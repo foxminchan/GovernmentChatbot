@@ -4,13 +4,13 @@ export interface IHttpService {
   get<T>(
     url: string,
     config?: AxiosRequestConfig | undefined
-  ): Promise<ApiResponse<T>>;
+  ): Promise<AxiosResponse<T>>;
 
   post<T>(
     url: string,
     data?: unknown,
     config?: AxiosRequestConfig | undefined
-  ): Promise<ApiResponse<T>>;
+  ): Promise<AxiosResponse<T>>;
 
   put(
     url: string,
@@ -22,12 +22,12 @@ export interface IHttpService {
     url: string,
     data?: unknown,
     config?: AxiosRequestConfig | undefined
-  ): Promise<ApiResponse<T>>;
+  ): Promise<AxiosResponse<T>>;
 
   delete<T>(
     url: string,
     config?: AxiosRequestConfig | undefined
-  ): Promise<ApiResponse<T>>;
+  ): Promise<AxiosResponse<T>>;
 
   setHttpConfigs(config?: Partial<AxiosRequestConfig>): void;
 }

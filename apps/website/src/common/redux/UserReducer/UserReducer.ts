@@ -1,8 +1,9 @@
 import {
-  Login,
+  LoginPayload,
   LoginResponse,
 } from '../../../features/SignIn/types/login.type';
 import Cookies from 'js-cookie';
+import history from 'history/browser';
 import { AppDispatch } from '../store';
 import { userState } from '../../../@types/global';
 import { StorageKeys } from '../../constants/keys';
@@ -15,6 +16,7 @@ const initialState: userState = {
     : undefined,
   loading: false,
   isLoggedIn: false,
+  error: null,
 };
 
 const userReducer = createSlice({
@@ -37,7 +39,7 @@ export const { loginAction, setLoading, setLoggedIn } = userReducer.actions;
 
 export default userReducer.reducer;
 
-export function loginApi(userLogin: Login) {
+export function loginApi(userLogin: LoginPayload) {
   return async (dispatch: AppDispatch) => {
     await axiosService
       .post<LoginResponse>('/auth/login', userLogin)
@@ -45,14 +47,16 @@ export function loginApi(userLogin: Login) {
         const action: PayloadAction<string> = loginAction(
           res.data.access_token
         );
-        dispatch(action);
-        Cookies.set(StorageKeys.ACCESS_TOKEN, res.data.access_token, {
-          expires: 1,
-        });
-        window.location.href = '/';
+        if (action.payload) {
+          dispatch(action);
+          Cookies.set(StorageKeys.ACCESS_TOKEN, res.data.access_token, {
+            expires: 1,
+          });
+          history.push('/');
+        }
       })
       .catch((err) => {
-        console.log(err);
+        alert(err.response.data.message);
       });
   };
 }
