@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import userReducer from './userReducer/userReducer';
+import userSlice from './userReducer/userReducer';
 
 const store = configureStore({
   reducer: {
-    userReducer,
+    userReducer: userSlice,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: true,
 });
 

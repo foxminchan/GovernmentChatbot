@@ -11,7 +11,7 @@ import Logo from '../../assets/images/quoc_huy.svg';
 import { LoginSchema } from './schemas/login.schema';
 import { AppDispatch } from '../../common/redux/store';
 import useMetadata from '../../common/hooks/useMetadata';
-import { loginApi } from '../../common/redux/userReducer/userReducer';
+import { loginThunk } from '../../common/redux/userReducer/userReducer';
 
 type Props = {
   title: string;
@@ -38,7 +38,7 @@ export default function SignIn(props: Readonly<Props>) {
 
     try {
       await dispatch(
-        loginApi({
+        loginThunk({
           username: result.data.username,
           password: result.data.password,
         } as LoginPayload)
