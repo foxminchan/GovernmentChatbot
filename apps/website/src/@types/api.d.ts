@@ -1,7 +1,3 @@
-type ApiResponse<T = unknown> = {
-  data: T;
-};
-
 type Exception = {
   message?: string;
   error?: string;

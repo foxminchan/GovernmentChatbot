@@ -7,6 +7,7 @@ import axios, {
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import _omitBy from 'lodash/omitBy';
+import history from 'history/browser';
 import { injectable } from 'inversify';
 import { StorageKeys } from '../constants/keys';
 import { axiosConfig } from '../configs/api.config';
@@ -16,15 +17,11 @@ import { IHttpService } from '../interfaces/interfaces';
 export default class HttpService implements IHttpService {
   private instance: AxiosInstance;
 
-  constructor(config = axiosConfig) {
-    const axiosConfigs = config;
-
-    const instance = axios.create({
-      ...axiosConfigs,
+  constructor() {
+    this.instance = axios.create({
+      ...axiosConfig,
     });
-
-    Object.assign(instance, this.setupInterceptorsTo(instance));
-    this.instance = instance;
+    this.instance = this.setupInterceptorsTo(this.instance);
   }
 
   private setupInterceptorsTo(axiosInstance: AxiosInstance): AxiosInstance {
@@ -56,7 +53,7 @@ export default class HttpService implements IHttpService {
         switch (statusCode) {
           case HttpStatusCode.Unauthorized: {
             Cookies.remove(StorageKeys.ACCESS_TOKEN);
-            window.location.href = '/';
+            history.push('/login');
             break;
           }
           case HttpStatusCode.TooManyRequests: {
@@ -77,16 +74,16 @@ export default class HttpService implements IHttpService {
   public async get<T>(
     url: string,
     config: AxiosRequestConfig | undefined = undefined
-  ): Promise<ApiResponse<T>> {
-    return await this.instance.get<T, ApiResponse<T>>(`${url}`, config);
+  ): Promise<AxiosResponse<T>> {
+    return await this.instance.get<T, AxiosResponse<T>>(`${url}`, config);
   }
 
   public async post<T>(
     url: string,
     data: unknown = undefined,
     config: AxiosRequestConfig | undefined = undefined
-  ): Promise<ApiResponse<T>> {
-    return await this.instance.post<T, ApiResponse<T>>(url, data, config);
+  ): Promise<AxiosResponse<T>> {
+    return await this.instance.post<T, AxiosResponse<T>>(url, data, config);
   }
 
   public async put(
@@ -101,15 +98,15 @@ export default class HttpService implements IHttpService {
     url: string,
     data: unknown = undefined,
     config: AxiosRequestConfig | undefined = undefined
-  ): Promise<ApiResponse<T>> {
-    return await this.instance.patch<T, ApiResponse<T>>(url, data, config);
+  ): Promise<AxiosResponse<T>> {
+    return await this.instance.patch<T, AxiosResponse<T>>(url, data, config);
   }
 
   public async delete<T>(
     url: string,
     config: AxiosRequestConfig | undefined = undefined
-  ): Promise<ApiResponse<T>> {
-    return await this.instance.delete<T, ApiResponse<T>>(url, config);
+  ): Promise<AxiosResponse<T>> {
+    return await this.instance.delete<T, AxiosResponse<T>>(url, config);
   }
 
   public setHttpConfigs(config?: Partial<AxiosRequestConfig>) {
