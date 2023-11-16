@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
-import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { LoginPayload } from './types/login.type';
 import Logo from '../../assets/images/quoc_huy.svg';
 import { LoginSchema } from './schemas/login.schema';
-import { AppDispatch } from '../../common/redux/store';
+import { AppDispatch, RootState } from '../../common/redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, CircularProgress } from '@mui/material';
 import useMetadata from '../../common/hooks/useMetadata';
 import { loginThunk } from '../../common/redux/UserReducer/UserReducer';
 
@@ -20,6 +20,9 @@ type Props = {
 export default function SignIn(props: Readonly<Props>) {
   useMetadata(props.title);
   const dispatch: AppDispatch = useDispatch();
+  const { loading, error } = useSelector(
+    (state: RootState) => state.userReducer
+  );
   const [validationError, setValidationError] = useState<string | null>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -86,16 +89,21 @@ export default function SignIn(props: Readonly<Props>) {
             type="password"
             id="password"
           />
-          {validationError && (
+          {(validationError || error) && (
             <Typography className="py-2 mt-2 text-center text-japonica-700">
-              {validationError}
+              {validationError ?? error}
             </Typography>
           )}
           <Button
             type="submit"
             className="w-full !px-6 !py-2 font-bold !text-white rounded !bg-japonica-400 hover:!bg-japonica-500"
+            disabled={loading}
           >
-            {props.title}
+            {loading ? (
+              <CircularProgress color="inherit" size={22} />
+            ) : (
+              'Đăng nhập'
+            )}
           </Button>
         </Box>
         <div className="flex items-center justify-center mt-4">
