@@ -7,10 +7,10 @@ import Typography from '@mui/material/Typography';
 import { LoginPayload } from './types/login.type';
 import Logo from '../../assets/images/quoc_huy.svg';
 import { LoginSchema } from './schemas/login.schema';
-import { AppDispatch, RootState } from '../../common/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, CircularProgress } from '@mui/material';
 import useMetadata from '../../common/hooks/useMetadata';
+import { AppDispatch, RootState } from '../../common/redux/store';
 import { loginThunk } from '../../common/redux/UserReducer/UserReducer';
 
 type Props = {

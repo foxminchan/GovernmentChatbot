@@ -7,7 +7,6 @@ import axios, {
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import _omitBy from 'lodash/omitBy';
-import history from 'history/browser';
 import { injectable } from 'inversify';
 import { StorageKeys } from '../constants/keys';
 import { axiosConfig } from '../configs/api.config';
@@ -53,7 +52,7 @@ export default class HttpService implements IHttpService {
         switch (statusCode) {
           case HttpStatusCode.Unauthorized: {
             Cookies.remove(StorageKeys.ACCESS_TOKEN);
-            history.push('/login');
+            window.location.href = '/dang-nhap';
             break;
           }
           case HttpStatusCode.TooManyRequests: {

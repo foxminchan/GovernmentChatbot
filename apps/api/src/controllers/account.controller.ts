@@ -6,9 +6,10 @@ import {
 } from '../libs/decorators';
 import { AccountService } from '../modules';
 import { AuthService } from '../frameworks';
-import { LoginPayload } from '../libs/helpers';
-import { Account, CreateAccountDto } from '../core';
 import { Body, Get, Param, Post } from '@nestjs/common';
+import { AccessToken } from '../libs/helpers/jwt.helper';
+import { Account, CreateAccountDto, User } from '../core';
+import { AccountPayload, LoginPayload } from '../libs/helpers';
 
 @ApiController('auth')
 export class AccountController {
@@ -32,7 +33,21 @@ export class AccountController {
   @Post()
   @SwaggerResponse({
     operation: 'Create account',
+    body: AccountPayload,
+    response: User,
+  })
+  createAccountWithUser(@Body() account: AccountPayload) {
+    return this.accountService.createAccountWithUser(
+      account.user,
+      account.password
+    );
+  }
+
+  @Post('exists')
+  @SwaggerResponse({
+    operation: 'Create account with existing user',
     body: CreateAccountDto,
+    response: Account,
   })
   createAccount(@Body() account: CreateAccountDto) {
     return this.accountService.createAccount(account);
@@ -42,6 +57,7 @@ export class AccountController {
   @SwaggerResponse({
     operation: 'Login account',
     body: LoginPayload,
+    response: AccessToken,
   })
   login(@Body() user: LoginPayload) {
     return this.authService.login(user);

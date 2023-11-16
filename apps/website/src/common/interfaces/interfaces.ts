@@ -1,3 +1,4 @@
+import { JwtPayload } from 'jwt-decode';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export interface IHttpService {
@@ -30,4 +31,8 @@ export interface IHttpService {
   ): Promise<AxiosResponse<T>>;
 
   setHttpConfigs(config?: Partial<AxiosRequestConfig>): void;
+}
+
+export interface ITokenService {
+  decodeToken(token: string): JwtPayload;
 }

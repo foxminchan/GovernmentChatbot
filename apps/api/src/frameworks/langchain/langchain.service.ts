@@ -107,6 +107,9 @@ export class LangChainService {
                 )
               ).pipe(
                 concatMap((splittedDocument) => {
+                  this.logger.log(
+                    `Embedding document and storing: ${document}`
+                  );
                   return from(
                     WeaviateStore.fromDocuments(
                       splittedDocument,

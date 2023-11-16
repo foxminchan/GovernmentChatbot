@@ -14,19 +14,17 @@ export class ChatHistoryService {
   }
 
   getFilterChatHistories(criteria: Criteria) {
-    const queryOptions = constructQueryOptions(criteria);
     return this.dataService.chatHistory.findMany({
-      ...queryOptions,
+      ...constructQueryOptions(criteria),
       include: { user: true, topic: true },
     });
   }
 
   getByUserId(userId: string, criteria: Criteria) {
-    const queryOptions = constructQueryOptions(criteria, {
-      where: { user_id: userId },
-    });
     return this.dataService.chatHistory.findMany({
-      ...queryOptions,
+      ...constructQueryOptions(criteria, {
+        where: { user_id: userId },
+      }),
       include: { user: true, topic: true },
     });
   }

@@ -1,16 +1,20 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Logo from '../../assets/images/quoc_huy.svg';
 import Caption from '../../assets/images/caption.svg';
+import useMetadata from '../../common/hooks/useMetadata';
 
 type Props = {
   title: string;
 };
 
 export default function SignUp(props: Readonly<Props>) {
+  useMetadata(props.title);
+
   return (
     <Container component="main" maxWidth="xs" className="h-screen">
       <Box className="flex flex-col items-center mt-16">
@@ -99,12 +103,12 @@ export default function SignUp(props: Readonly<Props>) {
               </p>
             </Grid>
           </Grid>
-          <button
+          <Button
             type="submit"
-            className="w-full px-6 py-2 mt-2 font-bold text-white rounded bg-japonica-400 hover:bg-japonica-500"
+            className="w-full !px-6 !py-2 font-bold !text-white rounded !bg-japonica-400 hover:!bg-japonica-500"
           >
             {props.title}
-          </button>
+          </Button>
           <div className="flex items-center justify-center mt-4">
             <span className="mr-2">Đã có tài khoản?</span>
             <Link

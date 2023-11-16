@@ -2,7 +2,7 @@
   "name": "@goverment/source",
   "version": "1.0.0",
   "license": "MIT",
-  "description": "Smart chatbot for streamlined administrative procedures, powered by advanced language models.",
+  "description": "Smart chatbot for streamlined administrative procedures in Vietnam, powered by advanced language models.",
   "keywords": [
     "nx",
     "nest",
@@ -84,6 +84,7 @@
     "helper-fns": "^2.6.38",
     "inversify": "^6.0.2",
     "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
     "langchain": "^0.0.167",
     "llmonitor": "^0.5.9",
     "lodash": "^4.17.21",

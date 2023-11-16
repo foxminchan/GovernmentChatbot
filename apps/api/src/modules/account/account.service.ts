@@ -1,7 +1,9 @@
+import { from, switchMap } from 'rxjs';
 import { Injectable } from '@nestjs/common';
-import { CreateAccountDto } from '../../core';
 import { DataService } from '../../frameworks';
 import { CryptoUtils } from '../../libs/utils';
+import { Claims, Roles } from '../../libs/@types/enums';
+import { CreateAccountDto, CreateUserDto } from '../../core';
 
 @Injectable()
 export class AccountService {
@@ -15,14 +17,43 @@ export class AccountService {
   }
 
   async createAccount(account: CreateAccountDto) {
-    const hashPassword = await CryptoUtils.hashString(account.password);
-    return this.dataService.$transaction([
-      this.dataService.account.create({
-        data: {
-          ...account,
-          password: hashPassword,
-        },
-      }),
-    ]);
+    return from(CryptoUtils.hashString(account.password)).pipe(
+      switchMap((hashPassword) => {
+        return from(
+          this.dataService.$transaction([
+            this.dataService.account.create({
+              data: {
+                ...account,
+                password: hashPassword,
+              },
+            }),
+          ])
+        );
+      })
+    );
+  }
+
+  async createAccountWithUser(user: CreateUserDto, password: string) {
+    return from(CryptoUtils.hashString(password)).pipe(
+      switchMap((hashPassword) => {
+        return from(
+          this.dataService.$transaction(async (data) => {
+            const createdUser = await data.user.create({
+              data: user,
+            });
+            await data.account.create({
+              data: {
+                username: user.email,
+                password: hashPassword,
+                role: Roles.CITIZEN,
+                claim: [Claims.Read, Claims.Create, Claims.Delete],
+                user_id: createdUser.id,
+              },
+            });
+            return { createdUser };
+          })
+        );
+      })
+    );
   }
 }

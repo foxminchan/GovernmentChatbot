@@ -12,8 +12,7 @@ export class UserService {
   }
 
   getFilterUsers(criteria: Criteria) {
-    const queryOptions = constructQueryOptions(criteria);
-    return this.dataService.user.findMany(queryOptions);
+    return this.dataService.user.findMany(constructQueryOptions(criteria));
   }
 
   getUser(id: string) {
